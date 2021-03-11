@@ -9,7 +9,6 @@ abstract public class Employee {
 
     // maybe use scanner instead of params
     public Employee (String id, String f_name, String l_name) {
-
     }
     public String getEmployeeID () {
         return this.employee_id;
