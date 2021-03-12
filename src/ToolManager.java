@@ -1,8 +1,8 @@
-import Employee;
+//import Employee;
 
 public class ToolManager extends Employee {
     // maybe use scanner in instead of params?
-    public ToolManager(String emp_id, Sting f_name, String l_name) {
+    public ToolManager(String emp_id, String f_name, String l_name) {
         super(emp_id, f_name, l_name);
     }
     public void addTool(String tool_id) {

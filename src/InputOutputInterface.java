@@ -1,4 +1,4 @@
-package ;
+//package ;
 
 // Very similar to CMPT270 assignment 5
 public interface InputOutputInterface {

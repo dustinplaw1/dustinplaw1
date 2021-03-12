@@ -1,7 +1,8 @@
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Tool  {
-
+    Scanner in = new Scanner(System.in);
     private HashMap<String, String> tool_list;
 
 
