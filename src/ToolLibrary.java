@@ -23,7 +23,7 @@ public class ToolLibrary {
 
     // adds new tool to tool_list
     public void addTool(Tool newTool) {
-
+        tool_list.put(newTool.name, newTool);
     }
 
     // adds a new account for an employee
