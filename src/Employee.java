@@ -1,17 +1,22 @@
 import java.util.Date;
 
 // needs proper java docs
-abstract public class Employee {
+public class Employee {
     protected String employee_id;
     protected String last_name;
     protected String first_name;
+
+    protected String employee_type;
     protected Date date_hired;
 
+
+
     // maybe use scanner instead of params
-    public Employee (String id, String last_name, String first_name) {
+    public Employee (String id, String last_name, String first_name, String title) {
         this.employee_id = id;
         this.last_name = last_name;
         this.first_name = first_name;
+        this.employee_type= title;
 
     }
     public String getEmployeeID () {

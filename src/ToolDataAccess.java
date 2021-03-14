@@ -42,7 +42,7 @@ public class ToolDataAccess
      * @param tool_id A string representing the tool id
      * @return A boolean representing true if successful, or false if not
      */
-    public boolean deleteTool(String tool_id) {
+    public boolean  deleteTool(String tool_id) {
         //initialize to false
         boolean validity = false;
 
