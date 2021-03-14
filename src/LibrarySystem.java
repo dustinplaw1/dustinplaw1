@@ -1,6 +1,4 @@
-import com.mysql.cj.log.Log;
 import java.util.Scanner;
-import java.util.Date;
 
 public class LibrarySystem
 {
@@ -14,18 +12,21 @@ public class LibrarySystem
      * A method that will check if the employee is validated
      * @param id A string for the employees id
      * @param password A string for the employees password
+     * @return
      */
-    public static void login(String id, String password){
+    public static boolean login(String id, String password){
 
         //create a login access, and then
         LoginDataAccess x = new LoginDataAccess();
-        if (x.authenticateLoginInfoOrSomething(id, password))
+        if (x.authenticateLoginInfo(id, password)) {
             System.out.println("Successfully logged in. ");
-        else
+            return true;
+        }
+        else{
             System.out.println("Error, the user/password combination was not correct");
-
-
-    }
+            return false;
+        }
+   }
 
     /**
      * A method that will delete a tool from the system
@@ -84,15 +85,30 @@ public class LibrarySystem
     public static void main (String[]args)
     {
        //Testing login function
+        Employee d = new Employee("12345", "12345", "l", "d", "foreman");
+        Employee e = new Employee("123456", "123456", "lawe", "d", "foreman");
+        Employee f = new Employee("1234567", "1234567", "lawer", "d", "foreman");
+
+        EmployeeDataAccess eda = new EmployeeDataAccess();
+        eda.newEmployee(d.employee_id, d.employee_password, d.last_name, d.first_name, d.employee_type);
+        eda.newEmployee(e.employee_id, e.employee_password, e.last_name, e.first_name, e.employee_type);
+        eda.newEmployee(f.employee_id, f.employee_password, f.last_name, f.first_name, f.employee_type);
+
+        LoginDataAccess lda = new LoginDataAccess();
+        lda.savenew(d.employee_id, d.employee_password);
+        lda.savenew(e.employee_id, e.employee_password);
+        lda.savenew(f.employee_id, f.employee_password);
+
+
+
         System.out.println("Enter userid: ");
         String username = in.next();
         System.out.println("Enter password: ");
         String password = in.next();
         System.out.println(username + " - " + password);
 
-        LoginDataAccess x = new LoginDataAccess();
-        x.authenticateLoginInfoOrSomething
-        Employee d = new Employee("1234", "1234", "law", "dustin", "foreman");
+
+        System.out.println(login(username, password));
 
 
 
