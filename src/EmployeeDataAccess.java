@@ -3,19 +3,23 @@ import java.sql.*;
 public class EmployeeDataAccess {
 
 
-    public static int newEmployee(String employee_id, String last_name, String first_name, String employee_type) {
+    public static int newEmployee(String employee_id, String password, String last_name, String first_name, String employee_type) {
         int confirmation = 0;
 
         //try/catch for database connection
         try {
+
             //create a connection
             Connection con = DB.getConnection();
+            System.out.println("Connection established");
             //prepared statement to make it efficient
-            PreparedStatement p = con.prepareStatement("insert into employees(employee_id, last_name, first_name, employee_type) values(?,?,?,?)");
+            PreparedStatement p = con.prepareStatement("insert into employees(employee_id, employee_password, last_name, first_name, employee_type) values(?,?,?,?,?)");
             p.setString(1, employee_id);
-            p.setString(2, last_name);
-            p.setString(3, first_name);
-            p.setString(4, employee_type);
+            p.setString(2, password);
+            p.setString(3, last_name);
+            p.setString(4, first_name);
+            p.setString(5, employee_type);
+
             //update values, then close connection
             confirmation = p.executeUpdate();
             con.close();
@@ -40,8 +44,10 @@ public class EmployeeDataAccess {
         try {
             //create a connection
             Connection con = DB.getConnection();
+            System.out.println("Connection established");
+
             //easier more efficient at accessing data
-            PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, phone_number, employee_type from employees"));
+            PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, employee_type from employees"));
 
             //cursor for going through data in database
             ResultSet r = p.executeQuery();
@@ -61,14 +67,6 @@ public class EmployeeDataAccess {
     public static void main(String[] args) {
 
 
-    Employee d = new Employee("123", "law", "dustin", "foreman");
-
-    newEmployee(d.employee_id, d.last_name, d.first_name,d.employee_type);
-
-    String x = getEmployeeInfo(d.employee_id);
-
-
-    System.out.println(x);
 
 
     }

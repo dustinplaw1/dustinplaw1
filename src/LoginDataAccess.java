@@ -2,7 +2,7 @@
 import java.sql.*;
 
 
-public class loginDataAccess {
+public class LoginDataAccess {
 
 
     /**
@@ -15,7 +15,7 @@ public class loginDataAccess {
         int awaiting = 0;
         try {
             Connection con = DB.getConnection();
-            PreparedStatement p = con.prepareStatement("insert into login(employee_description, employee_type )values (?,?)");
+            PreparedStatement p = con.prepareStatement("insert into logins(employee_id, employee_password )values (?,?)");
             p.setString(1, employee_id);
             p.setString(2, employee_password);
             awaiting = p.executeUpdate();
