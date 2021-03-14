@@ -2,7 +2,7 @@
 import java.sql.*;
 
 
-public class loginDataAccess {
+public class LoginDataAccess {
 
 
     /**
@@ -15,7 +15,7 @@ public class loginDataAccess {
         int awaiting = 0;
         try {
             Connection con = DB.getConnection();
-            PreparedStatement p = con.prepareStatement("insert into login(employee_description, employee_type )values (?,?)");
+            PreparedStatement p = con.prepareStatement("insert into logins(employee_id, employee_password )values (?,?)");
             p.setString(1, employee_id);
             p.setString(2, employee_password);
             awaiting = p.executeUpdate();
@@ -39,7 +39,7 @@ public class loginDataAccess {
      * @param employee_password A string that represents the employees password
      * @return
      */
-    public Boolean authenticateLoginInfoOrSomething(String employee_id, String employee_password) {
+    public Boolean authenticateLoginInfo(String employee_id, String employee_password) {
         //start with false
         boolean validity = false;
 
@@ -47,7 +47,7 @@ public class loginDataAccess {
         try {
             //get a connection to the database
             Connection con = DB.getConnection();
-            PreparedStatement p = con.prepareStatement("select * from login where employee_id=? and employee_password=?");
+            PreparedStatement p = con.prepareStatement("select * from logins where employee_id=? and employee_password=?");
             p.setString(1, employee_id);
             p.setString(2, employee_password);
             ResultSet result = p.executeQuery();
