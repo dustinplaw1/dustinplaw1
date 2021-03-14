@@ -1,4 +1,3 @@
-package ;
 
 public class LibrarySystem
 {
