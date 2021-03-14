@@ -16,10 +16,10 @@ abstract public class Employee {
     public String getFirstName() {
         return this.first_name;
     }
-    public String getLastName() {
+    String getLastName() {
         return this.last_name;
     }
-    public String getDateHired() {
+    public Date getDateHired() {
         return this.date_hired;
     }
     public void setFirstName(String new_name) {
