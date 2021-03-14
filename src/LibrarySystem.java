@@ -56,7 +56,11 @@ public class LibrarySystem
      */
     public static void createTool(String tool_id, String tool_name,String tool_desc)
     {
+        ToolDataAccess ta = new ToolDataAccess();
 
+        try {
+            ta.createTool(tool_id, tool_name, tool_desc);
+        } catch (Exception e) { System.out.println("Error: there was an error adding tool to system" + e);}
     }
 
     /**
