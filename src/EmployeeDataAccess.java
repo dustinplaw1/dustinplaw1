@@ -4,7 +4,31 @@ public class EmployeeDataAccess
 {
 
 
+        public static int newEmployee(String employee_id, String last_name, String first_name, String phone_number,
+                                      String employee_description, String employee_type)
+        {
+            int confirmation = 0;
 
+            //try/catch for database connection
+            try{
+                //create a connection
+                Connection con = DB.getConnection();
+                //prepared statement to make it efficient
+                PreparedStatement p = con.prepareStatement ("insert into employees(employee_id, last_name, first_name, phone_number, employee_description, employee_type) values(?,?,?,?,?,?)");
+                p.setString(1, employee_id);
+                p.setString(2, last_name);
+                p.setString(3, first_name);
+                p.setString(4, phone_number);
+                p.setString(5, employee_description);
+                p.setString(6, employee_type);
+                //update values, then close connection
+                confirmation = p.executeUpdate();
+                con.close();
+
+
+            }catch(Exception e){System.out.println(e);}
+            return confirmation;
+        }
 
 
 
