@@ -143,7 +143,7 @@ public class LibrarySystem
         System.out.println("Return a tool: (4)");
         int choice = in.nextInt();
 
-        while (choice <1 && choice >4) {
+
             if (choice == 1) {
                 //add a tool
                 System.out.println("Enter a tool id");
@@ -201,7 +201,7 @@ public class LibrarySystem
                 System.out.println("Invalid choice: Please input a valid choice. ");
                 choice = in.nextInt();
             }
-        }
+
 
 
 
