@@ -3,9 +3,9 @@ CREATE TABLE IF NOT EXISTS contracts
 contract_id varchar(20) not null primary key,
 employee_id varchar(30) not null,
 tool_id varchar(20) not null,
-date_borrowed DATE not null,
-due_date DATE not null,
-date_returned DATE not null
+date_borrowed timestamp not null,
+due_date timestamp not null,
+date_returned timestamp null
 );
 
 
