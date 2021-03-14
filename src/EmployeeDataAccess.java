@@ -20,7 +20,7 @@ public class EmployeeDataAccess
             //create a connection
             Connection con = DB.getConnection();
             //easier more efficient at accessing data
-            PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, phone_number, employee_type from employee"));
+            PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, phone_number, employee_type from employees"));
 
             //cursor for going through data in database
             ResultSet r = p.executeQuery();
