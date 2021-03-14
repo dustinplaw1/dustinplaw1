@@ -22,7 +22,7 @@ public class ToolDataAccess
         try{
         Connection con = DB.getConnection();
         //prepare to add items to tool database
-        PreparedStatement p = con.prepareStatement ("insert into tool(tool_id, tool_name, tool_description) values(?,?,?)");
+        PreparedStatement p = con.prepareStatement ("insert into tools(tool_id, tool_name, tool_description) values(?,?,?)");
         //sets parameters into a string
         p.setString(1, tool_id);
         p.setString(2, tool_name);
@@ -51,7 +51,7 @@ public class ToolDataAccess
             //make a connection
             Connection con = DB.getConnection();
             //make a prepared statement(more efficient)
-            PreparedStatement p = con.prepareStatement("delete from tool where tool_id=?");
+            PreparedStatement p = con.prepareStatement("delete from tools where tool_id=?");
             //sets p to the values after setString
             p.setString(1, tool_id);
             //saves a cursor position to go through the data to find the right tool_id
@@ -59,8 +59,7 @@ public class ToolDataAccess
             validity = r.next();
             con.close();
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception e) {System.out.println(e);
         }
 
         //return true or false
