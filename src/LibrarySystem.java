@@ -12,9 +12,8 @@ public class LibrarySystem
      * A method that will check if the employee is validated
      * @param id A string for the employees id
      * @param password A string for the employees password
-     * @return
      */
-    public static boolean login(String id, String password){
+    public static boolean  login(String id, String password){
 
         //create a login access, and then
         LoginDataAccess x = new LoginDataAccess();
@@ -40,7 +39,7 @@ public class LibrarySystem
 
         try{
             ta.deleteTool(id);
-
+            System.out.println("Tool id: " + id + "was removed from the system");
 
 
         } catch (Exception e) { System.out.println("Error: there was an error removing tool" + e);}
@@ -61,6 +60,7 @@ public class LibrarySystem
 
         try {
             ta.createTool(tool_id, tool_name, tool_desc);
+            System.out.println("Tool added successfully");
         } catch (Exception e) { System.out.println("Error: there was an error adding tool to system" + e);}
     }
 
@@ -68,19 +68,37 @@ public class LibrarySystem
      * A method that will borrow a tool from the system
      * @param tool_id A string that is the tool id
      */
-    public static void borrowTool(String tool_id)
+    public static void borrowTool(String tool_id, String employee_id)
     {
+        //create a new instance of ContractDataAccess
+        ContractDataAccess cda = new ContractDataAccess();
 
-    }
+        try{
+            cda.borrowTool(tool_id, employee_id);
+            System.out.println("Tool successfully borrowed");
+
+
+    } catch (Exception e) { System.out.println("Error: there was an error borrowing a tool " + e);}
+
+}
 
 
     /**
      * A method that will return tools that were borrowed
-     * @param id A string with the tool id
+     * @param tool_id A string with the tool id
+     * @param employee_id A string that represents the employee id
      */
-    public static void returnTool(String id)
+    public static void returnTool(String tool_id, String employee_id)
     {
+        //create a new instance of ContractDataAccess
+        ContractDataAccess cda = new ContractDataAccess();
 
+        try{
+            cda.returnTool(tool_id, employee_id);
+            System.out.println("Tool successfully returned");
+
+
+        } catch (Exception e) { System.out.println("Error: there was an error retruning the tool " + e);}
     }
 
 
@@ -93,26 +111,25 @@ public class LibrarySystem
         Employee e = new Employee("123456", "123456", "lawe", "d", "foreman");
         Employee f = new Employee("1234567", "1234567", "lawer", "d", "foreman");
 
-        EmployeeDataAccess eda = new EmployeeDataAccess();
-        eda.newEmployee(d.employee_id, d.employee_password, d.last_name, d.first_name, d.employee_type);
-        eda.newEmployee(e.employee_id, e.employee_password, e.last_name, e.first_name, e.employee_type);
-        eda.newEmployee(f.employee_id, f.employee_password, f.last_name, f.first_name, f.employee_type);
-
-        LoginDataAccess lda = new LoginDataAccess();
-        lda.savenew(d.employee_id, d.employee_password);
-        lda.savenew(e.employee_id, e.employee_password);
-        lda.savenew(f.employee_id, f.employee_password);
-
-
-
-        System.out.println("Enter userid: ");
-        String username = in.next();
-        System.out.println("Enter password: ");
-        String password = in.next();
-        System.out.println(username + " - " + password);
-
-
-        System.out.println(login(username, password));
+//        EmployeeDataAccess eda = new EmployeeDataAccess();
+//        eda.newEmployee(d.employee_id, d.last_name, d.first_name, d.employee_type);
+//        eda.newEmployee(e.employee_id, e.last_name, e.first_name, e.employee_type);
+//        eda.newEmployee(f.employee_id, f.last_name, f.first_name, f.employee_type);
+//
+//
+//        LoginDataAccess lda = new LoginDataAccess();
+//        lda.savenew(d.employee_id, d.employee_password);
+//        lda.savenew(e.employee_id, e.employee_password);
+//        lda.savenew(f.employee_id, f.employee_password);
+//
+//
+//
+//        System.out.println("Enter userid: ");
+//        String username = in.next();
+//        System.out.println("Enter password: ");
+//        String password = in.next();
+//
+//        System.out.println(login(username, password));
 
 
 

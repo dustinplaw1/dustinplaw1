@@ -3,7 +3,7 @@ import java.sql.*;
 public class EmployeeDataAccess {
 
 
-    public static int newEmployee(String employee_id, String password, String last_name, String first_name, String employee_type) {
+    public static int newEmployee(String employee_id, String last_name, String first_name, String employee_type) {
         int confirmation = 0;
 
         //try/catch for database connection
@@ -13,10 +13,9 @@ public class EmployeeDataAccess {
             Connection con = DB.getConnection();
             System.out.println("Connection established");
             //prepared statement to make it efficient
-            PreparedStatement p = con.prepareStatement("insert into employees(employee_id, employee_password, last_name, first_name, employee_type) values(?,?,?,?,?)");
+            PreparedStatement p = con.prepareStatement("insert into employees(employee_id, last_name, first_name, employee_type) values(?,?,?,?,?)");
             p.setString(1, employee_id);
-            p.setString(2, password);
-            p.setString(3, last_name);
+            p.setString(2, last_name);
             p.setString(4, first_name);
             p.setString(5, employee_type);
 
