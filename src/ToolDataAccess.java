@@ -27,7 +27,7 @@ public class ToolDataAccess
         p.setString(2, tool_name);
         p.setString(3, tool_description);
 
-        //a cursor pointing to the current spot in the data
+
 
         //close the connection
             p.executeUpdate();
@@ -54,7 +54,7 @@ public class ToolDataAccess
             //sets p to the values after setString
             p.setString(1, tool_id);
             //saves a cursor position to go through the data to find the right tool_id
-            p.executeQuery();
+            p.executeUpdate();
 
             con.close();
 
