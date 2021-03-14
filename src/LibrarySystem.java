@@ -113,7 +113,7 @@ public class LibrarySystem
 //        Employee d = new Employee("12345", "12345", "l", "d", "foreman");
 //        Employee e = new Employee("123456", "123456", "lawe", "d", "foreman");
 //        Employee f = new Employee("1234567", "1234567", "lawer", "d", "foreman");
-
+          createTool("plier_003", "side cutter pliers", "compact pliers");
         /*
         Testing to create a tool and delete a tool from database
          */
@@ -217,7 +217,7 @@ public class LibrarySystem
 //        createTool("screw_003", "flathead screwdriver", "compact flathead screwdriver");
 //        createTool("plier_001", "vice grips", "Vice Grips");
 //        createTool("plier_002", "needle-nose pliers", "small needle nose pliers");
-//        createTool("plier_003", "side cutter pliers", "side-cutter pliers");
+
 
 
     }

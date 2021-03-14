@@ -14,10 +14,9 @@ public class ToolDataAccess
      * @param tool_description A brief description of the tool
      * @return A boolean with true if tool was added properly, or false if not
      */
-    public boolean createTool(String tool_id, String tool_name, String tool_description)  {
+    public void createTool(String tool_id, String tool_name, String tool_description)  {
         // TODO Might need to do validation here, or in other method. Unsure at this point
-        //set boolean value to false
-        boolean validity = false;
+
         //establish a connection
         try{
         Connection con = DB.getConnection();
@@ -29,12 +28,12 @@ public class ToolDataAccess
         p.setString(3, tool_description);
 
         //a cursor pointing to the current spot in the data
-        ResultSet r = p.executeQuery();
-        validity = r.next();
+
         //close the connection
+            p.executeUpdate();
         con.close();
         } catch (Exception e) { System.out.println(e);}
-        return validity;
+        //return validity;
     }
 
     /**
@@ -42,7 +41,7 @@ public class ToolDataAccess
      * @param tool_id A string representing the tool id
      * @return A boolean representing true if successful, or false if not
      */
-    public boolean  deleteTool(String tool_id) {
+    public void  deleteTool(String tool_id) {
         //initialize to false
         boolean validity = false;
 
@@ -55,15 +54,14 @@ public class ToolDataAccess
             //sets p to the values after setString
             p.setString(1, tool_id);
             //saves a cursor position to go through the data to find the right tool_id
-            ResultSet r = p.executeQuery();
-            validity = r.next();
+            p.executeQuery();
+
             con.close();
 
         } catch (Exception e) {System.out.println(e);
         }
 
         //return true or false
-        return validity;
 
     }
 
