@@ -106,31 +106,118 @@ public class LibrarySystem
 
     public static void main (String[]args)
     {
-       //Testing login function
-        Employee d = new Employee("12345", "12345", "l", "d", "foreman");
-        Employee e = new Employee("123456", "123456", "lawe", "d", "foreman");
-        Employee f = new Employee("1234567", "1234567", "lawer", "d", "foreman");
+        //will be used to log in to database
+        LoginDataAccess lda = new LoginDataAccess();
 
-//        EmployeeDataAccess eda = new EmployeeDataAccess();
-//        eda.newEmployee(d.employee_id, d.last_name, d.first_name, d.employee_type);
-//        eda.newEmployee(e.employee_id, e.last_name, e.first_name, e.employee_type);
-//        eda.newEmployee(f.employee_id, f.last_name, f.first_name, f.employee_type);
-//
-//
-//        LoginDataAccess lda = new LoginDataAccess();
-//        lda.savenew(d.employee_id, d.employee_password);
-//        lda.savenew(e.employee_id, e.employee_password);
-//        lda.savenew(f.employee_id, f.employee_password);
-//
-//
-//
-//        System.out.println("Enter userid: ");
-//        String username = in.next();
-//        System.out.println("Enter password: ");
-//        String password = in.next();
-//
-//        System.out.println(login(username, password));
+        //Testing login function
+//        Employee d = new Employee("12345", "12345", "l", "d", "foreman");
+//        Employee e = new Employee("123456", "123456", "lawe", "d", "foreman");
+//        Employee f = new Employee("1234567", "1234567", "lawer", "d", "foreman");
 
+        /*
+        Testing to create a tool and delete a tool from database
+         */
+
+        System.out.println("Welcome to the tool management system:");
+
+
+        System.out.println("Enter employee id:");
+        String id = in.next();
+        System.out.println("Enter password: ");
+        String password = in.next();
+
+        //try/catch to handle login
+        try{
+
+            if( lda.authenticateLoginInfo(id, password))
+            System.out.println("Successful login");
+        } catch (Exception e) { System.out.println(e);}
+
+
+        //create a tool
+
+        System.out.println("Welcome, choose a menu option below");
+        System.out.println("Add a tool: (1)");
+        System.out.println("Delete a tool: (2)");
+        System.out.println("Borrow a tool. (3)");
+        System.out.println("Return a tool: (4)");
+        int choice = in.nextInt();
+
+        while (choice <1 && choice >4) {
+            if (choice == 1) {
+                //add a tool
+                System.out.println("Enter a tool id");
+                String tool_id = in.next();
+                System.out.println("Enter a tool name");
+                String tool_name = in.next();
+
+                System.out.println("Enter a tool description");
+                String tool_desc = in.next();
+
+                System.out.println("Adding tool to the system");
+                try {
+                    createTool(tool_id, tool_name, tool_desc);
+                    System.out.println("Tool added successfully");
+
+                } catch (Exception e) {
+                    System.out.println("Error adding tool: " + tool_name + ", " + (e));
+                }
+
+
+            } else if (choice == 2) {
+                //delete a tool
+                System.out.println("Enter a tool id to delete from the system");
+                String tool_id = in.next();
+
+                try {
+                    deleteTool(tool_id);
+                } catch (Exception e) {
+                    System.out.println("Error deleting tool: " + tool_id + ". " + (e));
+                }
+            } else if (choice == 3) {
+                //borrow a tool
+                System.out.println("Enter a tool id to borrow from system from the system");
+                String tool_id = in.next();
+                System.out.println("Enter your employee id");
+                String employee_id = in.next();
+                try {
+                    borrowTool(tool_id, employee_id);
+                } catch (Exception e) {
+                    System.out.println("Error borrowing tool: " + tool_id + ". " + (e));
+                }
+            } else if (choice == 4) {
+                //return a tool
+                System.out.println("Enter a tool id to return.");
+                String tool_id = in.next();
+                System.out.println("Enter your employee id");
+                String employee_id = in.next();
+
+                try {
+                    returnTool(tool_id, employee_id);
+                } catch (Exception e) {
+                    System.out.println("Error deleting tool: " + tool_id + ". " + (e));
+                }
+            } else {
+                System.out.println("Invalid choice: Please input a valid choice. ");
+                choice = in.nextInt();
+            }
+        }
+
+
+
+
+
+
+
+
+
+//        ToolDataAccess tda = new ToolDataAccess();
+//        createTool("screw_001", "phillips screwdriver", "compact philips screwdriver");
+//        createTool("screw_002", "robertson screwdriver", "compact robertson screwdriver");
+//        createTool("screw_003", "flathead screwdriver", "compact flathead screwdriver");
+//        createTool("plier_001", "vice grips", "Vice Grips");
+//        createTool("plier_002", "needle-nose pliers", "small needle nose pliers");
+//        createTool("plier_003", "side cutter pliers", "side-cutter pliers");
 
 
     }

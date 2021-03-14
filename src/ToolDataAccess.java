@@ -14,7 +14,7 @@ public class ToolDataAccess
      * @param tool_description A brief description of the tool
      * @return A boolean with true if tool was added properly, or false if not
      */
-    public boolean createTool(String tool_id, String tool_name, String tool_description) throws SQLException {
+    public boolean createTool(String tool_id, String tool_name, String tool_description)  {
         // TODO Might need to do validation here, or in other method. Unsure at this point
         //set boolean value to false
         boolean validity = false;
