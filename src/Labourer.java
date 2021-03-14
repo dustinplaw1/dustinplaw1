@@ -1,11 +1,11 @@
-import Employee;
-import ToolAccount;
 
 public class Labourer extends Employee {
-    private ToolAccount account;
+    //private ToolAccount account;
     // Maybe use scanner instead of params
-    Labourer(String emp_id, String f_name, String l_name) {
-        super(emp_id, f_name, l_name);
+
+
+    public Labourer(String employee_id, String last_name, String first_name, String employee_description) {
+        super(employee_id, last_name, first_name, employee_description);
         // initiallize tool Account.
     }
 
