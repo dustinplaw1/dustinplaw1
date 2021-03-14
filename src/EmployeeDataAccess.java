@@ -34,7 +34,7 @@ public class EmployeeDataAccess {
      * @param employee_id A string representing an employee id to retrieve info
      * @return
      */
-    public String getEmployeeInfo(String employee_id) {
+    public static String getEmployeeInfo(String employee_id) {
         String result = "";
         //try/catch when connecting to a database
         try {
@@ -65,7 +65,8 @@ public class EmployeeDataAccess {
 
     newEmployee(d.employee_id, d.last_name, d.first_name,d.employee_type);
 
-    String x = d.getEmployeeID();
+    String x = getEmployeeInfo(d.employee_id);
+
 
     System.out.println(x);
 
