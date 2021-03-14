@@ -37,9 +37,38 @@ public class ToolDataAccess
         return validity;
     }
 
-    public Boolean deleteTool(String tool_id) {
-        return true; //success deleted
+    /**
+     * A method that will delete the given tool from the database
+     * @param tool_id A string representing the tool id
+     * @return A boolean representing true if successful, or false if not
+     */
+    public boolean deleteTool(String tool_id) {
+        //initialize to false
+        boolean validity = false;
+
+        //try/catch when connecting to the database in case of error
+        try{
+            //make a connection
+            Connection con = DB.getConnection();
+            //make a prepared statement(more efficient)
+            PreparedStatement p = con.prepareStatement("delete from tool where tool_id=?");
+            //sets p to the values after setString
+            p.setString(1, tool_id);
+            //saves a cursor position to go through the data to find the right tool_id
+            ResultSet r = p.executeQuery();
+            validity = r.next();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        //return true or false
+        return validity;
+
     }
+
+
 
     /* not nec yet, but what data structure?
     public listOfToolsAndTheirData listAllTools() {
