@@ -46,6 +46,7 @@ public class ContractDataAccess
         }
     }
 
+
     // public listOFToolsSignedOut??
     /**
      * A method for an employee to return a tool that they previously signed out from the system
@@ -55,9 +56,10 @@ public class ContractDataAccess
     public void returnTool(String tool_id, String employee_id) throws Exception {
         //initialize to false
         boolean validity = false;
-
+        // verify that tool_id is in return
         //try/catch when connecting to the database in case of error
         try{
+            canEmployeeReturnTool(tool_id, employee_id);
             //make a connection
             Connection con = DB.getConnection();
             //make a prepared statement(more efficient)
@@ -77,6 +79,36 @@ public class ContractDataAccess
     }
 
 
+    /**
+     * Method used to check if the employee can return a tool
+     *
+     */
+    private Boolean canEmployeeReturnTool(String tool_id, String employee_id) throws Exception {
+        try {
+            Connection con = DB.getConnection();
+            //make a prepared statement(more efficient)
+            // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
+            //PreparedStatement p = con.prepareStatement("select contract_id from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
+            PreparedStatement p = con.prepareStatement("select * from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
+
+            p.setString(1, tool_id);
+            p.setString(2, employee_id);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+
+            if (rs.getString("contract_id").length() != 0) {
+                System.out.println("hi: "+rs.getString("contract_id"));
+                throw new Exception("The tool that you tried to return was not returned");
+            }
+            //saves a cursor position to go through the data to find the right tool_id
+            rs.close();
+            con.close();
+        } catch (Exception e) {
+            throw e;
+        }
+        return true;
+    }
+
     /*
     public Boolean isToolOverdue(String tool_id) {
 
@@ -86,6 +118,11 @@ public class ContractDataAccess
     public static void main(String[] args) {
         ContractDataAccess cda = new ContractDataAccess();
         //cda.borrowTool("1234", "2");
-        //cda.returnTool("123", "3");
+        try {
+            cda.returnTool("123", "3");
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }
