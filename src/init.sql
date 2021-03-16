@@ -1,3 +1,14 @@
+--CREATE TABLE IF NOT EXISTS contracts
+--(
+--contract_id varchar(20) not null primary key,
+--employee_id varchar(30) not null,
+--tool_id varchar(20) not null,
+--date_borrowed timestamp not null,
+--due_date timestamp not null,
+--date_returned timestamp null
+--);
+--note: no referential integrity constraint (FOREIGN Key Constraint) not imposed on employee_id and tool_id
+
 CREATE TABLE IF NOT EXISTS contracts
 (
 contract_id varchar(20) not null primary key,
@@ -5,8 +16,10 @@ employee_id varchar(30) not null,
 tool_id varchar(20) not null,
 date_borrowed timestamp not null,
 due_date timestamp not null,
-date_returned timestamp null
+date_returned timestamp null, 
+foreign key (employee_id) references employees(employee_id), foreign key (tool_id) references tools(tool_id)
 );
+
 
 
 CREATE TABLE IF NOT EXISTS employees
