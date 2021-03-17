@@ -117,9 +117,11 @@ public class ContractDataAccess
     */
     public static void main(String[] args) {
         ContractDataAccess cda = new ContractDataAccess();
-        //cda.borrowTool("1234", "2");
+        //cda.borrowTool("12345", "3");
+
         try {
-            cda.returnTool("123", "3");
+            cda.borrowTool("1235", "2");
+            //cda.returnTool("123", "3");
         }
         catch(Exception e) {
             System.out.println(e);

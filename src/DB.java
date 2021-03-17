@@ -12,16 +12,23 @@ public class DB
      * @return A connection to the database will be returned
      */
     public static Connection getConnection() {
-        String username = "";
-        String password = "";
-        String url = "jdbc:mysql://localhost:3306/";
+        // String username = "root";
+        String username = "group13_admin@loollibrary";
+        String password = "primer-spectator-vestA";
+        String url = "jdbc:mysql://loollibrary.mysql.database.azure.com:3306/tool_library?useSSL=true&requireSSL=false";
+        // String url = "jdbc:mysql://localhost:3306/tool_library";
 
         Connection con = null;
 
         try{
+            System.out.println("connecting to db");
             Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("here");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(url, username, password);
-        }catch (Exception e){System.out.println(e);}
+            System.out.println("Connected");
+            // con = DriverManager.getConnection(url, username, password);
+        }catch (Exception e){System.out.println("um "+e);}
 
         return con;
 
