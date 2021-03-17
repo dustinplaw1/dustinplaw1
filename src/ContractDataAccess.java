@@ -1,6 +1,7 @@
 import java.util.UUID;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 import java.sql.*;
 
 
@@ -14,7 +15,7 @@ public class ContractDataAccess
      * A method to allow an employee to borrow a tool by creating a contract.
      * @param tool_id the unique identifier of the tool being borrowed.
      * @param employee_id the unique identifier of the employee borrowing the tool.
-     * @throws exception
+     * //@throws exception
      */
     public void borrowTool(String tool_id, String employee_id) throws Exception {
         // get todays date
@@ -42,7 +43,7 @@ public class ContractDataAccess
             //close the connection
             con.close();
         } catch (Exception e) {
-           throw e;
+            throw e;
         }
     }
 
@@ -53,6 +54,7 @@ public class ContractDataAccess
      * @param tool_id A string which represents the borrowed tool that is being returned
      * @param employee_id the id of the employee returning the tool
      */
+
     public void returnTool(String tool_id, String employee_id) throws Exception {
         //initialize to false
         boolean validity = false;
@@ -118,10 +120,41 @@ public class ContractDataAccess
     public static void main(String[] args) {
         ContractDataAccess cda = new ContractDataAccess();
         //cda.borrowTool("12345", "3");
-
+        Scanner in = new Scanner(System.in);
+        System.out.println("What you want to do ? Borrow Tool (Enter 1)/ Return Tool (Enter 2)/ AddTool(Enter 3)");
+        int opt = in.nextInt();
+        System.out.println(opt);
         try {
-            cda.borrowTool("1235", "2");
-            //cda.returnTool("123", "3");
+            if(opt==1) {
+                System.out.println("Enter the tool id =");
+                String toolid = in.next();
+                System.out.println("Enter employee id = ");
+                String empid = in.next();
+                //cda.borrowTool("1", "2");
+                cda.borrowTool(toolid, empid);
+                System.out.println("Tool Borrowed");
+                //cda.returnTool("123", "3");
+            }
+            else if(opt==2) {
+                System.out.println("Enter the tool id =");
+                String toolid = in.next();
+                System.out.println("Enter employee id = ");
+                String empid = in.next();
+                //cda.borrowTool("1", "2");
+                cda.returnTool(toolid, empid);
+                System.out.println("Tool Returned");
+                //cda.returnTool("123", "3");
+            }
+            else if (opt==3)
+            {
+                AddTool obj = new AddTool();
+                obj.addTool();
+            }
+            else
+            {
+                System.out.println("Invalid Option");
+            }
+
         }
         catch(Exception e) {
             System.out.println(e);
