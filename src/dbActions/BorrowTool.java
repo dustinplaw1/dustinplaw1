@@ -87,14 +87,21 @@ public class BorrowTool {
                 System.out.println("Enter employee id = ");
                 String empid = in.next();
                 //cda.borrowTool("1", "2");
-                bt.execute(toolid, empid);
-                System.out.println("Tool Borrowed");
+
+
+        //i added this try/catch here because before it was giving me an error
+        try {
+            bt.execute(toolid, empid);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        System.out.println("Tool Borrowed");
                 //cda.returnTool("123", "3");
 
         }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-    }
+//        catch(Exception e) {
+//            System.out.println(e);
+
+
 
 }
