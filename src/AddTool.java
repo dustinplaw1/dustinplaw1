@@ -14,4 +14,13 @@ public class AddTool {
         obj.createTool(tool_id, tool_name, tool_desc);
 
     }
+    public void removeTool() {
+        Scanner in = new Scanner(System.in);
+        ToolDataAccess obj = new ToolDataAccess();
+        System.out.println("Enter Tool id = ");
+        String tool_id = in.nextLine();
+
+        obj.deleteTool(tool_id);
+
+    }
 }
