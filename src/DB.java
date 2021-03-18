@@ -23,8 +23,6 @@ public class DB
         try{
             System.out.println("connecting to db");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("here");
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(url, username, password);
             System.out.println("Connected");
             // con = DriverManager.getConnection(url, username, password);
