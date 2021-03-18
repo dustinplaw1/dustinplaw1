@@ -121,7 +121,7 @@ public class ContractDataAccess
         ContractDataAccess cda = new ContractDataAccess();
         //cda.borrowTool("12345", "3");
         Scanner in = new Scanner(System.in);
-        System.out.println("What you want to do ? Borrow Tool (Enter 1)/ Return Tool (Enter 2)/ AddTool(Enter 3)");
+        System.out.println("What you want to do ? Borrow Tool (Enter 1)/ Return Tool (Enter 2)/ AddTool(Enter 3)/ RemoveTool(Enter 4) / Change Employee Role (Enter 5)");
         int opt = in.nextInt();
         System.out.println(opt);
         try {
@@ -149,6 +149,16 @@ public class ContractDataAccess
             {
                 AddTool obj = new AddTool();
                 obj.addTool();
+            }
+            else if(opt==4)
+            {
+                AddTool obj = new AddTool();
+                obj.removeTool();
+            }
+            else if(opt==5)
+            {
+                ToolManager obj = new ToolManager();
+                obj.changeEmployeeRole();
             }
             else
             {
