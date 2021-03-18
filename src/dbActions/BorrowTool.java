@@ -79,7 +79,7 @@ public class BorrowTool {
     */
 
     public static void main(String[] args) {
-        borrowTool bt = new BorrowTool();
+        BorrowTool bt = new BorrowTool();
         //cda.borrowTool("12345", "3");
         Scanner in = new Scanner(System.in);
                 System.out.println("Enter the tool id =");
