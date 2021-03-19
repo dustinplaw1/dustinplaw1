@@ -40,10 +40,9 @@ public class LoginDataAccess {
      * @param password A string that represents the employees password
      * @return
      */
-    public Boolean authenticateLoginInfo(String employee_id, String password) {
+    public boolean authenticateLoginInfo(String employee_id, String password) {
         //start with false
         boolean validity = false;
-
 
         //check if the supplied info from user is valid (mainly a string with any value
 
