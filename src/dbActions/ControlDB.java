@@ -6,7 +6,7 @@ import java.sql.*;
 
 
 // import Date
-public class ControlDB {
+public class ControlDB extends Gateway {
 
     private String contract_fields =
         "contract_id varchar(20) not null primary key,"
@@ -21,19 +21,25 @@ public class ControlDB {
         "employee_id varchar(30) NOT NULL PRIMARY KEY,"
         + " first_name varchar(50) NOT NULL,"
         + " last_name varchar(50) NOT NULL,"
-        + " phone_num varchar(15),"
+        //+ " phone_num varchar(15),"
         + " emp_description varchar(200),"
         + " employee_type varchar(20) NOT NULL";
 
-    private String login_fields = "employee_id varchar(30) NOT NULL PRIMARY KEY,"
-        + " password varchar(50)";
-        //+ " foreign key (employee_id) references employees(employee_id), foreign key (tool_id) references tools(tool_id)";
+    private String login_fields = "employee_id varchar(30) NOT NULL,"
+        + " password varchar(50),"
+        + " foreign key (employee_id) references employees(employee_id)";
 
     private String tool_fields =
         "tool_id varchar(20) NOT NULL PRIMARY KEY,"
         + "tool_name varchar(50) NOT NULL,"
         + "tool_description varchar(30)";
 
+    private String[] employees = {
+        " (e01, Smith, John, Apprentice),",
+        " (e02, Dickinson, Emily, Journeyman),",
+        " (e03, Benes, Elaine, Job_Manager),",
+        " (e04, Scott, Adam, Tool_Manager)"
+    };
 
     private void resetTables(String tool_id, String employee_id) throws Exception {
     }
@@ -58,13 +64,14 @@ public class ControlDB {
         }
 
         try{
-            Connection con = DB.getConnection();
+            this.getConnection();
+            // Connection con = DB.getConnection();
             // Drop Table
             Statement stmt = con.createStatement();
             String p = "drop table if exists " + table_name;
+            System.out.println(p);
             stmt.executeUpdate(p);
 
-            System.out.println("here");
             // Create new table
             p = String.format("CREATE TABLE IF NOT EXISTS %s (%s)", table_name, table_fields);
             //sets parameters into a string
@@ -80,7 +87,8 @@ public class ControlDB {
      */
     private void viewTable(String table_name) {
         try {
-            Connection con = DB.getConnection();
+            this.getConnection();
+            //Connection con = DB.getConnection();
             //make a prepared statement(more efficient)
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             //PreparedStatement p = con.prepareStatement("select contract_id from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
@@ -107,6 +115,33 @@ public class ControlDB {
         }
     }
 
+
+    /**
+     * This method inserts some test data into a given table
+     * @param The name of the table to insert data into
+     */
+    private void addDataToTable(String table_name) {
+        try {
+            Connection con = DB.getConnection();
+            String entry = String.format("insert into %s values", table_name);
+            for (String value : employees) {
+                entry += value;
+            }
+
+
+            //prepare to add items to tool database
+            //PreparedStatement p = con.prepareStatement (String.format("insert into %s(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)", table_name));
+
+            //p.executeUpdate();
+            //close the connection
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
     public static void main(String[] args) {
         String [] tables = {"tools", "employees", "logins", "contracts"};
         String [] fields = {};
@@ -125,8 +160,14 @@ public class ControlDB {
                     opt = in.nextInt();
                     //cda.borrowTool("1", "2");
                     if (opt > 0 && opt <= 4) {
-                        cdb.resetTable(tables[opt-1]);
-                        System.out.println("Table Reset");
+                        System.out.println(String.format("\nThis action will remove all entries from %s", tables[opt-1]));
+                        System.out.println("Press 1 to continue, or 0 to exit");
+                        System.out.printf("-------: ");
+                        int opt2 = in.nextInt();
+                        if (opt2 == 1) {
+                            cdb.resetTable(tables[opt-1]);
+                            System.out.println("Table Reset\n");
+                        }
                     }
 
                 } else if(opt==2) {
