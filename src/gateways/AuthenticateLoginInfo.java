@@ -50,4 +50,16 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
         return this.validity;
     }
 
+
+    /**
+     * Alows the employee to change their login authentication info after an incorrect
+     * attempted login.
+     * @param emp_id input employee id
+     * @param emp_pass input password
+     */
+    public void setLoginInfo(String emp_id, String emp_pass) {
+        employee_id = emp_id;
+        password = emp_pass;
+    }
+
 }
