@@ -1,3 +1,5 @@
+package Gui;
+
 import dbActions.LoginDataAccess;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,7 @@ public class Login implements ActionListener {
     private static boolean totalValid;
 
 
-    public static void displayLogin()
+    public static void executeLogin()
     {
         JPanel panel = new JPanel();
 
@@ -85,6 +87,8 @@ public class Login implements ActionListener {
         String employee = employeeText.getText();  //capture employee id input
         String password = passwordText.getText();   //capture employee password input
 
+
+
         LoginDataAccess lda = new LoginDataAccess();
 
         //check database to see if combo was on the database or not
@@ -111,7 +115,7 @@ public class Login implements ActionListener {
                 System.out.println("in the else statement, this is where they match!");
                 totalValid = true;
                 whileCheck = true;
-                displayLogin();
+                executeLogin();
             }
             }while (!whileCheck);
 
@@ -123,7 +127,7 @@ public class Login implements ActionListener {
 
     public static void main(String[] args) {
 
-        displayLogin();
+        executeLogin();
 
 
 
