@@ -76,7 +76,7 @@ public class Login implements ActionListener {
     /**
      * A method that will validate a username/password
      */
-    public void validate()
+    private void validate()
     {
         //boolean that will be used to help authenticate
         boolean isValid = false;
@@ -92,20 +92,28 @@ public class Login implements ActionListener {
 
         System.out.println("Username/password entered: " + employee + ": " + password + " is: " + databaseCheck );
 
-        //this should check for an empty password or one that returned false from checking the database
-        if ((employee.isEmpty() || password.isEmpty()) || databaseCheck== false )
-        {
-            System.out.println("in the if statement, this should re-initialize the login screen" + databaseCheck);
 
-            totalValid = false;
+        boolean whileCheck = true;
 
-        }
-        //if username/password is null
-        else{
-            System.out.println("in the else statement, this is where they match!");
-            //displayLogin();
-            totalValid = true;
-        }
+        do{
+
+            //this should check for an empty password or one that returned false from checking the database
+            if ((employee.isEmpty() || password.isEmpty()) || databaseCheck== false )
+            {
+                System.out.println("in the if statement, this should re-initialize the login screen" + databaseCheck);
+
+                totalValid = false;
+
+
+            }
+            //if password is valid
+            else {
+                System.out.println("in the else statement, this is where they match!");
+                totalValid = true;
+                whileCheck = true;
+                displayLogin();
+            }
+            }while (!whileCheck);
 
 
 
@@ -138,7 +146,11 @@ public class Login implements ActionListener {
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
             successful.setText("Login successful.");
-         //inside here call to open appropriate homescreen depending on which user logs in
+            System.out.println("Login successful");
+
+            //inside here call to open appropriate homescreen depending on which user logs in
+
+
 
         //if unsuccessful,
         } else {
@@ -146,7 +158,6 @@ public class Login implements ActionListener {
             successful.setText("Login unsuccessful, please try again");
             // TODO Make the popup screen clear and user can try again
 
-            displayLogin();
 
         }
         //}
