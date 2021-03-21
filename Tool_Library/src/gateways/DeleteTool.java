@@ -1,5 +1,4 @@
-import java.util.Calendar;
-import java.util.Date;
+package gateways;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
@@ -48,7 +47,8 @@ public class DeleteTool extends Gateway implements Command {
     public static void main(String[] args) {
         try {
             //cda.borrowTool("12345", "3");
-            Scanner in = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner in = new Scanner(System.in);
 
             System.out.println("Enter the tool id =");
             String toolid = in.next();

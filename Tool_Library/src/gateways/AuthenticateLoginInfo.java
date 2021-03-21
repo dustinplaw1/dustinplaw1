@@ -1,5 +1,4 @@
-import java.util.UUID;
-import java.util.Scanner;
+package gateways;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -52,7 +51,7 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
 
 
     /**
-     * Alows the employee to change their login authentication info after an incorrect
+     * Allows the employee to change their login authentication info after an incorrect
      * attempted login.
      * @param emp_id input employee id
      * @param emp_pass input password

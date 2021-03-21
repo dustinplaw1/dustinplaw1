@@ -1,3 +1,4 @@
+package gateways;
 import java.util.Calendar;
 //import java.util.Date;
 import java.util.Scanner;
@@ -30,7 +31,8 @@ public class ReturnTool extends Gateway implements Command {
      */
     public void execute () throws Exception {
         // confirmation of response
-        int confirmation = 0;
+        @SuppressWarnings("unused")
+		int confirmation = 0;
         try{
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? AND employee_id=?");
@@ -50,7 +52,8 @@ public class ReturnTool extends Gateway implements Command {
 
     public static void main(String[] args) {
 
-        Scanner in = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
         System.out.println("Enter the tool id =");
         String toolid = in.next();
         System.out.println("Enter employee id = ");

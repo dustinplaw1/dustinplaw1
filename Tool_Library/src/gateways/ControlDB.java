@@ -1,6 +1,6 @@
-import java.util.UUID;
-import java.util.Calendar;
-import java.util.Date;
+package gateways;
+//import java.util.Calendar;
+//import java.util.Date;
 import java.util.Scanner;
 import java.sql.*;
 
@@ -41,9 +41,7 @@ public class ControlDB extends Gateway {
         " (e04, Scott, Adam, Tool_Manager)"
     };
 
-    private void resetTables(String tool_id, String employee_id) throws Exception {
-    }
-
+    
     /**
      * This method is used to drop a table with table_name and then create a table of the same name
      * @param The name of the table to be reset
@@ -65,7 +63,6 @@ public class ControlDB extends Gateway {
 
         try{
             this.getConnection();
-            // Connection con = DB.getConnection();
             // Drop Table
             Statement stmt = con.createStatement();
             String p = "drop table if exists " + table_name;
@@ -88,7 +85,7 @@ public class ControlDB extends Gateway {
     private void viewTable(String table_name) {
         try {
             this.getConnection();
-            //Connection con = DB.getConnection();
+            
             //make a prepared statement(more efficient)
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             //PreparedStatement p = con.prepareStatement("select contract_id from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
@@ -120,9 +117,9 @@ public class ControlDB extends Gateway {
      * This method inserts some test data into a given table
      * @param The name of the table to insert data into
      */
-    private void addDataToTable(String table_name) {
+    @SuppressWarnings("unused")
+	private void addDataToTable(String table_name) {
         try {
-            Connection con = DB.getConnection();
             String entry = String.format("insert into %s values", table_name);
             for (String value : employees) {
                 entry += value;
@@ -144,9 +141,9 @@ public class ControlDB extends Gateway {
 
     public static void main(String[] args) {
         String [] tables = {"tools", "employees", "logins", "contracts"};
-        String [] fields = {};
         ControlDB cdb = new ControlDB();
-        Scanner in = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
         while (true) {
             System.out.println("Select option: ");
             System.out.println("1: Reset Tables\n2: View Table Data\n0: Exit menu");

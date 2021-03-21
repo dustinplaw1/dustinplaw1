@@ -1,3 +1,4 @@
+package gateways;
 import java.util.UUID;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
@@ -31,7 +32,8 @@ public class CreateTool extends Gateway implements Command {
      */
     public void execute() throws Exception {
 
-        int confirmation = 0;
+        @SuppressWarnings("unused")
+		int confirmation = 0;
 
         try {
             //prepare to add item to tool database
@@ -52,7 +54,8 @@ public class CreateTool extends Gateway implements Command {
 
     // Literally only here to manually test the method.
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
         System.out.println("Enter the tool name =");
         String toolname = in.next();
         System.out.println("Enter a tool description = ");

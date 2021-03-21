@@ -1,4 +1,4 @@
-import java.util.UUID;
+package gateways;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -56,7 +56,7 @@ public class GetEmployeeInfo extends Gateway implements Command {
             System.out.println(e);
         }
 
-        // sets the repsonse object
+        // sets the response object
     }
 
     /**

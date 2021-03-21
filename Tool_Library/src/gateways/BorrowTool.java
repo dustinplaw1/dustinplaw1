@@ -1,6 +1,6 @@
+package gateways;
 import java.util.UUID;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
@@ -35,7 +35,8 @@ public class BorrowTool extends Gateway implements Command {
      */
     public void execute() throws Exception {
         // confirmation of response
-        int confirmation = 0;
+        @SuppressWarnings("unused")
+		int confirmation = 0;
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
@@ -97,7 +98,8 @@ public class BorrowTool extends Gateway implements Command {
 
     // Literally only here to manually test the method.
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
         System.out.println("Enter the tool id =");
         String toolid = in.next();
         System.out.println("Enter employee id = ");
