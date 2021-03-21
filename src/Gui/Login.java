@@ -1,6 +1,11 @@
 package Gui;
 
+import Gui.Employees.Labourer;
+import Gui.Employees.Manager;
+import Gui.Employees.ToolManager;
 import gateways.AuthenticateLoginInfo;
+import gateways.GetEmployeeInfo;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +14,7 @@ public class Login implements ActionListener {
 
 
     //values are declared here so they are accessible in the methods below
+    private static JFrame loginFrame;
     private static JLabel employeeLabel;
     private static JTextField employeeText;
     private static JLabel passwordLabel;
@@ -22,10 +28,10 @@ public class Login implements ActionListener {
     {
         JPanel panel = new JPanel();
 
-        JFrame frame = new JFrame();
-        frame.setSize(350, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        JFrame loginFrame = new JFrame();
+        loginFrame.setSize(350, 200);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.add(panel);
 
 
         //quick test here to see about making generic values in a gui
@@ -72,7 +78,7 @@ public class Login implements ActionListener {
 
 
         //set it visible
-        frame.setVisible(true);
+        loginFrame.setVisible(true);
     }
 
     /**
@@ -144,7 +150,7 @@ public class Login implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //here i need to get data from the database, (login information
-
+        String employee = employeeText.getText();  //capture employee id input
 
         try {
             validate(); //call this method to validate user input
@@ -158,6 +164,45 @@ public class Login implements ActionListener {
             successful.setText("Login successful.");
 
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
+
+            try {
+                GetEmployeeInfo info = new GetEmployeeInfo(employee);
+                info.execute();
+
+                //this is empty for now
+                //int employee_role = info.getRole();
+
+
+                int employee_role = 1;      //this is just to test, uncomment code above to get right one.
+
+
+                if (employee_role == 1)
+                {
+                    Labourer.executeLabourer();
+                    loginFrame.setVisible(false);
+                }
+                else if (employee_role ==2 )
+                {
+                    Manager.executeLabourer();
+                    loginFrame.setVisible(false);
+
+                }
+                else if (employee_role == 3)
+                {
+                    ToolManager.executeToolManager();
+                    loginFrame.setVisible(false);
+
+                }
+                else
+                {
+                    throw new Exception("Error, the employee's role is not valid");
+                }
+
+
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
 
