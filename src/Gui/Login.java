@@ -1,6 +1,6 @@
 package Gui;
 
-import dbActions.LoginDataAccess;
+import gateways.AuthenticateLoginInfo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -78,8 +78,7 @@ public class Login implements ActionListener {
     /**
      * A method that will validate a username/password
      */
-    private void validate()
-    {
+    private void validate() throws Exception {
         //boolean that will be used to help authenticate
         boolean isValid = false;
 
@@ -87,14 +86,15 @@ public class Login implements ActionListener {
         String employee = employeeText.getText();  //capture employee id input
         String password = passwordText.getText();   //capture employee password input
 
+        AuthenticateLoginInfo auth = new AuthenticateLoginInfo(employee, password);
 
 
-        LoginDataAccess lda = new LoginDataAccess();
+
 
         //check database to see if combo was on the database or not
-        boolean databaseCheck = lda.authenticateLoginInfo(employee, password);
 
-        System.out.println("Username/password entered: " + employee + ": " + password + " is: " + databaseCheck );
+
+        System.out.println("Username/password entered: " + employee + ": " + password + " is: " );
 
 
         boolean whileCheck = true;
@@ -102,9 +102,9 @@ public class Login implements ActionListener {
         do{
 
             //this should check for an empty password or one that returned false from checking the database
-            if ((employee.isEmpty() || password.isEmpty()) || databaseCheck== false )
+            if ((employee.isEmpty() || password.isEmpty()) ||auth.getValidity())
             {
-                System.out.println("in the if statement, this should re-initialize the login screen" + databaseCheck);
+                System.out.println("in the if statement, this should re-initialize the login screen" );
 
                 totalValid = false;
 
@@ -142,9 +142,11 @@ public class Login implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //here i need to get data from the database, (login information
 
-        validate(); //call this method to validate user input
-
-
+        try {
+            validate(); //call this method to validate user input
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
 
         //if login was successful, the call to open the homescreen should happen here.
