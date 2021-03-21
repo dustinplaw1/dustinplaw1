@@ -12,7 +12,7 @@ import java.awt.*;
 
 
 public class Labourer extends JPanel {
-    protected static String [] options = {"Borrow a tool" , "Return a tool" , "Search for available tools"};
+    protected static String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
     private static JFrame labourerFrame;
     private static JPanel labourerPanel;
     private static JButton logoutButton;
