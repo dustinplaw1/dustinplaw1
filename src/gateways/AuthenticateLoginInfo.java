@@ -32,7 +32,7 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
     public void execute() throws Exception {
 
         try {
-            PreparedStatement p = con.prepareStatement("select * from logins where employee_id=? and employee_password=?");
+            PreparedStatement p = con.prepareStatement("select * from logins where employee_id=? and password=?");
             p.setString(1, employee_id);
             p.setString(2, password);
             ResultSet result = p.executeQuery();

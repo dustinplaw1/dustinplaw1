@@ -86,7 +86,10 @@ public class Login implements ActionListener {
         String employee = employeeText.getText();  //capture employee id input
         String password = passwordText.getText();   //capture employee password input
 
-        AuthenticateLoginInfo auth = new AuthenticateLoginInfo(employee, password);
+        AuthenticateLoginInfo authenticate = new AuthenticateLoginInfo(employee, password);
+        authenticate.execute();
+        boolean getAuthentication = authenticate.getValidity();
+
 
 
 
@@ -102,7 +105,7 @@ public class Login implements ActionListener {
         do{
 
             //this should check for an empty password or one that returned false from checking the database
-            if ((employee.isEmpty() || password.isEmpty()) ||auth.getValidity())
+            if ((employee.isEmpty() || password.isEmpty()) ||!getAuthentication)
             {
                 System.out.println("in the if statement, this should re-initialize the login screen" );
 
@@ -142,6 +145,7 @@ public class Login implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //here i need to get data from the database, (login information
 
+
         try {
             validate(); //call this method to validate user input
         } catch (Exception exception) {
@@ -152,6 +156,11 @@ public class Login implements ActionListener {
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
             successful.setText("Login successful.");
+
+            //when password is successful here, need to check the role of the employee to open the appropriate frame by title
+
+
+
             System.out.println("Login successful");
 
             //inside here call to open appropriate homescreen depending on which user logs in
