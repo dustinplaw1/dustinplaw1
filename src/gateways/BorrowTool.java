@@ -1,25 +1,46 @@
-package dbActions;
+package gateways;
 import java.util.UUID;
 import java.util.Calendar;
-import java.util.Date;
-import java.sql.*;
 import java.util.Scanner;
+import java.sql.PreparedStatement;
 
-public class BorrowTool {
+// The BorrowTool Gateway is called by: new BorrowTool({"e02", "t03"}).execute();
+public class BorrowTool extends Gateway implements Command {
+    /** tool_id of tool being borrowed */
+    private String tool_id;
+    /** employee_id of employee borrowing the tool */
+    private String employee_id;
 
-    // TODO please note that this is a temporary format until we get a proper input system.
-    // borrow tool should impplement Command and execute should need no params
+
+    /** Creates a new Gateway for creating tool contracts
+     * @param tool_id of tool being borrowed
+     * @param employee_id of employee borrowing the tool
+     */
+    public BorrowTool(String t_id, String emp_id) throws Exception {
+        try {
+            // Connect to database by calling superclass method
+            this.getConnection();
+        } catch (Exception e) {
+            throw e;
+        }
+
+        tool_id = t_id;
+        employee_id = emp_id;
+    }
+
+
     /**
      * A method to allow an employee to borrow a tool by creating a contract.
-     * @param tool_id the unique identifier of the tool being borrowed.
-     * @param employee_id the unique identifier of the employee borrowing the tool.
-     * //@throws exception
+     * @throws exception
      */
-    public void execute(String tool_id, String employee_id) throws Exception {
-        // get todays date
-        // increment date
+    public void execute() throws Exception {
+        // confirmation of response
+        @SuppressWarnings("unused")
+		int confirmation = 0;
+
+
         // TODO Might need to do validation here, or in other method. Unsure at this point
-        String contract_id = UUID.randomUUID().toString().substring(0,8);
+        String contract_id = "c" + UUID.randomUUID().toString().substring(0,3);
         Calendar today = Calendar.getInstance();
         Calendar due_date = Calendar.getInstance();
         due_date.add(Calendar.DAY_OF_MONTH, 14);
@@ -27,7 +48,6 @@ public class BorrowTool {
         System.out.println("test:"+due_date.getTimeInMillis());
         //establish a connection
         try {
-            Connection con = DB.getConnection();
             //prepare to add items to tool database
             PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)");
             //sets parameters into a string
@@ -37,7 +57,7 @@ public class BorrowTool {
             p.setTimestamp(4, new java.sql.Timestamp(today.getTimeInMillis()));
             p.setTimestamp(5, new java.sql.Timestamp(due_date.getTimeInMillis()));
 
-            p.executeUpdate();
+            confirmation = p.executeUpdate();
             //close the connection
             con.close();
         } catch (Exception e) {
@@ -46,11 +66,8 @@ public class BorrowTool {
     }
 
 
-    /**
-     * Method used to check if the employee can return a tool
-     *
-     */
     /*
+     // Method used to check if the employee can return a tool
     private Boolean canEmployeeReturnTool(String tool_id, String employee_id) throws Exception {
         try {
             Connection con = DB.getConnection();
@@ -78,26 +95,23 @@ public class BorrowTool {
     }
     */
 
+
+    // Literally only here to manually test the method.
     public static void main(String[] args) {
-        BorrowTool bt = new BorrowTool();
-        //cda.borrowTool("12345", "3");
-        Scanner in = new Scanner(System.in);
-                System.out.println("Enter the tool id =");
-                String toolid = in.next();
-                System.out.println("Enter employee id = ");
-                String empid = in.next();
-                //cda.borrowTool("1", "2");
 
+        @SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
+        System.out.println("Enter the tool id =");
+        String toolid = in.next();
+        System.out.println("Enter employee id = ");
+        String empid = in.next();
 
-        //i added this try/catch here because before it was giving me an error
         try {
-            bt.execute(toolid, empid);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        System.out.println("Tool Borrowed");
-                //cda.returnTool("123", "3");
+            BorrowTool bt = new BorrowTool(toolid, empid);
+            bt.execute();
 
+        } catch(Exception e) {
+            System.out.println(e);
         }
 //        catch(Exception e) {
 //            System.out.println(e);
