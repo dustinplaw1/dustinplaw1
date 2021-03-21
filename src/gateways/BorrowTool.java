@@ -104,10 +104,8 @@ public class BorrowTool extends Gateway implements Command {
         String empid = in.next();
 
         try {
-
             BorrowTool bt = new BorrowTool(toolid, empid);
             bt.execute();
-            System.out.println("Tool Borrowed");
 
         } catch(Exception e) {
             System.out.println(e);
