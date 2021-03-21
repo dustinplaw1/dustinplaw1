@@ -2,3 +2,7 @@
 /out
 .DS_Store
 /.metadata/
+.classpath
+.project
+.metadata/
+.metadata/*
