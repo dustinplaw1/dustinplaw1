@@ -26,13 +26,13 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
 
 
     /**
-     * A method that sets the valitity term in AuthenticateLoginInfo by checking the database
+     * A method that sets the validity term in AuthenticateLoginInfo by checking the database
      * @throws exception
      */
     public void execute() throws Exception {
 
         try {
-            PreparedStatement p = con.prepareStatement("select * from logins where employee_id=? and employee_password=?");
+            PreparedStatement p = con.prepareStatement("select * from logins where employee_id=? and password=?");
             p.setString(1, employee_id);
             p.setString(2, password);
             ResultSet result = p.executeQuery();

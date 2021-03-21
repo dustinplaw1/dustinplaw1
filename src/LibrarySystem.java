@@ -42,7 +42,7 @@
 //            System.out.println("Tool id: " + id + "was removed from the system");
 //
 //
-//        } catch (Exception e) { System.out.println("Error: there was an error removing tool" + e);}
+//        } catch (Eception e) { System.out.println("Error: there was an error removing tool" + e);}
 //
 //
 //    }
