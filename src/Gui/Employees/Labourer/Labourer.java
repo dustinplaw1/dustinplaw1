@@ -1,4 +1,4 @@
-package Gui.Employees;
+package Gui.Employees.Labourer;
 
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
@@ -11,10 +11,10 @@ import java.awt.*;
  */
 
 
-public class ToolManager extends JPanel {
-    protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
-    private static JFrame toolManagerFrame;
-    private static JPanel managerPanel;
+public class Labourer extends JPanel {
+    protected static String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
+    private static JFrame labourerFrame;
+    private static JPanel labourerPanel;
     private static JButton logoutButton;
     private static JButton nextButton;
 
@@ -30,47 +30,47 @@ public class ToolManager extends JPanel {
     private static JLabel welcomeMessage;
 
 
-    public static void executeToolManager()
+    public static void executeLabourer()
     {
 
 
         //toolManager's frame
-        toolManagerFrame = new JFrame();
+        labourerFrame = new JFrame();
 
 
-        toolManagerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        toolManagerFrame.pack();
-        toolManagerFrame.setSize(1280,768);
+        labourerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        labourerFrame.pack();
+        labourerFrame.setSize(1280,768);
 
 
 
         //Create a new panel that will be the tool manager's actionmenu
-        managerPanel = new JPanel();
+        labourerPanel = new JPanel();
 
         //create a layout for the panel
-        managerPanel.setLayout(null);
+        labourerPanel.setLayout(null);
 
         //set the size of the panel (This is the size of the frame, so it should take the whole window (I believe)
-        managerPanel.setSize(1280,768);
+        labourerPanel.setSize(1280,768);
 
 
         //now create the logout or enter button
 
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(100,650,80,25);
-        managerPanel.add(logoutButton);
+        labourerPanel.add(logoutButton);
 
         nextButton = new JButton("Next");
 
         nextButton.setBounds(1000,650,80,25);
-        managerPanel.add(nextButton);
+        labourerPanel.add(nextButton);
 
 
         //maybe a way so that we pull the name of the employee that logged in to display name
-        welcomeMessage = new JLabel ("Welcome Tool Manager, Choose an action below:");
+        welcomeMessage = new JLabel ("Welcome, Choose an action below:");
         welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 24));
         welcomeMessage.setBounds(300,50,700,40);
-        managerPanel.add(welcomeMessage);
+        labourerPanel.add(welcomeMessage);
 
 
 
@@ -88,18 +88,18 @@ public class ToolManager extends JPanel {
 
         listScroll.setBounds(550,250,200,200);
 
-        managerPanel.add(listScroll);
+        labourerPanel.add(listScroll);
 
 
-        toolManagerFrame.add(managerPanel);
+        labourerFrame.add(labourerPanel);
 
-        toolManagerFrame.setVisible(true);
+        labourerFrame.setVisible(true);
 
 
     }
 
     public static void main(String[] args) {
-        executeToolManager();
+        executeLabourer();
     }
 
 

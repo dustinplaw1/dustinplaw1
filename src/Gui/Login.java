@@ -1,8 +1,9 @@
 package Gui;
 
-import Gui.Employees.Labourer;
-import Gui.Employees.Manager;
-import Gui.Employees.ToolManager;
+import Gui.Employees.Labourer.Labourer;
+import Gui.Employees.Manager.Manager;
+import Gui.Employees.ToolManager.ToolManager;
+
 import gateways.AuthenticateLoginInfo;
 import gateways.GetEmployeeInfo;
 
@@ -173,21 +174,25 @@ public class Login implements ActionListener {
                 //int employee_role = info.getRole();
 
 
-                int employee_role = 1;      //this is just to test, uncomment code above to get right one.
+                //int employee_role = 0;      //this is just to test, uncomment code above to get right one.
 
+                // TODO Change this to make it work for a string
 
-                if (employee_role == 1)
+                //need to get employee title
+                String employee_role= "";       //change this     Labourer, Tool_Manager, Job_Manager
+
+                if (employee_role.equals("Labourer"))
                 {
                     Labourer.executeLabourer();
                     loginFrame.setVisible(false);
                 }
-                else if (employee_role ==2 )
+                else if (employee_role.equals("Tool_Manager") )
                 {
-                    Manager.executeLabourer();
+                    Manager.executeManager();
                     loginFrame.setVisible(false);
 
                 }
-                else if (employee_role == 3)
+                else if (employee_role.equals("Job_Manager"))
                 {
                     ToolManager.executeToolManager();
                     loginFrame.setVisible(false);

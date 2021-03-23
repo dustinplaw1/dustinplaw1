@@ -1,4 +1,4 @@
-package Gui.Employees;
+package Gui.Employees.Manager;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
@@ -29,7 +29,7 @@ public class Manager extends JPanel {
     private static JLabel welcomeMessage;
 
 
-    public static void executeLabourer()
+    public static void executeManager()
     {
 
 
@@ -98,7 +98,7 @@ public class Manager extends JPanel {
     }
 
     public static void main(String[] args) {
-        executeLabourer();
+
     }
 
 
