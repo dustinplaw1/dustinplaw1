@@ -92,7 +92,7 @@ public class ToolManager extends JPanel {
         toolManagerFrame.add(managerPanel);
 
         toolManagerFrame.setVisible(true);
-
+        toolManagerFrame.setResizable(false);
 
     }
 

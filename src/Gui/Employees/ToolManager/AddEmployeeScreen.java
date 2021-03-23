@@ -95,7 +95,7 @@ public class AddEmployeeScreen extends JPanel{
         //add the panel to the frame and make accessible
         addEmployeeFrame.add(addPanel);
         addEmployeeFrame.setVisible(true);
-
+        addEmployeeFrame.setResizable(false);
     }
 
     public static void main(String[] args) {

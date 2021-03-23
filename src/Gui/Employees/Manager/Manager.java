@@ -17,12 +17,7 @@ public class Manager extends JPanel {
     private static JButton logoutButton;
     private static JButton nextButton;
 
-    private static JRadioButton addTool;
-    private static JRadioButton removeTool;
-    private static JRadioButton addEmployee;
-    private static JRadioButton modifyEmployee;
-    private static ButtonGroup optionButtons;
-    //private static JPanel buttonPanel;
+
     private static JList list;
     private static JScrollPane listScroll;
 

@@ -94,7 +94,7 @@ public class AddToolScreen extends JPanel{
         //add components to the frame
         addToolFrame.add(addPanel);
         addToolFrame.setVisible(true);
-
+        addToolFrame.setResizable(false);
     }
 
     public static void main(String[] args) {

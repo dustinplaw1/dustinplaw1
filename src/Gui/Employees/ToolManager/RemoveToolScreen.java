@@ -95,7 +95,7 @@ public class RemoveToolScreen extends JPanel{
         removeToolFrame.add(addPanel);
 
         removeToolFrame.setVisible(true);
-
+        removeToolFrame.setResizable(false);
     }
 
     public static void main(String[] args) {
