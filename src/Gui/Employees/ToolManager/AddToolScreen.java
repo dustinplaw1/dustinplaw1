@@ -1,5 +1,7 @@
 package Gui.Employees.ToolManager;
 
+import Gui.Login;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
@@ -90,6 +92,22 @@ public class AddToolScreen extends JPanel{
         toolNameField = new JTextField(20);
         toolNameField.setBounds(650,400,400,30);
         addPanel.add(toolNameField);
+
+
+
+        //now to create functionality with buttons
+        //addButton, backButton, saveButton
+        //button.addActionListener(new Login());
+
+
+
+
+
+
+
+
+
+
 
         //add components to the frame
         addToolFrame.add(addPanel);

@@ -171,7 +171,7 @@ public class Login implements ActionListener {
                 info.execute();
 
                 //this is empty for now
-                //int employee_role = info.getRole();
+                //String employee_role = info.getRole();
 
 
                 //int employee_role = 0;      //this is just to test, uncomment code above to get right one.

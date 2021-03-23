@@ -30,6 +30,17 @@ public class Labourer extends JPanel {
     private static JLabel welcomeMessage;
 
 
+    public String[] getOptions()
+    {
+        //this method is used to get the list of tools (tool name) that the labourer can borrow
+        String[]tool_list = {""};
+
+
+
+        return tool_list;
+    }
+
+
     public static void executeLabourer()
     {
 
