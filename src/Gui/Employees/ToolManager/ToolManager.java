@@ -29,15 +29,15 @@ public class ToolManager extends JPanel {
 
     private static JLabel welcomeMessage;
 
-
+    /**
+     * A method that will run and execute the gui for the toolmanager action menu
+     */
     public static void executeToolManager()
     {
 
 
         //toolManager's frame
         toolManagerFrame = new JFrame();
-
-
         toolManagerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         toolManagerFrame.pack();
         toolManagerFrame.setSize(1280,768);
@@ -46,10 +46,8 @@ public class ToolManager extends JPanel {
 
         //Create a new panel that will be the tool manager's actionmenu
         managerPanel = new JPanel();
-
         //create a layout for the panel
         managerPanel.setLayout(null);
-
         //set the size of the panel (This is the size of the frame, so it should take the whole window (I believe)
         managerPanel.setSize(1280,768);
 
@@ -98,37 +96,6 @@ public class ToolManager extends JPanel {
 
     }
 
-    /**
-     * A method to show the Gui associated with Tool Manager adding a tool
-     */
-    public static void addToolGui()
-    {
-
-    }
-
-    /**
-     * A method to show the Gui associated with Tool Manager removing a tool
-     */
-    public static void removeToolGui()
-    {
-
-    }
-
-    /**
-     * A method to show the Gui associated with Tool Manager adding a new employee
-     */
-    public static void addEmployeeGui()
-    {
-
-    }
-
-    /**
-     * A method to show the Gui associated with Tool Manager changing the roll of an employee
-     */
-    public static void changeEmployeeRoleGui()
-    {
-
-    }
 
     public static void main(String[] args) {
         executeToolManager();
