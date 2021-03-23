@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Tool.AddTool">
+  <grid id="27dc6" binding="JPanelAddTool" layout-manager="GridLayoutManager" row-count="7" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="516" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="578b6" class="javax.swing.JLabel" binding="LabelAddTool">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="26" style="1"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="ADD TOOL"/>
+        </properties>
+      </component>
+      <vspacer id="d9629">
+        <constraints>
+          <grid row="1" column="4" row-span="5" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="da8d0" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="22" style="1"/>
+          <text value="Tool ID"/>
+        </properties>
+      </component>
+      <component id="25382" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="24" style="1"/>
+          <text value="Tool Name"/>
+        </properties>
+      </component>
+      <component id="3eb09" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="24" style="1"/>
+          <text value="Quantity"/>
+        </properties>
+      </component>
+      <component id="f0d9a" class="javax.swing.JButton" binding="ADDButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="16" style="1"/>
+          <text value="ADD"/>
+        </properties>
+      </component>
+      <component id="46aa6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="24" style="1"/>
+          <text value="Description"/>
+        </properties>
+      </component>
+      <component id="1ba8b" class="javax.swing.JTextField" binding="txtToolName">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Consolas" size="24" style="1"/>
+        </properties>
+      </component>
+      <component id="f3647" class="javax.swing.JTextField" binding="txtToolID">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Consolas" size="24" style="1"/>
+          <horizontalAlignment value="4"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="43f04" class="javax.swing.JTextField" binding="txtToolqty">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Consolas" size="24" style="1"/>
+        </properties>
+      </component>
+      <component id="5c55c" class="javax.swing.JTextArea" binding="txtToolDesc">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="16" style="1"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="b305e" class="javax.swing.JButton" binding="backButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="18" style="1"/>
+          <text value="Back"/>
+        </properties>
+      </component>
+      <component id="bcadb" class="javax.swing.JButton" binding="nextButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Arial Black" size="18" style="1"/>
+          <text value="Next"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
