@@ -22,10 +22,6 @@ public class BorrowToolScreen extends JPanel {
     private static JScrollPane listScroll;
 
 
-
-
-
-
         /**
          * A method that will run and execute the gui for the toolmanager add tool menu
          */
