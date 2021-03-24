@@ -119,7 +119,7 @@ public class ToolManager extends JPanel implements ActionListener {
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Mouse click");
+
                 choice = list.getSelectedIndex();
                 System.out.println(choice);
 
@@ -191,10 +191,11 @@ public class ToolManager extends JPanel implements ActionListener {
                 toolManagerFrame.setVisible(false);
                 ModifyEmployeeRole.executeModifyEmployeeRole();
             }
-            else if (choice ==3)
-            {
-                //when choice isn't valid
-            }
+
+        }
+        else if ("logout".equals(e.getActionCommand()))
+        {
+            //need to logout here
         }
 
 

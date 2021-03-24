@@ -1,16 +1,22 @@
 package Gui.Employees.Manager;
+import Gui.Employees.ToolManager.AddToolScreen;
+import Gui.Employees.ToolManager.ModifyEmployeeRole;
+import Gui.Employees.ToolManager.RemoveToolScreen;
 import Gui.MainFrame;
-import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * This java class will have the ToolManager's action menu here (for now)
  */
 
 
-public class Manager extends JPanel {
+public class Manager extends JPanel implements ActionListener {
     protected static String [] options = {"Check if a certain tool is available" , "See which tools are signed out" , "Assign tools to an employee"};
     private static JFrame managerFrame;
     private static JPanel managerPanel;
@@ -23,6 +29,7 @@ public class Manager extends JPanel {
 
     private static JLabel welcomeMessage;
 
+    private static int choice;
 
     public static void executeManager()
     {
@@ -60,6 +67,13 @@ public class Manager extends JPanel {
         managerPanel.add(nextButton);
 
 
+        //set action buttons
+        logoutButton.setActionCommand("logout");
+        nextButton.setActionCommand("next");
+
+        logoutButton.addActionListener(new Manager());
+        nextButton.addActionListener(new Manager());
+
         //maybe a way so that we pull the name of the employee that logged in to display name
         welcomeMessage = new JLabel ("Welcome, Choose an action below:");
         welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 24));
@@ -77,7 +91,22 @@ public class Manager extends JPanel {
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
 
-        listScroll = new JScrollPane(list);
+        list.addMouseListener(new MouseAdapter() { /**
+         * {@inheritDoc} A method that will track which mouse click
+         *
+         * @param e
+         */
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            choice = list.getSelectedIndex();
+            System.out.println(choice);
+
+        }
+        });
+
+
+            listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(250,400));
 
         listScroll.setBounds(550,250,200,200);
@@ -93,10 +122,52 @@ public class Manager extends JPanel {
     }
 
     public static void main(String[] args) {
-
+        executeManager();
     }
 
 
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if ("next".equals(e.getActionCommand()))
+        {
+            if (choice == 0)
+            {
+                //add a new tool window
+                CheckAvailabilityScreen.executeCheckAvailabilityScreen();
+                managerFrame.setVisible(false);
 
 
+
+            }
+            else if(choice == 1)
+            {
+                //remove a tool window
+                InventoryOfToolsScreen.executeInventoryOfTool();
+                managerFrame.setVisible(false);
+
+            }
+            else if(choice ==2)
+            {
+
+                //modify employee role
+                ModifyEmployeeRole.executeModifyEmployeeRole();
+                managerFrame.setVisible(false);
+
+            }
+            else if (choice ==3)
+            {
+                AssignToolsScreen.executeAssignTool();
+                managerFrame.setVisible(false);
+
+                //when choice isn't valid
+            }
+        }
+
+
+    }
 }

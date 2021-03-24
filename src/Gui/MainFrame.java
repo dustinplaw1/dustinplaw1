@@ -11,10 +11,10 @@ public class MainFrame {
 
     public static void execute()
     {
-        mainFrame = new JFrame();
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setSize(new Dimension(1280,768));
-        mainFrame.setVisible(true);
+//        mainFrame = new JFrame();
+//        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        mainFrame.setSize(new Dimension(1280,768));
+//        mainFrame.setVisible(true);
 
         Login.executeLogin();
 

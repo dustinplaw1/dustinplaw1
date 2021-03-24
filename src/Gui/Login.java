@@ -23,11 +23,11 @@ public class Login implements ActionListener {
     private static JButton button;
     private static JLabel successful;
     private static boolean totalValid;
-
+    private static JPanel panel;
 
     public static void executeLogin()
     {
-        JPanel panel = new JPanel();
+        panel = new JPanel();
 
         JFrame loginFrame = new JFrame();
         loginFrame.setSize(350, 200);
@@ -102,10 +102,6 @@ public class Login implements ActionListener {
 
 
         //check database to see if combo was on the database or not
-
-
-        System.out.println("Username/password entered: " + employee + ": " + password + " is: " );
-
 
         boolean whileCheck = true;
 
@@ -184,19 +180,19 @@ public class Login implements ActionListener {
                 if (employee_role.equals("Labourer"))
                 {
                     Labourer.executeLabourer();
-                    //loginFrame.setVisible(false);
+                    //loginFrame.remove(panel);
+
                 }
                 else if (employee_role.equals("Tool_Manager") )
                 {
                     ToolManager.executeToolManager();
-                    //loginFrame.setVisible(false);
+
 
                 }
                 else if (employee_role.equals("Job_Manager"))
                 {
 
                     ToolManager.executeToolManager();
-                    //loginFrame.setVisible(false);
 
                 }
                 else

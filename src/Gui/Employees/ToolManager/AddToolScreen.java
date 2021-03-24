@@ -101,6 +101,9 @@ public class AddToolScreen extends JPanel implements ActionListener {
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 
+
+
+
         saveButton.addActionListener(new AddToolScreen());
         logoutButton.addActionListener(new AddToolScreen());
         backButton.addActionListener(new AddToolScreen());
@@ -146,14 +149,12 @@ public class AddToolScreen extends JPanel implements ActionListener {
             }
 
 
-            //case where save button is pressed
-
 
         }
+        //this is to logout
         else
         {
-
-                //where logout button is pressed
+           //logout
         }
 }
         
