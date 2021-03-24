@@ -19,6 +19,7 @@ import java.awt.event.MouseEvent;
 
 public class ToolManager extends JPanel implements ActionListener {
     protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
+
     private static JFrame toolManagerFrame;
     private static JPanel managerPanel;
     private static JButton logoutButton;
@@ -51,13 +52,13 @@ public class ToolManager extends JPanel implements ActionListener {
 
 
 
+
         //Create a new panel that will be the tool manager's actionmenu
         managerPanel = new JPanel();
         //create a layout for the panel
         managerPanel.setLayout(null);
         //set the size of the panel (This is the size of the frame, so it should take the whole window (I believe)
         managerPanel.setSize(1280,768);
-
 
         //now create the logout or enter button
 
@@ -173,7 +174,7 @@ public class ToolManager extends JPanel implements ActionListener {
             if (choice == 0)
             {
                 //add a new tool window
-                toolManagerFrame.setVisible(false);
+                //frame.setVisible(false);
                 AddToolScreen.executeAddToolScreen();
 
 
@@ -181,14 +182,14 @@ public class ToolManager extends JPanel implements ActionListener {
             else if(choice == 1)
             {
                 //remove a tool window
-                toolManagerFrame.setVisible(false);
+                //toolManagerFrame.setVisible(false);
                 RemoveToolScreen.executeRemoveToolScreen();
             }
             else if(choice ==2)
             {
 
                 //modify employee role
-                toolManagerFrame.setVisible(false);
+                //toolManagerFrame.setVisible(false);
                 ModifyEmployeeRole.executeModifyEmployeeRole();
             }
 

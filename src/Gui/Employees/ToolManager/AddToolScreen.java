@@ -136,6 +136,8 @@ public class AddToolScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand()))
         {
             addToolFrame.setVisible(false);
+
+            addToolFrame.dispose();
             ToolManager.executeToolManager();
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
@@ -144,6 +146,10 @@ public class AddToolScreen extends JPanel implements ActionListener {
             try {
                 CreateTool tool = new CreateTool(toolName, toolDescription);
                 tool.execute();     //execute it to add to the database
+
+                addToolFrame.setVisible(false);
+                addToolFrame.dispose();
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -154,6 +160,7 @@ public class AddToolScreen extends JPanel implements ActionListener {
         //this is to logout
         else
         {
+            System.exit(0);
            //logout
         }
 }

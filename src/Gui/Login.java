@@ -10,8 +10,10 @@ import gateways.GetEmployeeInfo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class Login implements ActionListener {
+
 
 
     //values are declared here so they are accessible in the methods below
@@ -29,7 +31,7 @@ public class Login implements ActionListener {
     {
         panel = new JPanel();
 
-        JFrame loginFrame = new JFrame();
+        loginFrame = new JFrame();
         loginFrame.setSize(350, 200);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.add(panel);
@@ -149,6 +151,8 @@ public class Login implements ActionListener {
         //here i need to get data from the database, (login information
         String employee = employeeText.getText();  //capture employee id input
 
+        //this will close the frame
+        loginFrame.setVisible(false);
         try {
             validate(); //call this method to validate user input
         } catch (Exception exception) {
@@ -167,7 +171,7 @@ public class Login implements ActionListener {
                 info.execute();
 
                 //this is empty for now
-                //int employee_role = info.getRole();
+                //String employee_role = info.getRole();
 
 
                 //int employee_role = 0;      //this is just to test, uncomment code above to get right one.
@@ -181,11 +185,15 @@ public class Login implements ActionListener {
                 {
                     Labourer.executeLabourer();
                     //loginFrame.remove(panel);
-
+                    loginFrame.setVisible(false);
+                    loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
                 }
-                else if (employee_role.equals("Tool_Manager") )
-                {
+                else if (employee_role.equals("Tool_Manager") ) {
+
+
+
                     ToolManager.executeToolManager();
+                    //  this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 
 
                 }

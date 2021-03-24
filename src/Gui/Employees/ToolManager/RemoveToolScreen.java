@@ -134,6 +134,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
 
 
         } else {
+            System.exit(0);
+
             //logout button is pressed
         }
     }
