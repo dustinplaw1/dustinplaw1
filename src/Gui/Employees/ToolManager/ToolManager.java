@@ -4,14 +4,20 @@ import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * This java class will have the ToolManager's action menu here (for now)
  */
 
 
-public class ToolManager extends JPanel {
+public class ToolManager extends JPanel implements ActionListener {
     protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
     private static JFrame toolManagerFrame;
     private static JPanel managerPanel;
@@ -28,6 +34,7 @@ public class ToolManager extends JPanel {
     private static JScrollPane listScroll;
 
     private static JLabel welcomeMessage;
+    private static int choice;
 
     /**
      * A method that will run and execute the gui for the toolmanager action menu
@@ -64,11 +71,31 @@ public class ToolManager extends JPanel {
         managerPanel.add(nextButton);
 
 
+
+        //setAction buttons
+        logoutButton.setActionCommand("logout");
+        nextButton.setActionCommand("next");
+
+        //new actionlistener for button
+        logoutButton.addActionListener(new ToolManager());
+        nextButton.addActionListener(new ToolManager());
+
+
+
+
+
+
+
+
+
         //maybe a way so that we pull the name of the employee that logged in to display name
         welcomeMessage = new JLabel ("Welcome Tool Manager, Choose an action below:");
         welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 24));
         welcomeMessage.setBounds(300,50,700,40);
         managerPanel.add(welcomeMessage);
+
+
+
 
 
 
@@ -80,11 +107,34 @@ public class ToolManager extends JPanel {
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
+        //only one selection
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //get a mouse listener (Override method
+        list.addMouseListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc} A method that will track which mouse click
+             *
+             * @param e
+             */
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Mouse click");
+                choice = list.getSelectedIndex();
+                System.out.println(choice);
+
+            }
+        });
 
         listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(250,400));
 
         listScroll.setBounds(550,250,200,200);
+
+        //now need to see which one in list i chose
+
+
+
 
         managerPanel.add(listScroll);
 
@@ -102,6 +152,53 @@ public class ToolManager extends JPanel {
     }
 
 
+    public void valueChanged(ListSelectionEvent e)
+    {
 
+    }
+
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+
+        //nested if
+        if ("next".equals(e.getActionCommand()))
+        {
+            if (choice == 0)
+            {
+                //add a new tool window
+                toolManagerFrame.setVisible(false);
+                AddToolScreen.executeAddToolScreen();
+
+
+            }
+            else if(choice == 1)
+            {
+                //remove a tool window
+                toolManagerFrame.setVisible(false);
+                RemoveToolScreen.executeRemoveToolScreen();
+            }
+            else if(choice ==2)
+            {
+
+                //modify employee role
+                toolManagerFrame.setVisible(false);
+                ModifyEmployeeRole.executeModifyEmployeeRole();
+            }
+            else if (choice ==3)
+            {
+                //when choice isn't valid
+            }
+        }
+
+
+
+    }
 
 }

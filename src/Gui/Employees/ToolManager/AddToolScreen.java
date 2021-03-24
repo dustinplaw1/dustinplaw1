@@ -1,12 +1,14 @@
 package Gui.Employees.ToolManager;
 
-import Gui.Login;
+import gateways.CreateTool;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AddToolScreen extends JPanel{
+public class AddToolScreen extends JPanel implements ActionListener {
 
     private static JFrame addToolFrame;
     private static JPanel addPanel;
@@ -89,26 +91,23 @@ public class AddToolScreen extends JPanel{
         addPanel.add(toolDescriptionLabel);
 
         //create toolname field functionality
-        toolNameField = new JTextField(20);
-        toolNameField.setBounds(650,400,400,30);
-        addPanel.add(toolNameField);
+        toolDescriptionField = new JTextField(20);
+        toolDescriptionField.setBounds(650,400,400,30);
+        addPanel.add(toolDescriptionField);
 
+        
+        //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
+        saveButton.setActionCommand("back");
+        logoutButton.setActionCommand("logout");
+        backButton.setActionCommand("back");
 
+        saveButton.addActionListener(new AddToolScreen());
+        logoutButton.addActionListener(new AddToolScreen());
+        backButton.addActionListener(new AddToolScreen());
 
-        //now to create functionality with buttons
-        //addButton, backButton, saveButton
-        //button.addActionListener(new Login());
+        
 
-
-
-
-
-
-
-
-
-
-
+        
         //add components to the frame
         addToolFrame.add(addPanel);
         addToolFrame.setVisible(true);
@@ -119,6 +118,47 @@ public class AddToolScreen extends JPanel{
         executeAddToolScreen();
     }
 
+        
+    @Override
+    public void actionPerformed(ActionEvent e){
+
+        String toolName= toolNameField.getText();        //gets the the tool description
+        String toolDescription = toolDescriptionField.getText();   //get the tool description
+
+
+
+
+        //now use th
+        //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
+        if ("back".equals(e.getActionCommand()))
+        {
+            addToolFrame.setVisible(false);
+            ToolManager.executeToolManager();
+        }
+        //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
+        else if ("save".equals(e.getActionCommand()))
+        {
+            try {
+                CreateTool tool = new CreateTool(toolName, toolDescription);
+                tool.execute();     //execute it to add to the database
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+
+            //case where save button is pressed
+
+
+        }
+        else
+        {
+
+                //where logout button is pressed
+        }
+}
+        
+        
+        
 
 
 

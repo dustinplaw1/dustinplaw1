@@ -179,23 +179,24 @@ public class Login implements ActionListener {
                 // TODO Change this to make it work for a string
 
                 //need to get employee title
-                String employee_role= "";       //change this     Labourer, Tool_Manager, Job_Manager
+                String employee_role= "Tool_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
 
                 if (employee_role.equals("Labourer"))
                 {
                     Labourer.executeLabourer();
-                    loginFrame.setVisible(false);
+                    //loginFrame.setVisible(false);
                 }
                 else if (employee_role.equals("Tool_Manager") )
                 {
-                    Manager.executeManager();
-                    loginFrame.setVisible(false);
+                    ToolManager.executeToolManager();
+                    //loginFrame.setVisible(false);
 
                 }
                 else if (employee_role.equals("Job_Manager"))
                 {
+
                     ToolManager.executeToolManager();
-                    loginFrame.setVisible(false);
+                    //loginFrame.setVisible(false);
 
                 }
                 else
