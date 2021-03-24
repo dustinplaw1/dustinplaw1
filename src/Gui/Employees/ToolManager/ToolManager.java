@@ -196,6 +196,9 @@ public class ToolManager extends JPanel implements ActionListener {
         }
         else if ("logout".equals(e.getActionCommand()))
         {
+
+            System.exit(0);
+
             //need to logout here
         }
 

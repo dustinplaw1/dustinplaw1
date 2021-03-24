@@ -3,7 +3,7 @@ package Gui;
 import Gui.Employees.Labourer.Labourer;
 import Gui.Employees.Manager.Manager;
 import Gui.Employees.ToolManager.ToolManager;
-
+import Gui.IsSuccessful;
 import gateways.AuthenticateLoginInfo;
 import gateways.GetEmployeeInfo;
 
@@ -33,7 +33,7 @@ public class Login implements ActionListener {
 
         loginFrame = new JFrame();
         loginFrame.setSize(350, 200);
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         loginFrame.add(panel);
 
 
@@ -115,6 +115,7 @@ public class Login implements ActionListener {
                 System.out.println("in the if statement, this should re-initialize the login screen" );
 
                 totalValid = false;
+                executeLogin();
 
 
             }
@@ -123,7 +124,6 @@ public class Login implements ActionListener {
                 System.out.println("in the else statement, this is where they match!");
                 totalValid = true;
                 whileCheck = true;
-                executeLogin();
             }
             }while (!whileCheck);
 
@@ -162,7 +162,7 @@ public class Login implements ActionListener {
 
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
-            successful.setText("Login successful.");
+            successful.setText("Login successful.");    //might need,
 
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
 
@@ -183,22 +183,25 @@ public class Login implements ActionListener {
 
                 if (employee_role.equals("Labourer"))
                 {
+                    IsSuccessful.isSuccessful("Loading Labourer menu");
+
                     Labourer.executeLabourer();
                     //loginFrame.remove(panel);
-                    loginFrame.setVisible(false);
-                    loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
+                    //loginFrame.setVisible(false);
+                    //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
                 }
                 else if (employee_role.equals("Tool_Manager") ) {
+                    //TODO update here for a timer of some sort
 
-
+                    IsSuccessful.isSuccessful("Loading Tool Manager menu");
 
                     ToolManager.executeToolManager();
-                    //  this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 
 
                 }
                 else if (employee_role.equals("Job_Manager"))
                 {
+                    IsSuccessful.isSuccessful("Loading Job Manager menu");
 
                     ToolManager.executeToolManager();
 
@@ -224,8 +227,10 @@ public class Login implements ActionListener {
 
         //if unsuccessful,
         } else {
-            System.out.println("Unsuccessful, please try again");
-            successful.setText("Login unsuccessful, please try again");
+            IsSuccessful.isSuccessful("Unsuccessful, please try again");
+
+
+            //successful.setText("Login unsuccessful, please try again");
             // TODO Make the popup screen clear and user can try again
 
 
