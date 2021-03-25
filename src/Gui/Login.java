@@ -127,7 +127,7 @@ public class Login implements ActionListener {
                 totalValid = true;
                 whileCheck = true;
             }
-            }while (!whileCheck);
+        }while (!whileCheck);
 
 
 
@@ -161,15 +161,14 @@ public class Login implements ActionListener {
             loginFrame.setVisible(false);
             try {
                 GetEmployeeInfo info = new GetEmployeeInfo(employee);
-                info.execute();
-
-                //this is empty for now
-                //String employee_role = info.getRole();
+                //info.();
 
 
-                //int employee_role = 0;      //this is just to test, uncomment code above to get right one.
+
 
                 // TODO Change this to make it work for a string
+
+
 
                 //need to get employee title
                 String employee_role= "Tool_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
@@ -221,7 +220,7 @@ public class Login implements ActionListener {
 
 
 
-        //if unsuccessful,
+            //if unsuccessful,
         } else {
             IsSuccessful.isSuccessful("Unsuccessful, please try again");
 
@@ -238,5 +237,3 @@ public class Login implements ActionListener {
 
 
 }
-
-
