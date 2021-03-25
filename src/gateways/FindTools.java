@@ -34,7 +34,7 @@ public class FindTools extends Gateway implements Command {
 
     /**
      * A method that initializes the tools array and fills it using info from the database
-     * @throws exception
+     * @throws Exception
      */
     public void execute() throws Exception {
 
