@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 public class Labourer extends Employee {
     //private ToolAccount account;
     // Maybe use scanner instead of params
@@ -7,6 +7,10 @@ public class Labourer extends Employee {
     public Labourer(String employee_id , String employee_password, String last_name, String first_name, String employee_description) {
         super(employee_id, employee_password, last_name, first_name, employee_description);
         // initiallize tool Account.
+    }
+
+    public Labourer() {
+
     }
 
     /**
