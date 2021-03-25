@@ -1,5 +1,5 @@
 module src {
-	exports Objects;
+	exports objects;
 
 	requires java.desktop;
 	requires java.sql;

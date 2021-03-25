@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 public class Labourer extends Employee {
     //private ToolAccount account;
     // Maybe use scanner instead of params

@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 import java.util.Date;
 
 // needs proper java docs
