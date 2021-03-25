@@ -16,8 +16,8 @@ public class MainFrame {
         mainFrame.setSize(new Dimension(1280,768));
         mainFrame.setVisible(true);
 
-        Login.executeLogin();
-
+        //JPanel panel = LoginPanel.();
+        //frame.add(panel);
     }
 
     public static void main(String[] args) {
