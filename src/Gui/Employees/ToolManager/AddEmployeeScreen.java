@@ -89,7 +89,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         lastNameLabel.setBounds(20,50,100,20);
         addPanel.add(lastNameLabel);
         lastField = new JTextField(20);
-        lastField.setBounds(150,50,200,20);
+        lastField.setBounds(160,50,200,20);
         addPanel.add(lastField);
 
 
@@ -98,7 +98,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         firstNameLabel.setBounds(20,80,100,20);
         addPanel.add(firstNameLabel);
         firstField = new JTextField(20);
-        firstField.setBounds(150,80,200,20);
+        firstField.setBounds(160,80,200,20);
         addPanel.add(firstField);
 
 
@@ -107,16 +107,16 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         passwordNameLabel.setBounds(20,110,100,20);
         addPanel.add(passwordNameLabel);
         passwordField = new JTextField(20);
-        passwordField.setBounds(150,110,200,20);
+        passwordField.setBounds(160,110,200,20);
         addPanel.add(passwordField);
 
 
         //date hired functionality
-        dateHiredLabel = new JLabel ("Date Hired: (yyyy-mm-dd)");
-        dateHiredLabel.setBounds(20,140,100,20);
+        dateHiredLabel = new JLabel ("Hire Date:(yyyy-mm-dd)");
+        dateHiredLabel.setBounds(20,140,200,20);
         addPanel.add(dateHiredLabel);
         dateHiredField = new JTextField(20);
-        dateHiredField.setBounds(150,140,200,20);
+        dateHiredField.setBounds(160,140,200,20);
         addPanel.add(dateHiredField);
 
 
@@ -126,11 +126,11 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         employeeRoleLabel.setBounds(20,170,100,20);
         addPanel.add(employeeRoleLabel);
         employeRoleField = new JTextField(20);
-        employeRoleField.setBounds(150,170,200,20);
+        employeRoleField.setBounds(160,170,200,20);
         addPanel.add(employeRoleField);
 
 
-        roles = new JLabel("1. Labourer, 2. Job Manager, 3. Tool Manager");
+        roles = new JLabel("Roles: Labourer, Job_Manager, Tool_Manager");
         roles.setBounds(20, 200, 300,20);
         addPanel.add(roles);
 
@@ -138,9 +138,9 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         saveButton.setActionCommand("back");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-        saveButton.addActionListener(new AddToolScreen());
-        logoutButton.addActionListener(new AddToolScreen());
-        backButton.addActionListener(new AddToolScreen());
+        saveButton.addActionListener(new AddEmployeeScreen());
+        logoutButton.addActionListener(new AddEmployeeScreen());
+        backButton.addActionListener(new AddEmployeeScreen());
 
 
 
@@ -187,13 +187,14 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
                 NewEmployee emp = new NewEmployee(last, first, type, pass );
 
 
-                addEmployeeFrame.setVisible(false);
-                addEmployeeFrame.dispose();
-                tm.executeToolManager();
+
 
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
+            addEmployeeFrame.setVisible(false);
+            addEmployeeFrame.dispose();
+            tm.executeToolManager();
 
 
         }

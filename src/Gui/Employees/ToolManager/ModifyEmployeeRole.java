@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
     public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
+        ToolManager tm = new ToolManager();
         private static JFrame roleFrame;
         private static JPanel rolePanel;
 
@@ -88,15 +89,18 @@ import java.awt.event.ActionListener;
             backButton.setActionCommand("back");
 
 
-            saveButton.addActionListener(new Gui.Employees.ToolManager.AddToolScreen());
-            logoutButton.addActionListener(new Gui.Employees.ToolManager.AddToolScreen());
-            backButton.addActionListener(new Gui.Employees.ToolManager.AddToolScreen());
+            saveButton.addActionListener(new ModifyEmployeeRole());
+            logoutButton.addActionListener(new ModifyEmployeeRole());
+            backButton.addActionListener(new ModifyEmployeeRole());
 
 
             //add components to the frame
             roleFrame.add(rolePanel);
             roleFrame.setVisible(true);
             roleFrame.setResizable(false);
+            roleFrame.setLocationRelativeTo(null);
+
+
         }
 
         @Override
@@ -107,15 +111,13 @@ import java.awt.event.ActionListener;
 
 
 
-            //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
             if ("back".equals(e.getActionCommand()))
             {
                 roleFrame.setVisible(false);
+                roleFrame.dispose();
 
-                ToolManager tm = new ToolManager();
                 tm.executeToolManager();
 
-                roleFrame.dispose();
             }
             //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
             else if ("save".equals(e.getActionCommand()))
@@ -123,14 +125,19 @@ import java.awt.event.ActionListener;
                 //change the roles here
                 if (rb1.isSelected())
                 {
+                    System.out.println("Labourer");
                     //change to labourer
                 }
                 if (rb2.isSelected())
                 {
+                    System.out.println("manager");
+
                     //change to manager
                 }
                 if (rb3.isSelected())
                 {
+                    System.out.println("tool manager");
+
                     //change to tool manager
                 }
 

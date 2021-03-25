@@ -36,10 +36,10 @@ public class Manager extends JPanel implements ActionListener {
 
 
         //toolManager's frame
-        managerFrame = new JFrame();
+        managerFrame = new JFrame("Manager Action Menu");
 
 
-        managerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        managerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         managerFrame.pack();
         managerFrame.setSize(1280,768);
 

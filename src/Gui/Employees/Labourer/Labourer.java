@@ -40,10 +40,10 @@ public class Labourer extends JPanel {
 
 
         //toolManager's frame
-        JFrame labourerFrame = new JFrame();
+        JFrame labourerFrame = new JFrame("Labourer Action Menu");
 
 
-        labourerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        labourerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         labourerFrame.pack();
         labourerFrame.setSize(1280,768);
 

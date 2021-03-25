@@ -124,8 +124,8 @@ public class AddToolScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
 
-        String toolName= toolNameField.getText();        //gets the the tool description
-        String toolDescription = toolDescriptionField.getText();   //get the tool description
+        String name= toolNameField.getText();        //gets the the tool description
+        String description = toolDescriptionField.getText();   //get the tool description
 
 
 
@@ -150,7 +150,7 @@ public class AddToolScreen implements ActionListener {
                 addToolFrame.dispose();
 
 
-                CreateTool tool = new CreateTool(toolName, toolDescription);
+                CreateTool tool = new CreateTool(name, description);
                 tool.execute();     //execute it to add to the database
 
 

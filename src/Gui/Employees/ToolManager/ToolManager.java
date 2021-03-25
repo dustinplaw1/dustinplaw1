@@ -38,7 +38,7 @@ public class ToolManager  implements ActionListener {
 
 
         //toolManager's frame
-        toolManagerFrame = new JFrame();
+        toolManagerFrame = new JFrame("Tool Management Action Menu");
         toolManagerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         toolManagerFrame.pack();
         toolManagerFrame.setSize(1280,768);
@@ -87,12 +87,6 @@ public class ToolManager  implements ActionListener {
         welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 24));
         welcomeMessage.setBounds(300,50,700,40);
         managerPanel.add(welcomeMessage);
-
-
-
-
-
-
 
 
         //create a new Jlist with the String [] list
@@ -204,12 +198,7 @@ public class ToolManager  implements ActionListener {
         {
 
             System.exit(0);
-
             //need to logout here
         }
-
-
-
     }
-
 }
