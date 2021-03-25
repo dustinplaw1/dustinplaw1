@@ -6,7 +6,7 @@ import objects.Employee;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame  extends JFrame {
+public class MainFrame {
 
 
 
@@ -20,8 +20,6 @@ public class MainFrame  extends JFrame {
 
 
         public static void main (String[]args){
-
-            Employee employee = new Employee();
 
             Login login = new Login();
             login.executeLogin();

@@ -6,20 +6,14 @@ import java.sql.PreparedStatement;
 
 // The BorrowTool Gateway is called by: new BorrowTool({"e02", "t03"}).execute();
 public class BorrowTool extends Gateway implements Command {
-    /**
-     * tool_id of tool being borrowed
-     */
+    /** tool_id of tool being borrowed */
     private String tool_id;
-    /**
-     * employee_id of employee borrowing the tool
-     */
+    /** employee_id of employee borrowing the tool */
     private String employee_id;
 
 
-    /**
-     * Creates a new Gateway for creating tool contracts
-     *
-     * @param tool_id     of tool being borrowed
+    /** Creates a new Gateway for creating tool contracts
+     * @param tool_id of tool being borrowed
      * @param employee_id of employee borrowing the tool
      */
     public BorrowTool(String t_id, String emp_id) throws Exception {
@@ -37,26 +31,25 @@ public class BorrowTool extends Gateway implements Command {
 
     /**
      * A method to allow an employee to borrow a tool by creating a contract.
-     *
      * @throws exception
      */
     public void execute() throws Exception {
         // confirmation of response
         @SuppressWarnings("unused")
-        int confirmation = 0;
+		int confirmation = 0;
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
-        String contract_id = "c" + UUID.randomUUID().toString().substring(0, 3);
+        String contract_id = "c" + UUID.randomUUID().toString().substring(0,3);
         Calendar today = Calendar.getInstance();
         Calendar due_date = Calendar.getInstance();
         due_date.add(Calendar.DAY_OF_MONTH, 14);
-        System.out.println("test:" + today.getTimeInMillis());
-        System.out.println("test:" + due_date.getTimeInMillis());
+        System.out.println("test:"+today.getTimeInMillis());
+        System.out.println("test:"+due_date.getTimeInMillis());
         //establish a connection
         try {
             //prepare to add items to tool database
-            PreparedStatement p = con.prepareStatement("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)");
+            PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)");
             //sets parameters into a string
             p.setString(1, contract_id);
             p.setString(2, employee_id);
@@ -107,7 +100,7 @@ public class BorrowTool extends Gateway implements Command {
     public static void main(String[] args) {
 
         @SuppressWarnings("resource")
-        Scanner in = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);
         System.out.println("Enter the tool id =");
         String toolid = in.next();
         System.out.println("Enter employee id = ");
@@ -117,12 +110,12 @@ public class BorrowTool extends Gateway implements Command {
             BorrowTool bt = new BorrowTool(toolid, empid);
             bt.execute();
 
-        } catch (Exception e) {
+        } catch(Exception e) {
             System.out.println(e);
         }
 //        catch(Exception e) {
 //            System.out.println(e);
 
-
     }
+
 }

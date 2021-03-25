@@ -15,81 +15,122 @@ public class AddEmployeeScreen extends JPanel{
 
     private static JButton backButton;
     private static JButton saveButton;
-
-
     private static JButton logoutButton;
 
+
     //label and textfield for the employee name label and field
-    private static JLabel employeeName;
-    private static JTextField employeeNameField;
+    private static JLabel lastNameLabel;
+    private static JTextField lastField;
+
+    private static JLabel firstNameLabel;
+    private static JTextField firstField;
+
+    private static JLabel empIdLabel;
+    private static JTextField empIdField;
+
+    private static JLabel passwordNameLabel;
+    private static JTextField passwordField;
+
+    private static JLabel dateHiredLabel;
+    private static JTextField dateHiredField;
 
     //label and textfield for the tool description
-    private static JLabel employeeRole;
+    private static JLabel employeeRoleLabel;
     private static JTextField employeRoleField;
 
+    private static JLabel roles;
 
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public static void executeAddEmployeeScreen()
+    public void executeAddEmployeeScreen()
     {
         //new frame for add employee
         addEmployeeFrame = new JFrame();
-        addEmployeeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addEmployeeFrame.pack();
-        addEmployeeFrame.setSize(1280,768);
+        addEmployeeFrame.setSize(400,400);
 
         //creates a new panel that will be the tool managers' add tool screen
         addPanel = new JPanel();
         addPanel.setLayout(null);
-        addPanel.setSize(1280,768);
-
-        //create logout button functionality
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1000, 50,80,30);
-        addPanel.add(logoutButton);
+        addPanel.setSize(400,400);
 
         //create back button functionality
         backButton = new JButton("Back");
-        backButton.setBounds(100,650,80,30);
+        backButton.setBounds(25,325,80,30);
         addPanel.add(backButton);
+
+        //create logout button functionality
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(150, 325,80,30);
+        addPanel.add(logoutButton);
+
 
         //create save button functionality
         saveButton = new JButton("Save");
-        saveButton.setBounds(1000,650,80,30);
+        saveButton.setBounds(285,325,80,30);
         addPanel.add(saveButton);
 
         //create welcome message JLabel
-        welcomeMessage = new JLabel ("Administrator, Add a new employee:");
-        welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 30));
-        welcomeMessage.setBounds(300,50,700,40);
+        welcomeMessage = new JLabel ("Add a new employee:");
+        welcomeMessage.setBounds(125,10,150,40);
         addPanel.add(welcomeMessage);
 
+        //last name display
+        lastNameLabel = new JLabel ("Last Name:");
+        lastNameLabel.setBounds(20,50,100,20);
+        addPanel.add(lastNameLabel);
+        lastField = new JTextField(20);
+        lastField.setBounds(150,50,200,20);
+        addPanel.add(lastField);
 
-        //create a new employee label with functionality
-        employeeName = new JLabel ("Employee name:");
-        employeeName.setFont(new Font("Verdana", Font.PLAIN, 20));
-        employeeName.setBounds(350,250,200,20);
-        addPanel.add(employeeName);
 
-        //create a new employee name field
-        employeeNameField = new JTextField(20);
-        employeeNameField.setBounds(650,250,300,30);
-        addPanel.add(employeeNameField);
+        //first name functionality
+        firstNameLabel = new JLabel ("First Name:");
+        firstNameLabel.setBounds(20,80,100,20);
+        addPanel.add(firstNameLabel);
+        firstField = new JTextField(20);
+        firstField.setBounds(150,80,200,20);
+        addPanel.add(firstField);
 
-        //350 for the tool name
 
-        //create an employeeRole label
-        //make this two lines
-        employeeRole = new JLabel("Employee Role: \nLabourer, Job_Manager, Tool_Manager");
-        employeeRole.setFont(new Font("Verdana", Font.PLAIN, 20));
-        employeeRole.setBounds(350,400,200,30);
-        addPanel.add(employeeRole);
+        //employee password
+        passwordNameLabel = new JLabel ("Password:");
+        passwordNameLabel.setBounds(20,110,100,20);
+        addPanel.add(passwordNameLabel);
+        passwordField = new JTextField(20);
+        passwordField.setBounds(150,110,200,20);
+        addPanel.add(passwordField);
 
-        //create an employee role field
+
+        //date hired functionality
+        dateHiredLabel = new JLabel ("Date Hired: (yyyy-mm-dd)");
+        dateHiredLabel.setBounds(20,140,100,20);
+        addPanel.add(dateHiredLabel);
+        dateHiredField = new JTextField(20);
+        dateHiredField.setBounds(150,140,200,20);
+        addPanel.add(dateHiredField);
+
+
+
+        //emp type
+        employeeRoleLabel = new JLabel ("Employee Role:");
+        employeeRoleLabel.setBounds(20,170,100,20);
+        addPanel.add(employeeRoleLabel);
         employeRoleField = new JTextField(20);
-        employeRoleField.setBounds(650,400,300,30);
+        employeRoleField.setBounds(150,170,200,20);
         addPanel.add(employeRoleField);
+
+
+        roles = new JLabel("1. Labourer, 2. Job Manager, 3. Tool Manager");
+        roles.setBounds(20, 200, 300,20);
+        addPanel.add(roles);
+
+//        //create an employee role field
+//        employeRoleField = new JTextField(20);
+//        employeRoleField.setBounds(650,400,300,30);
+//        addPanel.add(employeRoleField);
 
 
         //add the panel to the frame and make accessible
@@ -97,11 +138,6 @@ public class AddEmployeeScreen extends JPanel{
         addEmployeeFrame.setVisible(true);
         addEmployeeFrame.setResizable(false);
     }
-
-    public static void main(String[] args) {
-        executeAddEmployeeScreen();
-    }
-
 
 
 

@@ -16,16 +16,15 @@ public class Login implements ActionListener {
 
 
 
-    //values are declared here so they are accessible in the methods below
-    private  JFrame loginFrame;
-    private  JLabel employeeLabel;
-    private  JTextField employeeText;
-    private  JLabel passwordLabel;
-    private  JPasswordField passwordText;
-    private  JButton button;
-    private  JLabel successful;
-    private  boolean totalValid;
-    private  JPanel panel;
+    private static JFrame loginFrame;
+    private  static JLabel employeeLabel;
+    private  static JTextField employeeText;
+    private  static JLabel passwordLabel;
+    private  static JPasswordField passwordText;
+    private  static JButton button;
+    private  static JLabel successful;
+    private  static boolean totalValid;
+    private  static JPanel panel;
 
     public void executeLogin()
     {
@@ -82,6 +81,9 @@ public class Login implements ActionListener {
 
         //set it visible
         loginFrame.setVisible(true);
+        loginFrame.setResizable(false);
+        loginFrame.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -143,7 +145,6 @@ public class Login implements ActionListener {
         String employee = employeeText.getText();  //capture employee id input
 
         //this will close the frame
-        loginFrame.setVisible(false);
         try {
             validate(); //call this method to validate user input
         } catch (Exception exception) {
@@ -153,10 +154,11 @@ public class Login implements ActionListener {
 
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
+
             successful.setText("Login successful.");    //might need,
 
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
-
+            loginFrame.setVisible(false);
             try {
                 GetEmployeeInfo info = new GetEmployeeInfo(employee);
                 info.execute();

@@ -70,9 +70,9 @@ public class ReturnToolScreen extends JPanel implements ActionListener {
             backButton.setActionCommand("back");
             logoutButton.setActionCommand("logout");
 
-            addButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
-            backButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
-            logoutButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
+//            addButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
+//            backButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
+//            logoutButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
 
 
             //create welcome message JLabel
@@ -123,6 +123,7 @@ public class ReturnToolScreen extends JPanel implements ActionListener {
             returnToolFrame.add(returnPanel);
             returnToolFrame.setVisible(true);
             returnToolFrame.setResizable(false);
+            returnToolFrame.setLocationRelativeTo(null);
 
         }
 

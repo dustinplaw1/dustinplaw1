@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 import java.util.Date;
 
 // needs proper java docs
@@ -21,6 +21,11 @@ public class Employee {
         this.employee_type= title;
 
     }
+
+    public Employee() {
+
+    }
+
     public String getEmployeeID () {
         return this.employee_id;
     }

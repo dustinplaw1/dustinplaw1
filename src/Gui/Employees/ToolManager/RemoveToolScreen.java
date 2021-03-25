@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RemoveToolScreen extends JPanel implements ActionListener {
+    ToolManager tm = new ToolManager();
 
     private static JFrame removeToolFrame;
     private static JPanel addPanel;
@@ -37,50 +38,49 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
      */
     public static void executeRemoveToolScreen() {
         //create a new frame
-        removeToolFrame = new JFrame();
+        removeToolFrame = new JFrame("Remove a tool");
         removeToolFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         removeToolFrame.pack();
-        removeToolFrame.setSize(1280, 768);
+        removeToolFrame.setSize(400, 400);
 
         //creates a new panel that will be the tool managers' add tool screen
         addPanel = new JPanel();
         addPanel.setLayout(null);
-        addPanel.setSize(1280, 768);
-
-
-        //create logout button functionality
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1000, 50, 80, 30);
-        addPanel.add(logoutButton);
-
+        addPanel.setSize(400, 400);
 
         //create back button functionality
         backButton = new JButton("Back");
-        backButton.setBounds(100, 650, 80, 30);
+        backButton.setBounds(25, 325, 80, 30);
         addPanel.add(backButton);
+
+        //create logout button functionality
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(150, 325, 80, 30);
+        addPanel.add(logoutButton);
+
+
+
 
 
         //create save button functionality
         saveButton = new JButton("Save");
-        saveButton.setBounds(1000, 650, 80, 30);
+        saveButton.setBounds(285, 325, 80, 30);
         addPanel.add(saveButton);
 
         //create welcome button functionality
         welcomeMessage = new JLabel("Administrator, Remove a tool menu:");
-        welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 30));
-        welcomeMessage.setBounds(300, 50, 700, 40);
+        welcomeMessage.setBounds(125, 10, 125, 40);
         addPanel.add(welcomeMessage);
 
 
         //toolname label functionality
         toolIdLabel = new JLabel("Tool Id:");
-        toolIdLabel.setFont(new Font("Verdana", Font.PLAIN, 20));
-        toolIdLabel.setBounds(350, 250, 200, 30);
+        toolIdLabel.setBounds(20, 50, 100, 25);
         addPanel.add(toolIdLabel);
 
         //toolname field functionality
         toolIdField = new JTextField(20);
-        toolIdField.setBounds(650, 250, 300, 30);
+        toolIdField.setBounds(150, 50, 200, 25);
         addPanel.add(toolIdField);
 
 
@@ -98,6 +98,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         removeToolFrame.add(addPanel);
         removeToolFrame.setVisible(true);
         removeToolFrame.setResizable(false);
+        removeToolFrame.setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {
@@ -117,11 +118,10 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         String tool_id = toolIdField.getText();        //gets the the tool description
 
 
-        //now use th
+
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
-            ToolManager tm = new ToolManager();
             tm.executeToolManager();
             removeToolFrame.dispose();
 

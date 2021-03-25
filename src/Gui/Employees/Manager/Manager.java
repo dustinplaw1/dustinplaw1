@@ -31,7 +31,7 @@ public class Manager extends JPanel implements ActionListener {
 
     private static int choice;
 
-    public static void executeManager()
+    public  void executeManager()
     {
 
 
@@ -121,9 +121,6 @@ public class Manager extends JPanel implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-        executeManager();
-    }
 
 
     /**
@@ -155,7 +152,8 @@ public class Manager extends JPanel implements ActionListener {
             {
 
                 //modify employee role
-                ModifyEmployeeRole.executeModifyEmployeeRole();
+                ModifyEmployeeRole mer = new ModifyEmployeeRole();
+                mer.executeModifyEmployeeRole();
                 managerFrame.setVisible(false);
 
             }

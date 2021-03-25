@@ -81,6 +81,7 @@ public class Labourer extends JPanel {
 
 
 
+
         //create a new Jlist with the String [] list
         list = new JList(options);
 

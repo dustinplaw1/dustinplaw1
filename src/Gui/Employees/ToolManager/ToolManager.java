@@ -17,18 +17,18 @@ import java.awt.event.MouseEvent;
  */
 
 
-public class ToolManager extends JPanel implements ActionListener {
+public class ToolManager  implements ActionListener {
     protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
 
-    private  JFrame toolManagerFrame;
-    private  JPanel managerPanel;
-    private  JButton logoutButton;
-    private  JButton nextButton;
-    private  JList list;
-    private  JScrollPane listScroll;
+    private static JFrame toolManagerFrame;
+    private static JPanel managerPanel;
+    private static JButton logoutButton;
+    private static JButton nextButton;
+    private static JList list;
+    private static JScrollPane listScroll;
 
-    private  JLabel welcomeMessage;
-    private  int choice;
+    private static JLabel welcomeMessage;
+    private static int choice;
 
     /**
      * A method that will run and execute the gui for the toolmanager action menu
@@ -137,6 +137,7 @@ public class ToolManager extends JPanel implements ActionListener {
 
         toolManagerFrame.setVisible(true);
         toolManagerFrame.setResizable(false);
+        toolManagerFrame.setLocationRelativeTo(null);
 
     }
 
@@ -165,14 +166,14 @@ public class ToolManager extends JPanel implements ActionListener {
             if (choice == 0)
             {
                 //add a new tool window
-                //frame.setVisible(false);
+                toolManagerFrame.setVisible(false);
                 AddToolScreen ats = new AddToolScreen();
                 ats.executeAddToolScreen();
-                //toolManagerFrame.dispose();
+                toolManagerFrame.dispose();
 
 
             }
-            else if(choice == 1)
+            if(choice == 1)
             {
 
                 RemoveToolScreen rtc = new RemoveToolScreen();
@@ -180,12 +181,17 @@ public class ToolManager extends JPanel implements ActionListener {
                 //toolManagerFrame.dispose();
 
             }
-            else if(choice ==2)
+            if (choice == 2)
+            {
+                AddEmployeeScreen aes = new AddEmployeeScreen();
+                aes.executeAddEmployeeScreen();
+            }
+            if(choice ==3)
             {
 
-
-                ModifyEmployeeRole.executeModifyEmployeeRole();
-                //toolManagerFrame.dispose();
+                ModifyEmployeeRole mer = new ModifyEmployeeRole();
+                mer.executeModifyEmployeeRole();
+                toolManagerFrame.dispose();
 
             }
 

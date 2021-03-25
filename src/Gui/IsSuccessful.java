@@ -1,6 +1,6 @@
 package Gui;
 
-import com.mysql.cj.protocol.a.TimeTrackingPacketReader;
+//import com.mysql.cj.protocol.a.TimeTrackingPacketReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +51,8 @@ public class IsSuccessful extends JFrame{
 
 
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
 
 
         //create a delay so that the screen will only appear briefly

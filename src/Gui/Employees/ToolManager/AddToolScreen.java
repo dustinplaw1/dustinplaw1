@@ -8,27 +8,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddToolScreen extends JPanel implements ActionListener {
+public class AddToolScreen implements ActionListener {
 
-    private  JFrame addToolFrame;
-    private  JPanel addPanel;
+    private static JFrame addToolFrame;
+    private static JPanel addPanel;
 
-    private  JLabel welcomeMessage;
-
-
-    private  JButton backButton;
-    private  JButton saveButton;
+    private static JLabel welcomeMessage;
+    ToolManager tm = new ToolManager();
 
 
-    private  JButton logoutButton;
+    private static JButton backButton;
+    private static JButton saveButton;
+
+
+    private static JButton logoutButton;
 
     //label and textfield for the toolname label
-    private  JLabel toolNameLabel;
-    private  JTextField toolNameField;
+    private static JLabel toolNameLabel;
+    private static JTextField toolNameField;
 
     //label and textfield for the tool description
-    private  JLabel toolDescriptionLabel;
-    private  JTextField toolDescriptionField;
+    private static JLabel toolDescriptionLabel;
+    private static JTextField toolDescriptionField;
 
 
     /**
@@ -37,62 +38,61 @@ public class AddToolScreen extends JPanel implements ActionListener {
     public void executeAddToolScreen()
     {
         //new frame
-        addToolFrame = new JFrame();
-        addToolFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addToolFrame = new JFrame("Add a Tool");
+        addToolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addToolFrame.pack();
-        addToolFrame.setSize(1280,768);
+        addToolFrame.setSize(400,400);
 
         //creates a new panel that will be the tool managers' add tool screen
         addPanel = new JPanel();
         addPanel.setLayout(null);
-        addPanel.setSize(1280,768);
-
-        //create logout button functionality
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(1000, 50,80,30);
-        addPanel.add(logoutButton);
-
+        addPanel.setSize(400,400);
 
         //create back button functionality
         backButton = new JButton("Back");
-        backButton.setBounds(100,650,80,30);
+        backButton.setBounds(25,325,80,30);
         addPanel.add(backButton);
+
+
+        //create logout button functionality
+
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(150, 325,80,30);
+        addPanel.add(logoutButton);
+
 
 
         //create save button functionality
         saveButton = new JButton("Save");
-        saveButton.setBounds(1000,650,80,30);
+        saveButton.setBounds(285,325,80,30);
         addPanel.add(saveButton);
 
         //create welcome message functionality
-        welcomeMessage = new JLabel ("Administrator, Add a new Tool menu:");
-        welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 30));
-        welcomeMessage.setBounds(300,50,700,40);
+        welcomeMessage = new JLabel ("Add a new Tool menu:");
+        welcomeMessage.setBounds(125,10,150,40);
         addPanel.add(welcomeMessage);
 
 
         //create toolname label functionality
         toolNameLabel = new JLabel ("Tool Name:");
-        toolNameLabel.setFont(new Font("Verdana", Font.PLAIN, 20));
-        toolNameLabel.setBounds(350,250,200,30);
+        toolNameLabel.setBounds(20,50,100,25);
         addPanel.add(toolNameLabel);
 
         //create tool name field functionality
         toolNameField = new JTextField(20);
-        toolNameField.setBounds(650,250,300,30);
+        toolNameField.setBounds(150,50,200,25);
         addPanel.add(toolNameField);
 
         //350 for the tool name
 
         //create tool description label functionality
         toolDescriptionLabel = new JLabel("Description of tool:");
-        toolDescriptionLabel.setFont(new Font("Verdana", Font.PLAIN, 20));
-        toolDescriptionLabel.setBounds(350,400,200,30);
+        toolDescriptionLabel.setBounds(20,150,200,25);
         addPanel.add(toolDescriptionLabel);
 
         //create toolname field functionality
         toolDescriptionField = new JTextField(20);
-        toolDescriptionField.setBounds(650,400,400,30);
+        toolDescriptionField.setBounds(150  ,150,200,25);
         addPanel.add(toolDescriptionField);
 
         
@@ -115,6 +115,7 @@ public class AddToolScreen extends JPanel implements ActionListener {
         addToolFrame.add(addPanel);
         addToolFrame.setVisible(true);
         addToolFrame.setResizable(false);
+        addToolFrame.setLocationRelativeTo(null);
     }
 
 
@@ -133,25 +134,28 @@ public class AddToolScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand()))
         {
             addToolFrame.setVisible(false);
+            addToolFrame.dispose();
 
-            ToolManager tm = new ToolManager();
             tm.executeToolManager();
 
-            addToolFrame.dispose();
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
             //TODO need to check with confirmation from other method if update was successful
+
             try {
+                addToolFrame.setVisible(false);
+                addToolFrame.dispose();
+
+
                 CreateTool tool = new CreateTool(toolName, toolDescription);
                 tool.execute();     //execute it to add to the database
 
 
 
 
-                addToolFrame.setVisible(false);
-                addToolFrame.dispose();
+
 
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -166,8 +170,8 @@ public class AddToolScreen extends JPanel implements ActionListener {
             System.exit(0);
            //logout
         }
-}
-        
+    }
+
         
         
 
