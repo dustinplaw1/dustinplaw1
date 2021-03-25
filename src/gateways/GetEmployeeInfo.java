@@ -1,4 +1,5 @@
 package gateways;
+import objects.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -11,9 +12,8 @@ public class GetEmployeeInfo extends Gateway implements Command {
     /** employee_id is the id of the employee who's info is being requested */
     private String employee_id;
 
-    /** The response object is just a string */
-    // TODO come up with a response object that is nicer for the gui to handle
-    private String res_info;
+    /** The response object */
+    private Employee emp;
 
 
     /** Creates a new Gateway for getting employee information
@@ -38,18 +38,30 @@ public class GetEmployeeInfo extends Gateway implements Command {
      * @throws exception
      */
     public void execute() throws Exception {
-        String result = "";
         //try/catch when connecting to a database
         try {
             //easier more efficient at accessing data
             PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, employee_type from employees where employee_id=?"));
             p.setString(1, employee_id);
             //cursor for going through data in database
-            ResultSet r = p.executeQuery();
+            ResultSet rs = p.executeQuery();
+            // go to first entry
+            rs.next();
             //build a string for the employee information
-            result += "Employee name: " + r.getString("last_name") + ", " + r.getString("first_name") +
-                    ", phone number: " + r.getString("phone_number") + ", employee type: " + r.getString("employee_type");
-            res_info = result;
+            String id, l_name, f_name, role;
+            id = rs.getString("employee_id");
+            l_name = rs.getString("last_name");
+            f_name = rs.getString("first_name");
+            role = rs.getString("employee_type");
+            if (role.equals("Labourer")) {
+                  emp = new Labourer(id, l_name, f_name);
+            } else if (role.equals("Tool_Manager")) {
+                  emp = new ToolManager(id, l_name, f_name);
+            } else {
+                throw new Exception("Invalid Employee Type");
+            }
+
+
 
 
         } catch (Exception e) {
@@ -65,14 +77,13 @@ public class GetEmployeeInfo extends Gateway implements Command {
      * @return res_obj: object containing the requested employee's info
      * @throws Exception when the response object is null
      */
-    public String getResponse() throws Exception {
+    public Employee getResponse() throws Exception {
 
-        if (this.res_info == null) {
+        if (this.emp == null) {
             throw new Exception("Empty resonse object: Try running execute() first");
         }
-
-        String res_obj = this.res_info;
-        return res_obj;
+        
+        return this.emp;
     }
 
 
@@ -81,7 +92,7 @@ public class GetEmployeeInfo extends Gateway implements Command {
         try {
             GetEmployeeInfo gei = new GetEmployeeInfo("e01");
             gei.execute();
-            System.out.println(gei.getResponse());
+            System.out.println(gei.getResponse().toString());
 
         } catch(Exception e) {
             System.out.println(e);
