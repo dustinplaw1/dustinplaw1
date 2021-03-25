@@ -10,31 +10,31 @@ import java.awt.event.ActionListener;
 
 public class AddToolScreen extends JPanel implements ActionListener {
 
-    private static JFrame addToolFrame;
-    private static JPanel addPanel;
+    private  JFrame addToolFrame;
+    private  JPanel addPanel;
 
-    private static JLabel welcomeMessage;
-
-
-    private static JButton backButton;
-    private static JButton saveButton;
+    private  JLabel welcomeMessage;
 
 
-    private static JButton logoutButton;
+    private  JButton backButton;
+    private  JButton saveButton;
+
+
+    private  JButton logoutButton;
 
     //label and textfield for the toolname label
-    private static JLabel toolNameLabel;
-    private static JTextField toolNameField;
+    private  JLabel toolNameLabel;
+    private  JTextField toolNameField;
 
     //label and textfield for the tool description
-    private static JLabel toolDescriptionLabel;
-    private static JTextField toolDescriptionField;
+    private  JLabel toolDescriptionLabel;
+    private  JTextField toolDescriptionField;
 
 
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public static void executeAddToolScreen()
+    public void executeAddToolScreen()
     {
         //new frame
         addToolFrame = new JFrame();
@@ -117,9 +117,6 @@ public class AddToolScreen extends JPanel implements ActionListener {
         addToolFrame.setResizable(false);
     }
 
-    public static void main(String[] args) {
-        executeAddToolScreen();
-    }
 
         
     @Override
@@ -136,7 +133,9 @@ public class AddToolScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand()))
         {
             addToolFrame.setVisible(false);
-            ToolManager.executeToolManager();
+
+            ToolManager tm = new ToolManager();
+            tm.executeToolManager();
 
             addToolFrame.dispose();
         }

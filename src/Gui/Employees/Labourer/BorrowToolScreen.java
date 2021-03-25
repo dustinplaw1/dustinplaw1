@@ -1,12 +1,10 @@
 package Gui.Employees.Labourer;
 
 
-import Gui.Employees.ToolManager.AddToolScreen;
-import Gui.Employees.ToolManager.ModifyEmployeeRole;
-import Gui.Employees.ToolManager.RemoveToolScreen;
+//import Gui.Employees.ToolManager.ToolManager;
+//import objects.Tool;
+
 import Gui.Employees.ToolManager.ToolManager;
-import gateways.DeleteTool;
-import gateways.GetEmployeeInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,31 +12,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-public class BorrowToolScreen extends JPanel implements ActionListener {
+public class BorrowToolScreen implements ActionListener {
 
     //TODO I need to pull a list of all available tools in the system
-    protected static String [] options = {"hammer", "screwdriver"};
+    protected static ArrayList<Tool> options;    //= {"hammer", "screwdriver"};
 
-    private static JFrame borrowToolFrame;
-    private static JPanel borrowPanel;
+    private  JFrame borrowToolFrame;
+    private  JPanel borrowPanel;
 
-    private static JLabel welcomeMessage;
-    private static JButton backButton;
-    private static JButton nextButton;
-    private static JButton addButton;
-    private static JButton logoutButton;
+    private  JLabel welcomeMessage;
+    private  JButton backButton;
+    private  JButton nextButton;
+    private  JButton addButton;
+    private  JButton logoutButton;
 
-    private static String borrowTool;
+    private  String borrowTool;
 
-    private static JList list;
-    private static JScrollPane listScroll;
+    private  JList list;
+    private  JScrollPane listScroll;
 
 
         /**
          * A method that will run and execute the gui for the toolmanager add tool menu
          */
-    public static void executeBorrowToolScreen()
+    public void execute()
     {
                 //new frame for add employee
         borrowToolFrame = new JFrame("Add Tool");
@@ -83,8 +82,7 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
 
 
 
-        list = new JList(options);
-
+        list = new JList((ListModel) options);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
@@ -111,30 +109,12 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
 
 
 
-
-
-
-
-
-
         listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(100,200));
 
         listScroll.setBounds(112,75,150,200);
 
         borrowPanel.add(listScroll);
-
-
-
-
-
-
-
-
-
-
-        //350 for the tool name
-
 
 
         //add the panel to the frame and make accessible
@@ -144,9 +124,6 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-            executeBorrowToolScreen();
-        }
 
 
     /**
@@ -160,7 +137,8 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
         //user clicks on back button
         if ("back".equals(e.getActionCommand())) {
             borrowToolFrame.setVisible(false);
-            ToolManager.executeToolManager();
+            ToolManager tm = new ToolManager();
+            tm.executeToolManager();
             borrowToolFrame.dispose();
 
 
@@ -170,7 +148,7 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
         else if ("save".equals(e.getActionCommand())) {
             //I need to get the employee ID that is logged in for this session
 
-            GetEmployeeInfo
+
 
 
 
@@ -181,19 +159,7 @@ public class BorrowToolScreen extends JPanel implements ActionListener {
 
             //logout button is pressed
         }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
 }
+

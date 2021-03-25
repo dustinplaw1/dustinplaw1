@@ -20,27 +20,20 @@ import java.awt.event.MouseEvent;
 public class ToolManager extends JPanel implements ActionListener {
     protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
 
-    private static JFrame toolManagerFrame;
-    private static JPanel managerPanel;
-    private static JButton logoutButton;
-    private static JButton nextButton;
+    private  JFrame toolManagerFrame;
+    private  JPanel managerPanel;
+    private  JButton logoutButton;
+    private  JButton nextButton;
+    private  JList list;
+    private  JScrollPane listScroll;
 
-    private static JRadioButton addTool;
-    private static JRadioButton removeTool;
-    private static JRadioButton addEmployee;
-    private static JRadioButton modifyEmployee;
-    private static ButtonGroup optionButtons;
-    //private static JPanel buttonPanel;
-    private static JList list;
-    private static JScrollPane listScroll;
-
-    private static JLabel welcomeMessage;
-    private static int choice;
+    private  JLabel welcomeMessage;
+    private  int choice;
 
     /**
      * A method that will run and execute the gui for the toolmanager action menu
      */
-    public static void executeToolManager()
+    public void executeToolManager()
     {
 
 
@@ -148,9 +141,7 @@ public class ToolManager extends JPanel implements ActionListener {
     }
 
 
-    public static void main(String[] args) {
-        executeToolManager();
-    }
+
 
 
     public void valueChanged(ListSelectionEvent e)
@@ -175,7 +166,8 @@ public class ToolManager extends JPanel implements ActionListener {
             {
                 //add a new tool window
                 //frame.setVisible(false);
-                AddToolScreen.executeAddToolScreen();
+                AddToolScreen ats = new AddToolScreen();
+                ats.executeAddToolScreen();
                 //toolManagerFrame.dispose();
 
 
@@ -183,7 +175,8 @@ public class ToolManager extends JPanel implements ActionListener {
             else if(choice == 1)
             {
 
-                RemoveToolScreen.executeRemoveToolScreen();
+                RemoveToolScreen rtc = new RemoveToolScreen();
+                rtc.executeRemoveToolScreen();
                 //toolManagerFrame.dispose();
 
             }

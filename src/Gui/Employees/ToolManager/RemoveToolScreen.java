@@ -121,7 +121,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
-            ToolManager.executeToolManager();
+            ToolManager tm = new ToolManager();
+            tm.executeToolManager();
             removeToolFrame.dispose();
 
 

@@ -1,11 +1,13 @@
 package Gui;
 
 import Gui.Login;
+import objects.Employee;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame  extends JFrame {
-    private static JFrame mainFrame;
+
 
 
 //        public static void execute() {
@@ -19,7 +21,11 @@ public class MainFrame  extends JFrame {
 
         public static void main (String[]args){
 
-            Login.executeLogin();
+            Employee employee = new Employee();
+
+            Login login = new Login();
+            login.executeLogin();
+
             //mainFrame.setVisible(false);
         }
 

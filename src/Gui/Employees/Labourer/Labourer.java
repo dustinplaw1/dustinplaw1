@@ -12,22 +12,21 @@ import java.awt.*;
 
 
 public class Labourer extends JPanel {
-    protected static String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
-    private static JFrame labourerFrame;
-    private static JPanel labourerPanel;
-    private static JButton logoutButton;
-    private static JButton nextButton;
+    protected  String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
+    private  JFrame labourerFrame;
+    private  JPanel labourerPanel;
+    private  JButton logoutButton;
+    private  JButton nextButton;
 
-    private static JRadioButton addTool;
-    private static JRadioButton removeTool;
-    private static JRadioButton addEmployee;
-    private static JRadioButton modifyEmployee;
-    private static ButtonGroup optionButtons;
-    //private static JPanel buttonPanel;
-    private static JList list;
-    private static JScrollPane listScroll;
+    private  JRadioButton addTool;
+    private  JRadioButton removeTool;
+    private  JRadioButton addEmployee;
+    private  JRadioButton modifyEmployee;
+    private  ButtonGroup optionButtons;
+    private  JList list;
+    private  JScrollPane listScroll;
 
-    private static JLabel welcomeMessage;
+    private  JLabel welcomeMessage;
 
     public Labourer()
     {
@@ -36,12 +35,12 @@ public class Labourer extends JPanel {
     }
 
 
-    public static void executeLabourer()
+    public void executeLabourer()
     {
 
 
         //toolManager's frame
-        labourerFrame = new JFrame();
+        JFrame labourerFrame = new JFrame();
 
 
         labourerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +50,7 @@ public class Labourer extends JPanel {
 
 
         //Create a new panel that will be the tool manager's actionmenu
-        labourerPanel = new JPanel();
+        JPanel labourerPanel = new JPanel();
 
         //create a layout for the panel
         labourerPanel.setLayout(null);
@@ -62,7 +61,7 @@ public class Labourer extends JPanel {
 
         //now create the logout or enter button
 
-        logoutButton = new JButton("Logout");
+        JButton logoutButton = new JButton("Logout");
         logoutButton.setBounds(100,650,80,25);
         labourerPanel.add(logoutButton);
 
@@ -104,9 +103,7 @@ public class Labourer extends JPanel {
 
     }
 
-    public static void main(String[] args) {
-        executeLabourer();
-    }
+
 
 
 

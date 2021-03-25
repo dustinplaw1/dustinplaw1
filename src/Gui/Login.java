@@ -17,19 +17,19 @@ public class Login implements ActionListener {
 
 
     //values are declared here so they are accessible in the methods below
-    private static JFrame loginFrame;
-    private static JLabel employeeLabel;
-    private static JTextField employeeText;
-    private static JLabel passwordLabel;
-    private static JPasswordField passwordText;
-    private static JButton button;
-    private static JLabel successful;
-    private static boolean totalValid;
-    private static JPanel panel;
+    private  JFrame loginFrame;
+    private  JLabel employeeLabel;
+    private  JTextField employeeText;
+    private  JLabel passwordLabel;
+    private  JPasswordField passwordText;
+    private  JButton button;
+    private  JLabel successful;
+    private  boolean totalValid;
+    private  JPanel panel;
 
-    public static void executeLogin()
+    public void executeLogin()
     {
-        panel = new JPanel();
+        JPanel panel = new JPanel();
 
         loginFrame = new JFrame();
         loginFrame.setSize(350, 200);
@@ -132,15 +132,6 @@ public class Login implements ActionListener {
     }
 
 
-
-    public static void main(String[] args) {
-
-        executeLogin();
-
-
-
-    }
-
     /**
      * Invoked when an login button occurs.
      *
@@ -184,8 +175,8 @@ public class Login implements ActionListener {
                 if (employee_role.equals("Labourer"))
                 {
                     IsSuccessful.isSuccessful("Loading Labourer menu");
-
-                    Labourer.executeLabourer();
+                    Labourer l = new Labourer();
+                    l.executeLabourer();
                     //loginFrame.remove(panel);
                     //loginFrame.setVisible(false);
                     //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
@@ -195,7 +186,9 @@ public class Login implements ActionListener {
 
                     IsSuccessful.isSuccessful("Loading Tool Manager menu");
 
-                    ToolManager.executeToolManager();
+
+                    ToolManager tm = new ToolManager();
+                    tm.executeToolManager();
 
 
                 }
@@ -203,7 +196,8 @@ public class Login implements ActionListener {
                 {
                     IsSuccessful.isSuccessful("Loading Job Manager menu");
 
-                    ToolManager.executeToolManager();
+                    Manager man = new Manager();
+                    man.executeManager();
 
                 }
                 else
