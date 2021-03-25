@@ -1,13 +1,24 @@
 package Gui.Employees.Labourer;
 
 
+import Gui.Employees.ToolManager.AddToolScreen;
+import Gui.Employees.ToolManager.ModifyEmployeeRole;
+import Gui.Employees.ToolManager.RemoveToolScreen;
+import Gui.Employees.ToolManager.ToolManager;
+import gateways.DeleteTool;
+import gateways.GetEmployeeInfo;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class BorrowToolScreen extends JPanel {
+public class BorrowToolScreen extends JPanel implements ActionListener {
 
     //TODO I need to pull a list of all available tools in the system
-    protected static String [] options = {"NEED TO PULL DATA FROM THE DATABASE OF AVAILABLE TOOLS TO BORROW"};
+    protected static String [] options = {"hammer", "screwdriver"};
 
     private static JFrame borrowToolFrame;
     private static JPanel borrowPanel;
@@ -17,6 +28,8 @@ public class BorrowToolScreen extends JPanel {
     private static JButton nextButton;
     private static JButton addButton;
     private static JButton logoutButton;
+
+    private static String borrowTool;
 
     private static JList list;
     private static JScrollPane listScroll;
@@ -28,40 +41,44 @@ public class BorrowToolScreen extends JPanel {
     public static void executeBorrowToolScreen()
     {
                 //new frame for add employee
-        borrowToolFrame = new JFrame();
-        borrowToolFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        borrowToolFrame = new JFrame("Add Tool");
+        borrowToolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         borrowToolFrame.pack();
-        borrowToolFrame.setSize(1280,768);
+        borrowToolFrame.setSize(400,400);
 
         //creates a new panel that will be the tool managers' add tool screen
         borrowPanel = new JPanel();
         borrowPanel.setLayout(null);
-        borrowPanel.setSize(1280,768);
-
-        //create logout button functionality
-        backButton = new JButton("Logout");
-        backButton.setBounds(1000, 50,80,30);
-        borrowPanel.add(backButton);
+        borrowPanel.setSize(400,400);
 
         //create back button functionality
         nextButton = new JButton("Back");
-        nextButton.setBounds(100,650,80,30);
+        nextButton.setBounds(25,325,80,30);
         borrowPanel.add(nextButton);
 
-        //create save button functionality
-        logoutButton = new JButton("Next");
-        logoutButton.setBounds(1000,650,80,30);
-        borrowPanel.add(logoutButton);
+
+        //create logout button functionality
+        backButton = new JButton("Logout");
+        backButton.setBounds(150, 325,80,30);
+        borrowPanel.add(backButton);
 
         addButton = new JButton ("Add");
-        addButton.setBounds(1000 ,350,80,30);
+        addButton.setBounds(285 ,325,80,30);
         borrowPanel.add(addButton);
+
+        addButton.setActionCommand("add");
+        backButton.setActionCommand("back");
+        logoutButton.setActionCommand("logout");
+
+        addButton.addActionListener(new BorrowToolScreen());
+        backButton.addActionListener(new BorrowToolScreen());
+        logoutButton.addActionListener(new BorrowToolScreen());
 
 
         //create welcome message JLabel
-        welcomeMessage = new JLabel ("Labourer, borrow a tool:");
-        welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 30));
-        welcomeMessage.setBounds(350,50,400,40);
+        welcomeMessage = new JLabel ("Borrow A Tool:");
+
+        welcomeMessage.setBounds(150,20,150,40);
         borrowPanel.add(welcomeMessage);
 
 
@@ -72,10 +89,38 @@ public class BorrowToolScreen extends JPanel {
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
 
-        listScroll = new JScrollPane(list);
-        listScroll.setPreferredSize(new Dimension(250,400));
+        //This will capture what tool the user types
+        list.addMouseListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc} A method that will track which mouse click
+             *
+             * @param e
+             */
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Object tool = list.getSelectedValue();
+                borrowTool = tool.toString();
 
-        listScroll.setBounds(550,250,300,300);
+                //System.out.println(borrowTool);
+
+                //choice = list.getSelectedIndex();
+                //System.out.println(choice);
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+        listScroll = new JScrollPane(list);
+        listScroll.setPreferredSize(new Dimension(100,200));
+
+        listScroll.setBounds(112,75,150,200);
 
         borrowPanel.add(listScroll);
 
@@ -104,8 +149,51 @@ public class BorrowToolScreen extends JPanel {
         }
 
 
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        //user clicks on back button
+        if ("back".equals(e.getActionCommand())) {
+            borrowToolFrame.setVisible(false);
+            ToolManager.executeToolManager();
+            borrowToolFrame.dispose();
+
+
+
+        }
+        //here i need to extract the employee_id, and the tool_id
+        else if ("save".equals(e.getActionCommand())) {
+            //I need to get the employee ID that is logged in for this session
+
+            GetEmployeeInfo
+
+
+
+        }
+        //logout button pressed
+        else {
+            System.exit(0);
+
+            //logout button is pressed
+        }
+        }
 
 
 
 
+
+
+
+
+
+
+
+
+
+    }
 }

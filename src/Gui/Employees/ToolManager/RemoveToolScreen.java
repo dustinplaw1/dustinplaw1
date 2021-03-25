@@ -122,10 +122,16 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
             ToolManager.executeToolManager();
+            removeToolFrame.dispose();
+
+
+
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand())) {
-            try {
+
+            //TODO get confirmation that deletion occured
+             try {
                 DeleteTool tool = new DeleteTool(tool_id);
                 tool.execute();     //execute it to add to the database
             } catch (Exception exception) {
@@ -133,7 +139,9 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
             }
 
 
-        } else {
+        }
+        //logout button pressed
+        else {
             System.exit(0);
 
             //logout button is pressed

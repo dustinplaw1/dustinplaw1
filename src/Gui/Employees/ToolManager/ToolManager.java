@@ -176,21 +176,24 @@ public class ToolManager extends JPanel implements ActionListener {
                 //add a new tool window
                 //frame.setVisible(false);
                 AddToolScreen.executeAddToolScreen();
+                //toolManagerFrame.dispose();
 
 
             }
             else if(choice == 1)
             {
-                //remove a tool window
-                //toolManagerFrame.setVisible(false);
+
                 RemoveToolScreen.executeRemoveToolScreen();
+                //toolManagerFrame.dispose();
+
             }
             else if(choice ==2)
             {
 
-                //modify employee role
-                //toolManagerFrame.setVisible(false);
+
                 ModifyEmployeeRole.executeModifyEmployeeRole();
+                //toolManagerFrame.dispose();
+
             }
 
         }

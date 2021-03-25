@@ -131,21 +131,25 @@ public class AddToolScreen extends JPanel implements ActionListener {
 
 
 
-        //now use th
+
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand()))
         {
             addToolFrame.setVisible(false);
+            ToolManager.executeToolManager();
 
             addToolFrame.dispose();
-            ToolManager.executeToolManager();
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
+            //TODO need to check with confirmation from other method if update was successful
             try {
                 CreateTool tool = new CreateTool(toolName, toolDescription);
                 tool.execute();     //execute it to add to the database
+
+
+
 
                 addToolFrame.setVisible(false);
                 addToolFrame.dispose();
