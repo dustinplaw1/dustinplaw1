@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 
 public class AddToolScreen implements ActionListener {
 
+    ToolManager tm = new ToolManager();
     private static JFrame addToolFrame;
     private static JPanel addPanel;
 
     private static JLabel welcomeMessage;
-    ToolManager tm = new ToolManager();
 
 
     private static JButton backButton;
@@ -80,10 +80,10 @@ public class AddToolScreen implements ActionListener {
 
         //create tool name field functionality
         toolNameField = new JTextField(20);
+        toolNameField.setText("");
         toolNameField.setBounds(150,50,200,25);
         addPanel.add(toolNameField);
 
-        //350 for the tool name
 
         //create tool description label functionality
         toolDescriptionLabel = new JLabel("Description of tool:");
@@ -92,6 +92,7 @@ public class AddToolScreen implements ActionListener {
 
         //create toolname field functionality
         toolDescriptionField = new JTextField(20);
+        toolDescriptionField.setText("");
         toolDescriptionField.setBounds(150  ,150,200,25);
         addPanel.add(toolDescriptionField);
 

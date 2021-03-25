@@ -28,15 +28,12 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
     private static JLabel toolIdLabel;
     private static JTextField toolIdField;
 
-    //label and textfield for the tool description
-    private static JLabel toolDescriptionLabel;
-    private static JTextField toolDescriptionField;
 
 
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public static void executeRemoveToolScreen() {
+    public void executeRemoveToolScreen() {
         //create a new frame
         removeToolFrame = new JFrame("Remove a tool");
         removeToolFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,9 +98,6 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         removeToolFrame.setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-        executeRemoveToolScreen();
-    }
 
 
     /**
@@ -122,8 +116,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
-            tm.executeToolManager();
             removeToolFrame.dispose();
+            tm.executeToolManager();
 
 
 
@@ -135,7 +129,15 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
              try {
                 DeleteTool tool = new DeleteTool(tool_id);
                 tool.execute();     //execute it to add to the database
-            } catch (Exception exception) {
+
+                 removeToolFrame.setVisible(false);
+                 removeToolFrame.dispose();
+                 tm.executeToolManager();
+
+
+
+
+             } catch (Exception exception) {
                 exception.printStackTrace();
             }
 

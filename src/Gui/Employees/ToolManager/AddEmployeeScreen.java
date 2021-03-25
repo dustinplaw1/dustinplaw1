@@ -1,12 +1,19 @@
 package Gui.Employees.ToolManager;
 
 
+import gateways.DeleteTool;
+import gateways.NewEmployee;
+import objects.Employee;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AddEmployeeScreen extends JPanel{
+public class AddEmployeeScreen extends JPanel implements ActionListener {
 
+    ToolManager tm = new ToolManager();
     private static JFrame addEmployeeFrame;
     private static JPanel addPanel;
 
@@ -127,20 +134,90 @@ public class AddEmployeeScreen extends JPanel{
         roles.setBounds(20, 200, 300,20);
         addPanel.add(roles);
 
-//        //create an employee role field
-//        employeRoleField = new JTextField(20);
-//        employeRoleField.setBounds(650,400,300,30);
-//        addPanel.add(employeRoleField);
+
+        saveButton.setActionCommand("back");
+        logoutButton.setActionCommand("logout");
+        backButton.setActionCommand("back");
+        saveButton.addActionListener(new AddToolScreen());
+        logoutButton.addActionListener(new AddToolScreen());
+        backButton.addActionListener(new AddToolScreen());
+
+
 
 
         //add the panel to the frame and make accessible
         addEmployeeFrame.add(addPanel);
         addEmployeeFrame.setVisible(true);
         addEmployeeFrame.setResizable(false);
+        addEmployeeFrame.setLocationRelativeTo(null);
+    }
+
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String last = lastField.getText();
+        String first = firstField.getText();
+        String type = employeRoleField.getText();
+        String pass = passwordField.getText();
+
+        System.out.println(last + ", " + first + ", " + type + ", " + pass);
+
+
+
+
+        if ("back".equals(e.getActionCommand())) {
+            addEmployeeFrame.setVisible(false);
+            addEmployeeFrame.dispose();
+            tm.executeToolManager();
+
+
+
+        }
+        //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
+        else if ("save".equals(e.getActionCommand())) {
+
+            //TODO get confirmation for a new employee
+            try {
+                NewEmployee emp = new NewEmployee(last, first, type, pass );
+
+
+                addEmployeeFrame.setVisible(false);
+                addEmployeeFrame.dispose();
+                tm.executeToolManager();
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+
+        }
+        //logout button pressed
+        else {
+            System.exit(0);
+
+            //logout button is pressed
+        }
     }
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
 }
+

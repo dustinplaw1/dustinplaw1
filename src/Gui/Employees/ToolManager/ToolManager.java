@@ -176,19 +176,23 @@ public class ToolManager  implements ActionListener {
             if(choice == 1)
             {
 
+                toolManagerFrame.setVisible(false);
                 RemoveToolScreen rtc = new RemoveToolScreen();
                 rtc.executeRemoveToolScreen();
-                //toolManagerFrame.dispose();
+                toolManagerFrame.dispose();
 
             }
             if (choice == 2)
             {
+                toolManagerFrame.setVisible(false);
                 AddEmployeeScreen aes = new AddEmployeeScreen();
                 aes.executeAddEmployeeScreen();
+                toolManagerFrame.dispose();
+
             }
             if(choice ==3)
             {
-
+                toolManagerFrame.setVisible(false);
                 ModifyEmployeeRole mer = new ModifyEmployeeRole();
                 mer.executeModifyEmployeeRole();
                 toolManagerFrame.dispose();
