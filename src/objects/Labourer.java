@@ -4,8 +4,8 @@ public class Labourer extends Employee {
     // Maybe use scanner instead of params
 
 
-    public Labourer(String employee_id , String employee_password, String last_name, String first_name, String employee_description) {
-        super(employee_id, employee_password, last_name, first_name, employee_description);
+    public Labourer(String employee_id , String last_name, String first_name) {
+        super(employee_id, last_name, first_name);
         // initiallize tool Account.
     }
 

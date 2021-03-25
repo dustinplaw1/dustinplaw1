@@ -27,7 +27,7 @@ public class ControlDB extends Gateway {
 
     private String login_fields = "employee_id varchar(30) NOT NULL,"
         + " password varchar(50),"
-        + " foreign key (employee_id) referen2ces employees(employee_id)";
+        + " foreign key (employee_id) references employees(employee_id)";
 
     private String tool_fields =
         "tool_id varchar(20) NOT NULL PRIMARY KEY,"

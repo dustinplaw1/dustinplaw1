@@ -17,7 +17,7 @@ public class FindTools extends Gateway implements Command {
 
     /**
      * Creates a new Gateway for getting a list of tools from the database
-     * @param include_available, is true to include all tools, false to filter signed out tools from result
+     * @param includeAvailable, is true to include all tools, false to filter signed out tools from result
      */
     public FindTools (Boolean include_available) throws Exception {
         try {
@@ -29,13 +29,12 @@ public class FindTools extends Gateway implements Command {
 
         include_unavailable_tools = include_available;
         tools = new ArrayList<Tool>();
-
     }
 
 
     /**
      * A method that initializes the tools array and fills it using info from the database
-     * @throws new exception
+     * @throws Exception
      */
     public void execute() throws Exception {
 
@@ -78,7 +77,7 @@ public class FindTools extends Gateway implements Command {
     /** the getTools returns the tools list created by execute()
      * @return tools
      */
-    public  ArrayList<Tool> getTools() {
+    public ArrayList<Tool> getTools() {
         return this.tools;
     }
 
