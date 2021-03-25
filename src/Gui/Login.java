@@ -1,31 +1,39 @@
 package Gui;
 
+import Gui.Employees.Labourer.Labourer;
+import Gui.Employees.Manager.Manager;
+import Gui.Employees.ToolManager.ToolManager;
+import Gui.IsSuccessful;
 import gateways.AuthenticateLoginInfo;
+import gateways.GetEmployeeInfo;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class Login implements ActionListener {
 
 
-    //values are declared here so they are accessible in the methods below
-    private static JLabel employeeLabel;
-    private static JTextField employeeText;
-    private static JLabel passwordLabel;
-    private static JPasswordField passwordText;
-    private static JButton button;
-    private static JLabel successful;
-    private static boolean totalValid;
 
+    private static JFrame loginFrame;
+    private  static JLabel employeeLabel;
+    private  static JTextField employeeText;
+    private  static JLabel passwordLabel;
+    private  static JPasswordField passwordText;
+    private  static JButton button;
+    private  static JLabel successful;
+    private  static boolean totalValid;
+    private  static JPanel panel;
 
-    public static void executeLogin()
+    public void executeLogin()
     {
         JPanel panel = new JPanel();
 
-        JFrame frame = new JFrame();
-        frame.setSize(350, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        loginFrame = new JFrame();
+        loginFrame.setSize(350, 200);
+        loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        loginFrame.add(panel);
 
 
         //quick test here to see about making generic values in a gui
@@ -72,7 +80,10 @@ public class Login implements ActionListener {
 
 
         //set it visible
-        frame.setVisible(true);
+        loginFrame.setVisible(true);
+        loginFrame.setResizable(false);
+        loginFrame.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -86,27 +97,27 @@ public class Login implements ActionListener {
         String employee = employeeText.getText();  //capture employee id input
         String password = passwordText.getText();   //capture employee password input
 
-        AuthenticateLoginInfo auth = new AuthenticateLoginInfo(employee, password);
+        AuthenticateLoginInfo authenticate = new AuthenticateLoginInfo(employee, password);
+        authenticate.execute();
+        boolean getAuthentication = authenticate.getValidity();
+
 
 
 
 
         //check database to see if combo was on the database or not
 
-
-        System.out.println("Username/password entered: " + employee + ": " + password + " is: " );
-
-
         boolean whileCheck = true;
 
         do{
 
             //this should check for an empty password or one that returned false from checking the database
-            if ((employee.isEmpty() || password.isEmpty()) ||auth.getValidity())
+            if ((employee.isEmpty() || password.isEmpty()) ||!getAuthentication)
             {
                 System.out.println("in the if statement, this should re-initialize the login screen" );
 
                 totalValid = false;
+                executeLogin();
 
 
             }
@@ -115,7 +126,6 @@ public class Login implements ActionListener {
                 System.out.println("in the else statement, this is where they match!");
                 totalValid = true;
                 whileCheck = true;
-                executeLogin();
             }
             }while (!whileCheck);
 
@@ -123,15 +133,6 @@ public class Login implements ActionListener {
 
     }
 
-
-
-    public static void main(String[] args) {
-
-        executeLogin();
-
-
-
-    }
 
     /**
      * Invoked when an login button occurs.
@@ -141,7 +142,9 @@ public class Login implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //here i need to get data from the database, (login information
+        String employee = employeeText.getText();  //capture employee id input
 
+        //this will close the frame
         try {
             validate(); //call this method to validate user input
         } catch (Exception exception) {
@@ -151,7 +154,67 @@ public class Login implements ActionListener {
 
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
-            successful.setText("Login successful.");
+
+            successful.setText("Login successful.");    //might need,
+
+            //when password is successful here, need to check the role of the employee to open the appropriate frame by title
+            loginFrame.setVisible(false);
+            try {
+                GetEmployeeInfo info = new GetEmployeeInfo(employee);
+                info.execute();
+
+                //this is empty for now
+                //String employee_role = info.getRole();
+
+
+                //int employee_role = 0;      //this is just to test, uncomment code above to get right one.
+
+                // TODO Change this to make it work for a string
+
+                //need to get employee title
+                String employee_role= "Tool_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
+
+                if (employee_role.equals("Labourer"))
+                {
+                    IsSuccessful.isSuccessful("Loading Labourer menu");
+                    Labourer l = new Labourer();
+                    l.executeLabourer();
+                    //loginFrame.remove(panel);
+                    //loginFrame.setVisible(false);
+                    //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
+                }
+                else if (employee_role.equals("Tool_Manager") ) {
+                    //TODO update here for a timer of some sort
+
+                    IsSuccessful.isSuccessful("Loading Tool Manager menu");
+
+
+                    ToolManager tm = new ToolManager();
+                    tm.executeToolManager();
+
+
+                }
+                else if (employee_role.equals("Job_Manager"))
+                {
+                    IsSuccessful.isSuccessful("Loading Job Manager menu");
+
+                    Manager man = new Manager();
+                    man.executeManager();
+
+                }
+                else
+                {
+                    throw new Exception("Error, the employee's role is not valid");
+                }
+
+
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+
+
             System.out.println("Login successful");
 
             //inside here call to open appropriate homescreen depending on which user logs in
@@ -160,8 +223,10 @@ public class Login implements ActionListener {
 
         //if unsuccessful,
         } else {
-            System.out.println("Unsuccessful, please try again");
-            successful.setText("Login unsuccessful, please try again");
+            IsSuccessful.isSuccessful("Unsuccessful, please try again");
+
+
+            //successful.setText("Login unsuccessful, please try again");
             // TODO Make the popup screen clear and user can try again
 
 

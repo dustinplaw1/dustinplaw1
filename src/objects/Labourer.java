@@ -9,6 +9,10 @@ public class Labourer extends Employee {
         // initiallize tool Account.
     }
 
+    public Labourer() {
+
+    }
+
     /**
      * A method that will sign out a tool from the system
      * @param tool_id A string representing a tool that will be signed out of the system

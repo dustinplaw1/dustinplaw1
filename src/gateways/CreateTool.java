@@ -28,7 +28,7 @@ public class CreateTool extends Gateway implements Command {
 
     /**
      * A method that inserts a new tool into the database
-     * @throws exception
+     * @throws new exception
      */
     public void execute() throws Exception {
 
@@ -64,6 +64,7 @@ public class CreateTool extends Gateway implements Command {
         try {
             CreateTool ct = new CreateTool(toolname, tooldesc);
             ct.execute();
+            System.out.println("Tool successfully added");
 
         } catch(Exception e) {
             System.out.println(e);
