@@ -24,6 +24,10 @@ public class Tool {
         this.isBorrowed = t_borrowed;
     }
 
+    public Tool() {
+
+    }
+
     /** getter method for id
      * @return id
      */
