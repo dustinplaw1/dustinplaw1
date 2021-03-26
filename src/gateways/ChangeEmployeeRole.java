@@ -16,7 +16,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
         } catch (Exception e) {
             throw e;
         }
-        if (role.equals("Labourer") || role.equals("Tool_Manager")) {
+        if (role.equals("Labourer") || role.equals("Tool_Manager") || role.equals("Manager")) {
             employee_id = id;
             new_role = role;
         } else {
