@@ -57,6 +57,8 @@ public class GetEmployeeInfo extends Gateway implements Command {
                   emp = new Labourer(id, l_name, f_name);
             } else if (role.equals("Tool_Manager")) {
                   emp = new ToolManager(id, l_name, f_name);
+            } else if (role.equals("Manager")) {
+                emp = new Manager(id, l_name, f_name);
             } else {
                 throw new Exception("Invalid Employee Type");
             }
@@ -93,6 +95,8 @@ public class GetEmployeeInfo extends Gateway implements Command {
             GetEmployeeInfo gei = new GetEmployeeInfo("e01");
             gei.execute();
             System.out.println(gei.getResponse().toString());
+            System.out.println(gei.getResponse() instanceof ToolManager);
+
 
         } catch(Exception e) {
             System.out.println(e);
