@@ -134,38 +134,41 @@ public class Manager extends JPanel implements ActionListener {
         {
             if (choice == 0)
             {
-                //add a new tool window
-                CheckAvailabilityScreen.executeCheckAvailabilityScreen();
                 managerFrame.setVisible(false);
+
+                managerFrame.dispose();
+                CheckAvailabilityScreen check = new CheckAvailabilityScreen();
+                check.executeCheckAvailabilityScreen();
+                //add a new tool window
 
 
 
             }
             else if(choice == 1)
             {
+                managerFrame.setVisible(false);
+                managerFrame.dispose();
+
                 //remove a tool window
                 InventoryOfToolsScreen.executeInventoryOfTool();
-                managerFrame.setVisible(false);
 
             }
             else if(choice ==2)
             {
-
-                //modify employee role
-                ModifyEmployeeRole mer = new ModifyEmployeeRole();
-                mer.executeModifyEmployeeRole();
                 managerFrame.setVisible(false);
+                managerFrame.dispose();
+                //modify employee role
+                AssignToolsScreen assign = new AssignToolsScreen();
+                assign.executeAssignToolsScreen();
 
             }
-            else if (choice ==3)
-            {
-                AssignToolsScreen.executeAssignTool();
-                managerFrame.setVisible(false);
+
+
 
                 //when choice isn't valid
             }
         }
 
 
-    }
 }
+

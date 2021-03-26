@@ -4,6 +4,8 @@ package Gui;
 
 import Gui.Login;
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.awt.*;
 
 public class MainFrame {
@@ -21,6 +23,14 @@ public class MainFrame {
     }
 
     public static void main(String[] args) {
+        try{
+            UIManager.setLookAndFeel(new  NimbusLookAndFeel ());
+
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+
         Login login = new Login();
         login.executeLogin();
         //execute();
