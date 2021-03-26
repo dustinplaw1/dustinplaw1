@@ -159,7 +159,11 @@ public class Manager extends JPanel implements ActionListener {
                 managerFrame.dispose();
                 //modify employee role
                 AssignToolsScreen assign = new AssignToolsScreen();
-                assign.executeAssignToolsScreen();
+                try {
+                    assign.executeAssignToolsScreen();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
             }
 

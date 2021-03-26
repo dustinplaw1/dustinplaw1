@@ -1,7 +1,8 @@
 package Gui.Employees.Manager;
-
+import gateways.FindTools;
 import Gui.Employees.ToolManager.ModifyEmployeeRole;
 import Gui.Employees.ToolManager.ToolManager;
+import objects.Tool;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +28,11 @@ public class AssignToolsScreen implements ActionListener {
     private static JLabel employeeIdLabel;
     private static JTextField employeeText;
 
-    protected static String [] options = {""};      //need to get a list of available tools
+    //protected static Tool[] options;      //need to get a list of available tools
     private static JList list;
     private static JScrollPane listScroll;
 
-    public void executeAssignToolsScreen() {
+    public void executeAssignToolsScreen() throws Exception {
         //new frame
         assignFrame = new JFrame("Assign tools");
         assignFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,8 +74,13 @@ public class AssignToolsScreen implements ActionListener {
         employeeText = new JTextField();
         employeeText.setBounds(150,50,200,25);
         assignPanel.add(employeeText);
+        Tool t = new Tool();
 
+        FindTools ft = new FindTools(false);
+        ft.execute();
+        Tool[] options = ft.getTools();
 
+        System.out.println(options.length);
         list = new JList(options);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

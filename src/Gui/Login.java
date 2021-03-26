@@ -146,6 +146,7 @@ public class Login implements ActionListener {
         //here i need to get data from the database, (login information
         String employee = employeeText.getText();  //capture employee id input
 
+
         //this will close the frame
         try {
             validate(); //call this method to validate user input
@@ -162,7 +163,11 @@ public class Login implements ActionListener {
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
             loginFrame.setVisible(false);
             try {
+
                 GetEmployeeInfo info = new GetEmployeeInfo(employee);
+                info.execute();
+                System.out.println(info.getResponse());
+
                 //info.();
 
 
@@ -173,7 +178,7 @@ public class Login implements ActionListener {
 
 
                 //need to get employee title
-                String employee_role= "Tool_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
+                String employee_role= "Job_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
 
                 if (employee_role.equals("Labourer"))
                 {
