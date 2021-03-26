@@ -99,7 +99,7 @@ public class ControlDB extends Gateway {
             // taken from: https://stackoverflow.com/questions/24932374/java-how-to-print-the-rows-from-database
             System.out.println("");
             while (rs.next()) {
-                for(int i = 1; i < columnsNumber; i++)
+                for(int i = 1; i <= columnsNumber; i++)
                     System.out.print(rs.getString(i) + " ");
                 System.out.println();
             }

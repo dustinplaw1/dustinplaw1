@@ -78,13 +78,26 @@ public class AssignToolsScreen implements ActionListener {
         employeeText = new JTextField();
         employeeText.setBounds(150,50,200,25);
         assignPanel.add(employeeText);
+
+
+
+        //Todo Figure this out!!!
         Tool t = new Tool();
 
-        FindTools ft = new FindTools(false);
+        FindTools ft = new FindTools(true);
         ft.execute();
         Tool[] options = ft.getTools();
 
-        System.out.println(options.length);
+
+
+        System.out.println(options[0].getName());
+        for (int i = 0; i < options.length; i++)
+        {
+            options[i].getName();
+
+        }
+
+
         list = new JList(options);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

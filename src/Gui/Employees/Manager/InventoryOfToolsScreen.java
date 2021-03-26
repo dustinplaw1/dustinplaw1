@@ -49,6 +49,11 @@ public class InventoryOfToolsScreen implements ActionListener {
         welcomeMessage.setBounds(125,10,150,40);
         inventoryPanel.add(welcomeMessage);
 
+        //need to pull data from this
+
+
+
+
 
         list = new JList(options);
 
@@ -57,6 +62,10 @@ public class InventoryOfToolsScreen implements ActionListener {
         list.setVisibleRowCount(10);
         //only one selection
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+
+
+
 
 
 
