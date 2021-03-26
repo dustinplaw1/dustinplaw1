@@ -150,7 +150,8 @@ public class Manager extends JPanel implements ActionListener {
                 managerFrame.dispose();
 
                 //remove a tool window
-                InventoryOfToolsScreen.executeInventoryOfTool();
+                InventoryOfToolsScreen inventory = new InventoryOfToolsScreen();
+                inventory.executeInventoryOfTool();
 
             }
             else if(choice ==2)
