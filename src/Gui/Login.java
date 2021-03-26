@@ -6,6 +6,7 @@ import Gui.Employees.ToolManager.ToolManager;
 import Gui.IsSuccessful;
 import gateways.AuthenticateLoginInfo;
 import gateways.GetEmployeeInfo;
+import objects.Employee;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -164,12 +165,11 @@ public class Login implements ActionListener {
             loginFrame.setVisible(false);
             try {
 
-                GetEmployeeInfo info = new GetEmployeeInfo(employee);
-                info.execute();
-                System.out.println(info.getResponse());
+                GetEmployeeInfo gei = new GetEmployeeInfo(employee);
+                gei.execute();
+                if (gei.getResponse() instanceof objects.ToolManager)
 
                 //info.();
-
 
 
 
@@ -178,9 +178,9 @@ public class Login implements ActionListener {
 
 
                 //need to get employee title
-                String employee_role= "Job_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
+                //String employee_role= "Job_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
 
-                if (employee_role.equals("Labourer"))
+                if (gei.getResponse() instanceof objects.Labourer)
                 {
                     IsSuccessful.isSuccessful("Loading Labourer menu");
                     Labourer l = new Labourer();
@@ -189,7 +189,7 @@ public class Login implements ActionListener {
                     //loginFrame.setVisible(false);
                     //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
                 }
-                else if (employee_role.equals("Tool_Manager") ) {
+                else if (gei.getResponse() instanceof objects.ToolManager ) {
                     //TODO update here for a timer of some sort
 
                     IsSuccessful.isSuccessful("Loading Tool Manager menu");
@@ -200,7 +200,7 @@ public class Login implements ActionListener {
 
 
                 }
-                else if (employee_role.equals("Job_Manager"))
+                else if (gei.getResponse() instanceof objects.Manager)
                 {
                     IsSuccessful.isSuccessful("Loading Job Manager menu");
 
