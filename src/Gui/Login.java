@@ -175,43 +175,46 @@ public class Login implements ActionListener {
 
                 // TODO Change this to make it work for a string
 
-
+                System.out.println("Blah test");
+                System.out.println(gei.getResponse() instanceof objects.ToolManager);
+                System.out.println("After test");
 
                 //need to get employee title
                 //String employee_role= "Job_Manager";       //change this     Labourer, Tool_Manager, Job_Manager
-
-                if (gei.getResponse() instanceof objects.Labourer)
-                {
-                    IsSuccessful.isSuccessful("Loading Labourer menu");
-                    Labourer l = new Labourer();
-                    l.executeLabourer();
-                    //loginFrame.remove(panel);
-                    //loginFrame.setVisible(false);
-                    //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
-                }
-                else if (gei.getResponse() instanceof objects.ToolManager ) {
-                    //TODO update here for a timer of some sort
-
-                    IsSuccessful.isSuccessful("Loading Tool Manager menu");
-
-
-                    ToolManager tm = new ToolManager();
-                    tm.executeToolManager();
-
-
-                }
-                else if (gei.getResponse() instanceof objects.Manager)
-                {
-                    IsSuccessful.isSuccessful("Loading Job Manager menu");
-
-                    Manager man = new Manager();
-                    man.executeManager();
-
-                }
-                else
-                {
-                    throw new Exception("Error, the employee's role is not valid");
-                }
+//
+//                if (gei.getResponse() instanceof objects.Labourer)
+//                {
+//                    IsSuccessful.isSuccessful("Loading Labourer menu");
+//                    Labourer l = new Labourer();
+//                    l.executeLabourer();
+//                    //loginFrame.remove(panel);
+//                    //loginFrame.setVisible(false);
+//                    //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
+//                }
+//                else if (gei.getResponse() instanceof objects.ToolManager ) {
+//                    //TODO update here for a timer of some sort
+//
+//                    IsSuccessful.isSuccessful("Loading Tool Manager menu");
+//
+//
+//                    ToolManager tm = new ToolManager();
+//                    tm.executeToolManager();
+//
+//
+//                }
+                //uncomment this once Manager in objects is implemented
+//                else if (gei.getResponse() instanceof objects.Manager)
+//                {
+//                    IsSuccessful.isSuccessful("Loading Job Manager menu");
+//
+//                    Manager man = new Manager();
+//                    man.executeManager();
+//
+//                }
+//                else
+//                {
+//                    throw new Exception("Error, the employee's role is not valid");
+//                }
 
 
 
