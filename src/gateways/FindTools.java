@@ -10,7 +10,7 @@ import objects.Tool;
 public class FindTools extends Gateway implements Command {
 
     /** List of tool objects representing entries in the tools table in the database */
-    private ArrayList<Tool> tools;
+    private Tool[] tools;
 
     /** if include_unavailable_tools is false, then we exclude tools that are signed out */
     private Boolean include_unavailable_tools;
@@ -28,7 +28,6 @@ public class FindTools extends Gateway implements Command {
         }
 
         include_unavailable_tools = include_available;
-        tools = new ArrayList<Tool>();
     }
 
 
@@ -61,14 +60,17 @@ public class FindTools extends Gateway implements Command {
             String id;
             String name;
             Boolean isBorrowed;
+            // Using a temporary arraylist because ResultSet gives no way to count the number of entries.
+            ArrayList<Tool> toolsArrayList = new ArrayList<Tool>();
             while (rs.next()) {
                 id = rs.getString("tool_id");
                 name = rs.getString("tool_name");
                 isBorrowed = rs.getBoolean(3);
 
                 // create and add a tool to tools list
-                tools.add(new Tool(id, name, isBorrowed));
+                toolsArrayList.add(new Tool(id, name, isBorrowed));
             }
+            tools = toolsArrayList.toArray(new Tool[toolsArrayList.size()]);
             con.close();
         } catch (Exception e) { System.out.println(e);}
     }
@@ -77,7 +79,7 @@ public class FindTools extends Gateway implements Command {
     /** the getTools returns the tools list created by execute()
      * @return tools
      */
-    public ArrayList<Tool> getTools() {
+    public Tool[] getTools() {
         return this.tools;
     }
 
@@ -85,7 +87,8 @@ public class FindTools extends Gateway implements Command {
         try {
             FindTools ft = new FindTools(true);
             ft.execute();
-            ft.getTools();
+            Tool[] testArray = ft.getTools();
+            System.out.println(testArray.length);
         } catch (Exception e) {
             System.out.println(e);
         }
