@@ -82,7 +82,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
 
 
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
-        saveButton.setActionCommand("back");
+        saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 

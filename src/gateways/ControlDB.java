@@ -44,7 +44,7 @@ public class ControlDB extends Gateway {
     
     /**
      * This method is used to drop a table with table_name and then create a table of the same name
-     * @param The name of the table to be reset
+     * @param table_name The name of the table to be reset
      */
     private void resetTable(String table_name) {
         String table_fields;
@@ -80,7 +80,7 @@ public class ControlDB extends Gateway {
     }
     /**
      * This method is used for developers to view the contents of tables on the remote server.
-     * @param The name of the table to be reset
+     * @param table_name The name of the table to be reset
      */
     private void viewTable(String table_name) {
         try {
@@ -115,7 +115,7 @@ public class ControlDB extends Gateway {
 
     /**
      * This method inserts some test data into a given table
-     * @param The name of the table to insert data into
+     * @param table_name The name of the table to insert data into
      */
     @SuppressWarnings("unused")
 	private void addDataToTable(String table_name) {

@@ -120,7 +120,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
 
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
-        saveButton.setActionCommand("back");
+        saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 
