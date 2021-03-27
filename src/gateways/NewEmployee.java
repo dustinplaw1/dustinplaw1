@@ -97,6 +97,26 @@ public class NewEmployee extends Gateway implements Command {
         } catch(Exception e) {
             System.out.println(e);
         }
+
+        // Test with each field empty
+        try {
+            NewEmployee ne = new NewEmployee("", "", "", "");
+            ne.execute();
+
+        } catch(Exception e) {
+            System.out.println(e);
+            System.out.println("Empty Field Error (ALL)");
+        }
+
+        // Test with one field empty
+        try {
+            NewEmployee ne = new NewEmployee("name", "test", "", "passwordtest");
+            ne.execute();
+
+        } catch(Exception e) {
+            System.out.println(e);
+            System.out.println("Empty Field Error (SINGLE)");
+        }
     }
 
 }
