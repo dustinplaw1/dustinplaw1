@@ -37,12 +37,12 @@ public class SignedOutTools implements ActionListener {
         inventoryPanel.setSize(400,400);
 
         //create back button functionality
-        logoutButton = new JButton("Back");
+        logoutButton = new JButton("Logout");
         logoutButton.setBounds(25,325,80,30);
-        inventoryPanel.add(backButton);
+        inventoryPanel.add(logoutButton);
 
         //create save button functionality
-        backButton = new JButton("Save");
+        backButton = new JButton("Back");
         backButton.setBounds(285,325,80,30);
         inventoryPanel.add(backButton);
 
