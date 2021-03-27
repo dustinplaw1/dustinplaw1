@@ -91,7 +91,7 @@ public class NewEmployee extends Gateway implements Command {
     // Literally only here to manually test the method.
     public static void main(String[] args) {
         try {
-            NewEmployee ne = new NewEmployee("law", "d", "Tool_Manager", "12345");
+            NewEmployee ne = new NewEmployee("law", "d", "Manager", "12345");
             ne.execute();
 
         } catch(Exception e) {

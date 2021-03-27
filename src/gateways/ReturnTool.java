@@ -11,8 +11,8 @@ public class ReturnTool extends Gateway implements Command {
     private String employee_id;
 
     /** Creates a new Gateway for creating tool contracts
-     * @param tool_id of tool being borrowed
-     * @param employee_id of employee borrowing the tool
+     * @param t_id of tool being borrowed
+     * @param emp_id of employee borrowing the tool
      */
     public ReturnTool(String t_id, String emp_id) throws Exception {
         try {
