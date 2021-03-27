@@ -110,14 +110,14 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         passwordField.setBounds(160,110,200,20);
         addPanel.add(passwordField);
 
-
-        //date hired functionality
-        dateHiredLabel = new JLabel ("Hire Date:(yyyy-mm-dd)");
-        dateHiredLabel.setBounds(20,140,200,20);
-        addPanel.add(dateHiredLabel);
-        dateHiredField = new JTextField(20);
-        dateHiredField.setBounds(160,140,200,20);
-        addPanel.add(dateHiredField);
+//
+//        //date hired functionality
+//        dateHiredLabel = new JLabel ("Hire Date:(yyyy-mm-dd)");
+//        dateHiredLabel.setBounds(20,140,200,20);
+//        addPanel.add(dateHiredLabel);
+//        dateHiredField = new JTextField(20);
+//        dateHiredField.setBounds(160,140,200,20);
+//        addPanel.add(dateHiredField);
 
 
 
@@ -135,7 +135,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         addPanel.add(roles);
 
 
-        saveButton.setActionCommand("back");
+        saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
         saveButton.addActionListener(new AddEmployeeScreen());
@@ -184,7 +184,9 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
             //TODO get confirmation for a new employee
             try {
-                NewEmployee emp = new NewEmployee(last, first, type, pass );
+                System.out.println("inside try");
+                NewEmployee emp = new NewEmployee(last, first, type, pass);
+                emp.execute();
 
 
 

@@ -210,22 +210,22 @@ public class AssignToolsScreen implements ActionListener {
 
 
             Object finalID = toolIds.getElementAt(0);
-            String a = finalID.toString();
+            String a = (String)finalID;
 
 
-//            System.out.println(finalID + " finalID");
-//            System.out.println(a + "A");
+            System.out.println(finalID + " finalID");
+            System.out.println(a + "A");
             //try and borrow a tool against the specified employee id
-//            try
-//            {
-//                assignFrame.setVisible(false);
-//                assignFrame.dispose();
-//
-//                //create an instance of borrow tool, and use toolIds to get the id from element at index
-//                BorrowTool borrowTool = new BorrowTool(empId, a);
-//            } catch (Exception exception) {
-//                exception.printStackTrace();
-//            }
+            try
+            {
+                assignFrame.setVisible(false);
+                assignFrame.dispose();
+
+                //create an instance of borrow tool, and use toolIds to get the id from element at index
+                BorrowTool borrowTool = new BorrowTool(empId, a);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
             man.executeManager();

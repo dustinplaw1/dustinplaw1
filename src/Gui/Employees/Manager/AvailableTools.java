@@ -82,16 +82,6 @@ public class AvailableTools implements ActionListener {
         availableFrame.setLocationRelativeTo(null);
 
 
-
-
-
-
-
-
-
-
-
-
     }
 
 
