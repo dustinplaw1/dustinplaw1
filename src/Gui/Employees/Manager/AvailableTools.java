@@ -62,16 +62,16 @@ public class AvailableTools implements ActionListener {
 
 
         listScroll = new JScrollPane(list);
-        listScroll.setPreferredSize(new Dimension(100,150));
+        listScroll.setPreferredSize(new Dimension(200,250));
 
-        listScroll.setBounds(100,150,150,150);
+        listScroll.setBounds(100,50,200,250);
 
         availablePanel.add(listScroll);
 
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-        logoutButton.addActionListener(new AssignToolsScreen());
-        backButton.addActionListener(new AssignToolsScreen());
+        logoutButton.addActionListener(new AvailableTools());
+        backButton.addActionListener(new AvailableTools());
 
 
 

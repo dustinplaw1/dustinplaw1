@@ -13,8 +13,9 @@ import java.awt.event.ActionListener;
  *
  */
 public class SignedOutTools implements ActionListener {
-    DefaultListModel toolName = new DefaultListModel();
+    //DefaultListModel toolName = new DefaultListModel();
 
+    List  toolList = new List();
     Manager man = new Manager();
     private static String[] options;
     private static JFrame inventoryFrame;
@@ -26,7 +27,7 @@ public class SignedOutTools implements ActionListener {
     private static JLabel welcomeMessage;
 
 
-    public  void executeInventoryOfTool() throws Exception {
+    public  void executeSignedOutTools() throws Exception {
         inventoryFrame = new JFrame("Signed out tools:");
         inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         inventoryFrame.pack();
@@ -53,16 +54,19 @@ public class SignedOutTools implements ActionListener {
 
         //need to pull data from this
 
-        FindTools ft = new FindTools(true);
+
+        int count = 0;
+        FindTools ft = new FindTools(false);
         ft.execute();
         Tool[] options = ft.getTools();
         for(int i = 0; i< options.length; i++)
         {
             //id[i].getID();
+            toolList.add(options[i].getName().toString());
 
             //options[i].getName().toString();
-            toolName.addElement( options[i].getName().toString());
-
+            //toolName.addElement( options[i].getName().toString());
+            count++;
 
         }
 
@@ -70,7 +74,8 @@ public class SignedOutTools implements ActionListener {
 
 
 
-        list = new JList(toolName);
+
+        //list = new JList(toolList);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
@@ -85,9 +90,9 @@ public class SignedOutTools implements ActionListener {
 
 
         listScroll = new JScrollPane(list);
-        listScroll.setPreferredSize(new Dimension(100,200));
+        listScroll.setPreferredSize(new Dimension(200,250));
 
-        listScroll.setBounds(100,150,150,200);
+        listScroll.setBounds(100,50,200,250);
         inventoryPanel.add(listScroll);
 
 

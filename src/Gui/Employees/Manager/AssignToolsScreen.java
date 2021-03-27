@@ -9,10 +9,8 @@ import objects.Tool;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 
 /**
@@ -20,12 +18,12 @@ import java.awt.event.MouseEvent;
  */
 public class AssignToolsScreen implements ActionListener {
     Manager man = new Manager();
-    DefaultListModel toolName = new DefaultListModel();
-    DefaultListModel toolIds = new DefaultListModel();
+    private static ArrayList<String> toolId = new ArrayList<String>();
+    private static DefaultListModel toolName = new DefaultListModel();
     private static JFrame assignFrame;
     private static JPanel assignPanel;
     private static Object choice;
-    private static int num;
+    private  int num;
 
     private static JLabel welcomeMessage;
 
@@ -39,7 +37,7 @@ public class AssignToolsScreen implements ActionListener {
 
     private static Tool [] id;
     protected static Tool[] options;      //need to get a list of available tools
-    private static JList list;
+    private static JList<Tool> list;
     private static JScrollPane listScroll;
 
     public void executeAssignToolsScreen() throws Exception {
@@ -86,25 +84,6 @@ public class AssignToolsScreen implements ActionListener {
         assignPanel.add(employeeText);
 
 
-//        FindTools ft = new FindTools(true);
-//        ft.execute();
-//        Tool[] options = ft.getTools();
-//        Tool[]listOfToolNames ={};
-//        Tool[]listOfToolId ={};
-//        int length = options.length;
-//
-//        Tool [][] toolList = new Tool[length][2];
-//        for (int i = 0; i < options.length; i++)
-//        {
-//            for (int j = 0; j < 2; j++)
-//            //now get the info and add to the 2d array
-//            toolList = {{options[i].getName(), options[i].getID()}};
-//        }
-//
-//        String toolColumn[] = {"ToolID", "Tool Name"};
-//
-//
-//        JTable jt = new JTable(toolList, toolColumn);
 
 
         //Todo Figure this out!!!
@@ -113,28 +92,39 @@ public class AssignToolsScreen implements ActionListener {
         ft.execute();
         Tool[] options = ft.getTools();
 
-        int size = options.length;
+        String x ="";
 
+        int size = options.length;
 
         for(int i = 0; i< options.length; i++)
         {
+
+
             //id[i].getID();
-
+            toolName.addElement(options[i].getName().toString());
             //options[i].getName().toString();
-            toolName.addElement( options[i].getName().toString());
-            toolIds.addElement(options[i].getID());
+            //toolName.addElement( options[i].getName().toString());
+            //toolIds.addElement(options[i].getID());
+           // String test = options[i].getName();
+            toolId.add(i,(String)options[i].getID());
 
-
+            //listModel.addElement(test);
+            x = toolId.get(i);
         }
 
+        System.out.println(x + "with a size of " + toolId.size());
 
-        list = new JList(toolName);
+
+        list = new JList(toolName);     //don't change this. I get the list to populate. Now it will not need to be changed
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
         //only one selection
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        list.addMouseListener(new MouseAdapter() {
+        });
 
         //get a mouse listener (Override method
         list.addMouseListener(new MouseAdapter() {
@@ -146,7 +136,7 @@ public class AssignToolsScreen implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                choice = list.getSelectedValue();
+                choice = list.getSelectedValue();       //this will give me the string of the tool type
                 num = list.getSelectedIndex();          //this will get the index of the button that is pressed
                 System.out.println(num);
                 System.out.println(choice);             //this should return the toolName that is pressed
@@ -186,8 +176,6 @@ public class AssignToolsScreen implements ActionListener {
     }
 
 
-
-
     /**
      * Invoked when an action occurs.
      *
@@ -206,28 +194,26 @@ public class AssignToolsScreen implements ActionListener {
         //else if save is pressed
         else if ("save".equals(e.getActionCommand()))
         {
-            //num will be the index that will be used from the toolId
+            //I need to check if this is valid or not
+            String emp_id = employeeText.getText();
+//            toolId.size();
+//            toolId.get(num);        //this should give me the tool id and the index i want
+//            System.out.println("The id to send to borrow a tool");
+//            System.out.println("num is " + num);
+//            System.out.println ("Tool id size is : " + toolId.size());
 
 
-            Object finalID = toolIds.getElementAt(0);
-            String a = (String)finalID;
 
 
-            System.out.println(finalID + " finalID");
-            System.out.println(a + "A");
-            //try and borrow a tool against the specified employee id
-            try
-            {
-                assignFrame.setVisible(false);
-                assignFrame.dispose();
+            String tool_id = toolId.get(num);
 
-                //create an instance of borrow tool, and use toolIds to get the id from element at index
-                BorrowTool borrowTool = new BorrowTool(empId, a);
+            try {
+                BorrowTool bt = new BorrowTool(emp_id, tool_id);
+                bt.execute();
+                System.out.println("I believe I added it");
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-
-
             man.executeManager();
 
 
