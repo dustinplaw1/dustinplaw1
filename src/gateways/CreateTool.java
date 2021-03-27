@@ -69,6 +69,16 @@ public class CreateTool extends Gateway implements Command {
         } catch(Exception e) {
             System.out.println(e);
         }
+
+
+        try {
+            NewEmployee ne = new NewEmployee("", "", "", "");
+            ne.execute();
+
+        } catch(Exception e) {
+            System.out.println(e);
+            System.out.println("Empty Field Error");
+        }
     }
 
 }
