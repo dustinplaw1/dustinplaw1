@@ -18,8 +18,8 @@ import java.awt.event.MouseEvent;
 
 
 public class ToolManager  implements ActionListener {
-    //protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
-    protected static String[] options = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14"};
+    protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
+
     private static JFrame toolManagerFrame;
     private static JPanel managerPanel;
     private static JButton logoutButton;
