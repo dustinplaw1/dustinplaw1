@@ -1,17 +1,20 @@
 package Gui.Employees.Manager;
 
+import gateways.FindTools;
+import objects.Tool;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * This class is a gui in which the manager can see which tools are signed out (maybe by whom with an emp_id?)
  *
  */
-public class InventoryOfToolsScreen implements ActionListener {
+public class SignedOutTools implements ActionListener {
+    DefaultListModel toolName = new DefaultListModel();
+
     Manager man = new Manager();
     private static String[] options;
     private static JFrame inventoryFrame;
@@ -23,8 +26,7 @@ public class InventoryOfToolsScreen implements ActionListener {
     private static JLabel welcomeMessage;
 
 
-    public  void executeInventoryOfTool()
-    {
+    public  void executeInventoryOfTool() throws Exception {
         inventoryFrame = new JFrame("Signed out tools:");
         inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         inventoryFrame.pack();
@@ -51,11 +53,24 @@ public class InventoryOfToolsScreen implements ActionListener {
 
         //need to pull data from this
 
+        FindTools ft = new FindTools(true);
+        ft.execute();
+        Tool[] options = ft.getTools();
+        for(int i = 0; i< options.length; i++)
+        {
+            //id[i].getID();
+
+            //options[i].getName().toString();
+            toolName.addElement( options[i].getName().toString());
+
+
+        }
 
 
 
 
-        list = new JList(options);
+
+        list = new JList(toolName);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
@@ -80,8 +95,8 @@ public class InventoryOfToolsScreen implements ActionListener {
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 
-        logoutButton.addActionListener(new InventoryOfToolsScreen());
-        backButton.addActionListener(new InventoryOfToolsScreen());
+        logoutButton.addActionListener(new SignedOutTools());
+        backButton.addActionListener(new SignedOutTools());
 
 
         inventoryFrame.add(inventoryPanel);

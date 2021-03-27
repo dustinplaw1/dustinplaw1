@@ -213,8 +213,8 @@ public class AssignToolsScreen implements ActionListener {
             String a = finalID.toString();
 
 
-            System.out.println(finalID + " finalID");
-            System.out.println(a + "A");
+//            System.out.println(finalID + " finalID");
+//            System.out.println(a + "A");
             //try and borrow a tool against the specified employee id
 //            try
 //            {
