@@ -1,7 +1,10 @@
 package Gui.Employees.Manager;
+import gateways.BorrowTool;
 import gateways.FindTools;
 import Gui.Employees.ToolManager.ModifyEmployeeRole;
 import Gui.Employees.ToolManager.ToolManager;
+import gateways.GetEmployeeInfo;
+import objects.Employee;
 import objects.Tool;
 
 import javax.swing.*;
@@ -17,10 +20,12 @@ import java.awt.event.MouseEvent;
  */
 public class AssignToolsScreen implements ActionListener {
     Manager man = new Manager();
-
+    DefaultListModel toolName = new DefaultListModel();
+    DefaultListModel toolIds = new DefaultListModel();
     private static JFrame assignFrame;
     private static JPanel assignPanel;
-    private static int choice;
+    private static Object choice;
+    private static int num;
 
     private static JLabel welcomeMessage;
 
@@ -32,7 +37,8 @@ public class AssignToolsScreen implements ActionListener {
     private static JLabel employeeIdLabel;
     private static JTextField employeeText;
 
-    //protected static Tool[] options;      //need to get a list of available tools
+    private static Tool [] id;
+    protected static Tool[] options;      //need to get a list of available tools
     private static JList list;
     private static JScrollPane listScroll;
 
@@ -80,25 +86,49 @@ public class AssignToolsScreen implements ActionListener {
         assignPanel.add(employeeText);
 
 
+//        FindTools ft = new FindTools(true);
+//        ft.execute();
+//        Tool[] options = ft.getTools();
+//        Tool[]listOfToolNames ={};
+//        Tool[]listOfToolId ={};
+//        int length = options.length;
+//
+//        Tool [][] toolList = new Tool[length][2];
+//        for (int i = 0; i < options.length; i++)
+//        {
+//            for (int j = 0; j < 2; j++)
+//            //now get the info and add to the 2d array
+//            toolList = {{options[i].getName(), options[i].getID()}};
+//        }
+//
+//        String toolColumn[] = {"ToolID", "Tool Name"};
+//
+//
+//        JTable jt = new JTable(toolList, toolColumn);
+
 
         //Todo Figure this out!!!
-        Tool t = new Tool();
 
         FindTools ft = new FindTools(true);
         ft.execute();
         Tool[] options = ft.getTools();
 
+        int size = options.length;
 
 
-        System.out.println(options[0].getName());
-        for (int i = 0; i < options.length; i++)
+        for(int i = 0; i< options.length; i++)
         {
-            options[i].getName();
+            //id[i].getID();
+
+            //options[i].getName().toString();
+            toolName.addElement( options[i].getName().toString());
+            toolIds.addElement(options[i].getID());
+
 
         }
 
 
-        list = new JList(options);
+        list = new JList(toolName);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
@@ -116,9 +146,10 @@ public class AssignToolsScreen implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                choice = list.getSelectedIndex();
-                System.out.println(choice);
-
+                choice = list.getSelectedValue();
+                num = list.getSelectedIndex();          //this will get the index of the button that is pressed
+                System.out.println(num);
+                System.out.println(choice);             //this should return the toolName that is pressed
             }
         });
 
@@ -137,7 +168,7 @@ public class AssignToolsScreen implements ActionListener {
 
 
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
-        saveButton.setActionCommand("back");
+        saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 
@@ -172,12 +203,31 @@ public class AssignToolsScreen implements ActionListener {
             assignFrame.dispose();
             man.executeManager();
         }
+        //else if save is pressed
         else if ("save".equals(e.getActionCommand()))
         {
-            //assign tools to the particular employee    (basically borrowTool.java with the employee and the tool
-            //need to get the tool id
-            assignFrame.setVisible(false);
-            assignFrame.dispose();
+            //num will be the index that will be used from the toolId
+
+
+            Object finalID = toolIds.getElementAt(0);
+            String a = finalID.toString();
+
+
+            System.out.println(finalID + " finalID");
+            System.out.println(a + "A");
+            //try and borrow a tool against the specified employee id
+//            try
+//            {
+//                assignFrame.setVisible(false);
+//                assignFrame.dispose();
+//
+//                //create an instance of borrow tool, and use toolIds to get the id from element at index
+//                BorrowTool borrowTool = new BorrowTool(empId, a);
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//            }
+
+
             man.executeManager();
 
 
