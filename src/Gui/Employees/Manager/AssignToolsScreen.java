@@ -1,4 +1,5 @@
 package Gui.Employees.Manager;
+import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
 import Gui.Employees.ToolManager.ModifyEmployeeRole;
@@ -212,8 +213,11 @@ public class AssignToolsScreen implements ActionListener {
             try {
                 BorrowTool bt = new BorrowTool(emp_id, tool_id);
                 bt.execute();
-                System.out.println("I believe I added it");
+                IsSuccessful.isSuccessful("Assigning Tool Successful");
+
             } catch (Exception exception) {
+                IsSuccessful.isSuccessful("Assigning Tool Failed:");
+
                 exception.printStackTrace();
             }
             man.executeManager();
@@ -226,6 +230,8 @@ public class AssignToolsScreen implements ActionListener {
         //logout button pressed, then exit
         else if ("logout".equals(e.getActionCommand()))
         {
+            IsSuccessful.isSuccessful("Goodbye");
+
             System.exit(0);
         }
 
