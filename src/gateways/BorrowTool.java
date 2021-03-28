@@ -35,7 +35,7 @@ public class BorrowTool extends Gateway implements Command {
     public void execute() throws Exception {
         // confirmation of response
         @SuppressWarnings("unused")
-		int confirmation = 0;
+        int confirmation = 0;
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
