@@ -1,6 +1,8 @@
 package Gui.Employees.Manager;
 
+import gateways.FindContracts;
 import gateways.FindTools;
+import objects.Contract;
 import objects.Tool;
 
 import javax.swing.*;
@@ -13,12 +15,11 @@ import java.awt.event.ActionListener;
  *
  */
 public class SignedOutTools implements ActionListener {
-    //DefaultListModel toolName = new DefaultListModel();
+    DefaultListModel toolList = new DefaultListModel();
 
-    List  toolList = new List();
     Manager man = new Manager();
-    private static String[] options;
-    private static JFrame inventoryFrame;
+    //private static String[] options;
+    private static JFrame signedOutToolsFrame;
     private static JPanel inventoryPanel;
     private static JButton backButton;
     private static JButton logoutButton;
@@ -28,10 +29,10 @@ public class SignedOutTools implements ActionListener {
 
 
     public  void executeSignedOutTools() throws Exception {
-        inventoryFrame = new JFrame("Signed out tools:");
-        inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        inventoryFrame.pack();
-        inventoryFrame.setSize(400,400);
+        signedOutToolsFrame = new JFrame("Signed out tools:");
+        signedOutToolsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        signedOutToolsFrame.pack();
+        signedOutToolsFrame.setSize(400,400);
 
         inventoryPanel = new JPanel();
         inventoryPanel.setLayout(null);
@@ -49,25 +50,20 @@ public class SignedOutTools implements ActionListener {
 
         //create welcome message functionality
         welcomeMessage = new JLabel ("Tools Currently Signed out:");
-        welcomeMessage.setBounds(125,10,150,40);
+        welcomeMessage.setBounds(125,10,200,40);
         inventoryPanel.add(welcomeMessage);
 
         //need to pull data from this
 
+        FindContracts fc = new FindContracts();
+        fc.execute();
+        Contract [] options = fc.getContracts();
 
-        int count = 0;
-        FindTools ft = new FindTools(false);
-        ft.execute();
-        Tool[] options = ft.getTools();
-        for(int i = 0; i< options.length; i++)
+
+
+        for(int i =0; i < options.length; i++)
         {
-            //id[i].getID();
-            toolList.add(options[i].getName().toString());
-
-            //options[i].getName().toString();
-            //toolName.addElement( options[i].getName().toString());
-            count++;
-
+            toolList.addElement(options[i].toString());
         }
 
 
@@ -75,7 +71,7 @@ public class SignedOutTools implements ActionListener {
 
 
 
-        //list = new JList(toolList);
+        list = new JList(toolList);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
@@ -104,10 +100,10 @@ public class SignedOutTools implements ActionListener {
         backButton.addActionListener(new SignedOutTools());
 
 
-        inventoryFrame.add(inventoryPanel);
-        inventoryFrame.setVisible(true);
-        inventoryFrame.setResizable(false);
-        inventoryFrame.setLocationRelativeTo(null);
+        signedOutToolsFrame.add(inventoryPanel);
+        signedOutToolsFrame.setVisible(true);
+        signedOutToolsFrame.setResizable(false);
+        signedOutToolsFrame.setLocationRelativeTo(null);
 
 
 
@@ -124,11 +120,11 @@ public class SignedOutTools implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("back".equals(e.getActionCommand()))
         {
-            inventoryFrame.setVisible(false);
+            signedOutToolsFrame.setVisible(false);
 
             man.executeManager();
 
-            inventoryFrame.dispose();
+            signedOutToolsFrame.dispose();
         }
         if ("logout".equals(e.getActionCommand()))
         {

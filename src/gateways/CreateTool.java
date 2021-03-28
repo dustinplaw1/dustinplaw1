@@ -52,6 +52,11 @@ public class CreateTool extends Gateway implements Command {
     }
 
 
+    public String getTool_id()
+    {
+        return this.tool_id;
+    }
+
     // Literally only here to manually test the method.
     public static void main(String[] args) {
         @SuppressWarnings("resource")

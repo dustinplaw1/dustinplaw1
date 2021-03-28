@@ -15,14 +15,18 @@ public class CreateToolTest
         System.out.println("Enter a tool description = ");
         String tooldesc = in.next();
 
+
         try {
             CreateTool ct = new CreateTool(toolname, tooldesc);
             ct.execute();
             System.out.println("Tool successfully added");
-
+            String test = ct.getTool_id();
+            System.out.println("tool id is: " + test);
         } catch(Exception e) {
             System.out.println(e);
         }
+
+
 
 
         try {
