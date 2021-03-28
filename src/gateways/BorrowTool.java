@@ -6,17 +6,16 @@ import java.sql.PreparedStatement;
 
 // The BorrowTool Gateway is called by: new BorrowTool({"e02", "t03"}).execute();
 public class BorrowTool extends Gateway implements Command {
-    /** tool_id of tool being borrowed */
-    private String tool_id;
     /** employee_id of employee borrowing the tool */
     private String employee_id;
-
+    /** tool_id of tool being borrowed */
+    private String tool_id;
 
     /** Creates a new Gateway for creating tool contracts
      * @param tool_id of tool being borrowed
      * @param employee_id of employee borrowing the tool
      */
-    public BorrowTool(String t_id, String emp_id) throws Exception {
+    public BorrowTool(String emp_id, String t_id) throws Exception {
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -64,58 +63,4 @@ public class BorrowTool extends Gateway implements Command {
             throw e;
         }
     }
-
-
-    /*
-     // Method used to check if the employee can return a tool
-    private Boolean canEmployeeReturnTool(String tool_id, String employee_id) throws Exception {
-        try {
-            Connection con = DB.getConnection();
-            //make a prepared statement(more efficient)
-            // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
-            //PreparedStatement p = con.prepareStatement("select contract_id from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
-            PreparedStatement p = con.prepareStatement("select * from contracts where tool_id=? AND employee_id=?");//" AND date_returned is null");
-
-            p.setString(1, tool_id);
-            p.setString(2, employee_id);
-            ResultSet rs = p.executeQuery();
-            rs.next();
-
-            if (rs.getString("contract_id").length() != 0) {
-                System.out.println("hi: "+rs.getString("contract_id"));
-                throw new Exception("The tool that you tried to return was not returned");
-            }
-            //saves a cursor position to go through the data to find the right tool_id
-            rs.close();
-            con.close();
-        } catch (Exception e) {
-            throw e;
-        }
-        return true;
-    }
-    */
-
-
-    // Literally only here to manually test the method.
-    public static void main(String[] args) {
-
-        @SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-        System.out.println("Enter the tool id =");
-        String toolid = in.next();
-        System.out.println("Enter employee id = ");
-        String empid = in.next();
-
-        try {
-            BorrowTool bt = new BorrowTool(toolid, empid);
-            bt.execute();
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-//        catch(Exception e) {
-//            System.out.println(e);
-
-    }
-
 }
