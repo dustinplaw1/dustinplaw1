@@ -51,7 +51,10 @@ public class CreateTool extends Gateway implements Command {
         } catch (Exception e) { System.out.println(e);}
     }
 
-
+    /**
+     * A method to retrieve the tool_id that is randomly generated
+     * @return  A String representing the tool_id
+     */
     public String getTool_id()
     {
         return this.tool_id;
