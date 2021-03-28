@@ -89,7 +89,7 @@ public class AssignToolsScreen implements ActionListener {
 
         //Todo Figure this out!!!
 
-        FindTools ft = new FindTools(true);
+        FindTools ft = new FindTools(false);
         ft.execute();
         Tool[] options = ft.getTools();
 
@@ -211,8 +211,11 @@ public class AssignToolsScreen implements ActionListener {
             System.out.println(tool_id + " tool id");
 
             try {
+
                 BorrowTool bt = new BorrowTool(emp_id, tool_id);
                 bt.execute();
+                assignFrame.setVisible(false);
+                assignFrame.dispose();
                 IsSuccessful.isSuccessful("Assigning Tool Successful");
 
             } catch (Exception exception) {
