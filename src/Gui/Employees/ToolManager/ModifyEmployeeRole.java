@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.IsSuccessful;
 import gateways.ChangeEmployeeRole;
 
 
@@ -174,7 +175,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                     exception.printStackTrace();
                 }
 
-                //change emp role to labourer`````````````
+                //change emp role to labourer
             }
             else if (choice == 1)
             {
@@ -193,18 +194,23 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                 try {
                     ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
                     change.execute();
+                    IsSuccessful.isSuccessful("Employee Modification Successful");
+
                     //now it should be good
                 } catch (Exception exception) {
+                    IsSuccessful.isSuccessful("Employee Modification Failed");
+
                     exception.printStackTrace();
                 }
             }
 
 
-            System.out.println("Test");
         }
         //this is to logout
         else
         {
+            IsSuccessful.isSuccessful("Goodbye");
+
             System.exit(0);
             //logout
         }

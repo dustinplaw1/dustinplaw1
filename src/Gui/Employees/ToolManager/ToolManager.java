@@ -194,6 +194,17 @@ public class ToolManager  implements ActionListener {
                 toolManagerFrame.dispose();
 
             }
+            else
+            {
+                IsSuccessful.isSuccessful("Please Choose a valid option");
+                toolManagerFrame.setVisible(false);
+                toolManagerFrame.dispose();
+                ToolManager tm = new ToolManager();
+                tm.executeToolManager();
+
+            }
+
+
 
         }
         else if ("logout".equals(e.getActionCommand()))

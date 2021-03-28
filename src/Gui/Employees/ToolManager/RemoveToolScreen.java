@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.IsSuccessful;
 import gateways.CreateTool;
 import gateways.DeleteTool;
 
@@ -130,6 +131,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
             try {
                 DeleteTool tool = new DeleteTool(tool_id);
                 tool.execute();     //execute it to add to the database
+                IsSuccessful.isSuccessful("Tool Removal Successful");
 
 
                 tm.executeToolManager();
@@ -138,6 +140,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
 
 
             } catch (Exception exception) {
+                IsSuccessful.isSuccessful("Tool Removal Failed");
+
                 exception.printStackTrace();
             }
 
