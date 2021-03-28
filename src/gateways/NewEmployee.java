@@ -22,7 +22,7 @@ public class NewEmployee extends Gateway implements Command {
     public NewEmployee (String l_name, String f_name, String emp_type, String emp_pass) throws Exception {
         // quick input validity check
         if (l_name == null || f_name == null || emp_pass.length() < 5) {
-            throw new Exception("Issue with input parameters. names cannot be null, password must be larger than 4 chars.")
+            throw new Exception("Issue with input parameters. names cannot be null, password must be larger than 4 chars.");
         } else if (!(emp_type.equals("Labourer") || emp_type.equals("Tool_Manager") || emp_type.equals("Manager"))) {
             throw new Exception("Invalid employee role/type: must be 'Labourer', 'Tool_Manager', or 'Manager'");
         }
