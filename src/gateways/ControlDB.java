@@ -22,7 +22,7 @@ public class ControlDB extends Gateway {
         + " first_name varchar(50) NOT NULL,"
         + " last_name varchar(50) NOT NULL,"
         //+ " phone_num varchar(15),"
-        + " emp_description varchar(200),"
+        //+ " emp_description varchar(200),"
         + " employee_type varchar(20) NOT NULL";
 
     private String login_fields = "employee_id varchar(30) NOT NULL,"

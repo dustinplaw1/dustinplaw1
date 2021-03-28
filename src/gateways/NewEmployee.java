@@ -14,13 +14,19 @@ public class NewEmployee extends Gateway implements Command {
 
 
     /** Creates a new Gateway for adding new employees and their login info
-     * @param emp_id of new employee
      * @param l_name last name of the new employee
      * @param f_name first name of the new employee
      * @param emp_pass default password for new employee to login with
      * @param emp_type Labourer (Apprentice, Journeyman), Tool_Manager, Job_Manager
      */
     public NewEmployee (String l_name, String f_name, String emp_type, String emp_pass) throws Exception {
+        // quick input validity check
+        if (l_name == null || f_name == null || emp_pass.length() < 5) {
+            throw new Exception("Issue with input parameters. names cannot be null, password must be larger than 4 chars.");
+        } else if (!(emp_type.equals("Labourer") || emp_type.equals("Tool_Manager") || emp_type.equals("Manager"))) {
+            throw new Exception("Invalid employee role/type: must be 'Labourer', 'Tool_Manager', or 'Manager'");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -33,12 +39,13 @@ public class NewEmployee extends Gateway implements Command {
         last_name = l_name;
         first_name = f_name;
         employee_type = emp_type;
+        password = emp_pass;
     }
 
 
     /**
      * This method creates a new employee and their login entry in the database
-     * @throws new exception
+     * @throws Exception
      */
     public void execute() throws Exception {
 
@@ -59,19 +66,6 @@ public class NewEmployee extends Gateway implements Command {
             //update values, then close connection
             confirmation = p.executeUpdate();
 
-
-
-            //check if any of these items is null, if so then it should throw an exception
-            if (employee_id.isEmpty() || last_name.isEmpty() || first_name.isEmpty() || employee_type.isEmpty())
-            {
-                confirmation = 0;
-            }
-            //make sure the employee_type is only 3 options
-            if (employee_type.equalsIgnoreCase("labourer") || employee_type.equalsIgnoreCase("tool_manager") || employee_type.equalsIgnoreCase("job_manager"))
-            {
-                confirmation = 0;
-            }
-            System.out.println(confirmation);
             // check for successful employee creation
             if (confirmation != 1) {
 

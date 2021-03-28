@@ -13,13 +13,31 @@ public class FindTools extends Gateway implements Command {
     private Tool[] tools;
 
     /** if include_unavailable_tools is false, then we exclude tools that are signed out */
-    private Boolean include_unavailable_tools;
+    private Boolean search_available;
+
+    /** filter variable used to match all occurences of tools that have a tool_name equal to tool_type */
+    private String tool_type;
 
     /**
      * Creates a new Gateway for getting a list of tools from the database
-     * @param include_available, is true to include all tools, false to filter signed out tools from result
+     * @param t_type, specifies the type of tools to be matched.
      */
-    public FindTools (Boolean include_available) throws Exception {
+    public FindTools (String t_type) throws Exception {
+        try {
+            // Connect to database by calling superclass method
+            this.getConnection();
+        } catch (Exception e) {
+           throw e;
+        }
+
+        tool_type = t_type;
+    }
+
+    /**
+     * Creates a new Gateway for getting a list of tools from the database
+     * @param available_tools, is true to include all tools, false to filter signed out tools from result
+     */
+    public FindTools (Boolean available_tools) throws Exception {
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -27,7 +45,7 @@ public class FindTools extends Gateway implements Command {
             throw e;
         }
 
-        include_unavailable_tools = include_available;
+        search_available = available_tools;
     }
 
 
@@ -40,19 +58,36 @@ public class FindTools extends Gateway implements Command {
         try {
             PreparedStatement p;
             // list all tools for tool_manager
-            if (include_unavailable_tools) {
-                p =  con.prepareStatement("select A.tool_id, A.tool_name, " +
-                        "CASE when EXISTS (select * from contracts B " +
-                        "where (B.tool_id=A.tool_id AND date_returned is NULL)) " +
-                        "THEN true " +
-                        "ELSE false " +
-                        "END unavailable" +
-                        " from tools A");
+            if (tool_type == null && search_available == null) {
+                throw new Exception("FindTools gateway not correctly initialized.");
             }
-            // list all tools that are not signed out for labourers
-            else {
-                p =  con.prepareStatement("select tool_id, tool_name, false from tools where tool_id" +
-                        " not in (select tool_id from contracts where date_returned is null)");
+
+            // Create query for finding available tools with a specific tool_name equal to tool_type
+            if (tool_type != null) {
+                p = con.prepareStatement("select t1.tool_id, t1.tool_name, false from tools as t1 " +
+                        "where t1.tool_name=? and t1.tool_id not in " +
+                        "(select c.tool_id from contracts as c where c.date_returned is null);");
+                p.setString(1, tool_type);
+
+            }
+            // search for tools without filtering by tool_name
+            else { // input param is a boolean
+                if (search_available) {
+                    // This Query returns a list of all tools regardless of their availability
+                    // This function is likely not used in this project
+                    p = con.prepareStatement("select A.tool_id, A.tool_name, " +
+                            "CASE when EXISTS (select * from contracts B " +
+                            "where (B.tool_id=A.tool_id AND date_returned is NULL)) " +
+                            "THEN true " +
+                            "ELSE false " +
+                            "END unavailable" +
+                            " from tools A");
+                }
+                // list all tools that are not signed out for labourers
+                else {
+                    p = con.prepareStatement("select tool_id, tool_name, false from tools where tool_id" +
+                            " not in (select tool_id from contracts where date_returned is null)");
+                }
             }
 
             ResultSet rs = p.executeQuery();
@@ -86,18 +121,27 @@ public class FindTools extends Gateway implements Command {
 
     public static void main(String[] args) {
         try {
-            FindTools ft = new FindTools(true);
+            // return all tools regardless of availability
+            //FindTools ft = new FindTools(true);
+
+            // return all available tools
+            //FindTools ft = new FindTools(false);
+
+            // filter available tools by type
+            FindTools ft = new FindTools("robertson");
+
             ft.execute();
             Tool[] testArray = ft.getTools();
             System.out.println(testArray.length);
 
+            for (int i=0; i<testArray.length; i++) {
+                System.out.println(testArray[0].getID());
+            }
+
             testArray[0].getName().toString();
             System.out.println(testArray[0].getName());
 
-
-
-
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
