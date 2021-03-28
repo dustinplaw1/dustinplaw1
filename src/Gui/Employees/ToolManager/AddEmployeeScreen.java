@@ -212,7 +212,8 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         }
         //logout button pressed
         else if ("logout".equals(e.getActionCommand())){
-
+            is = new IsSuccessful();
+            is.isSuccessful("Goodbye");
             System.exit(0);
 
             //logout button is pressed

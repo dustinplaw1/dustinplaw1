@@ -3,6 +3,7 @@ package Gui.Employees.Labourer;
 import Gui.Employees.Manager.AssignToolsScreen;
 import Gui.Employees.Manager.AvailableTools;
 import Gui.Employees.Manager.SignedOutTools;
+import Gui.IsSuccessful;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
@@ -143,14 +144,17 @@ public class Labourer extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        labourerFrame.setVisible(false);
+        labourerFrame.dispose();
+
+
         if ("next".equals(e.getActionCommand()))
         {
             if (choice == 0)
             {
 
-                labourerFrame.setVisible(false);
 
-                labourerFrame.dispose();
                 BorrowToolScreen bt = new BorrowToolScreen();
                 try {
                     bt.executeBorrowTool();
@@ -164,8 +168,7 @@ public class Labourer extends JPanel implements ActionListener {
             }
             else if(choice == 1)
             {
-                labourerFrame.setVisible(false);
-                labourerFrame.dispose();
+
 
                 //remove a tool window
                 ReturnToolScreen rts = new ReturnToolScreen();
@@ -183,8 +186,7 @@ public class Labourer extends JPanel implements ActionListener {
 
                 SearchForToolScreen sft = new SearchForToolScreen();
 
-                labourerFrame.setVisible(false);
-                labourerFrame.dispose();
+
                 //modify employee role
                 try {
                     sft.executeSearchForTool();
@@ -200,6 +202,8 @@ public class Labourer extends JPanel implements ActionListener {
         }
         else if ("logout".equals(e.getActionCommand()))
         {
+            IsSuccessful is = new IsSuccessful();
+            is.isSuccessful("Goodbye");
             System.exit(0);
         }
     }

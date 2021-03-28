@@ -1,5 +1,7 @@
 package Gui.Employees.Manager;
 
+import Gui.IsSuccessful;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ import java.awt.event.MouseEvent;
 
 
 public class Manager extends JPanel implements ActionListener {
+
     protected static String [] options = {"Find a list of available tools" , "See which tools are signed out" , "Assign tools to an employee"};
     private static JFrame managerFrame;
     private static JPanel managerPanel;
@@ -126,14 +129,17 @@ public class Manager extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        //make frame not visible, then dispose of it
+        managerFrame.setVisible(false);
+        managerFrame.dispose();
+
         if ("next".equals(e.getActionCommand()))
         {
             if (choice == 0)
             {
 
-                managerFrame.setVisible(false);
 
-                managerFrame.dispose();
                 AvailableTools at = new AvailableTools();
                 try {
                     at.executeAvailableTools();
@@ -147,8 +153,7 @@ public class Manager extends JPanel implements ActionListener {
             }
             else if(choice == 1)
             {
-                managerFrame.setVisible(false);
-                managerFrame.dispose();
+
 
                 //remove a tool window
                 SignedOutTools sot = new SignedOutTools();
@@ -165,8 +170,7 @@ public class Manager extends JPanel implements ActionListener {
 
                 AssignToolsScreen ats = new AssignToolsScreen();
 
-                managerFrame.setVisible(false);
-                managerFrame.dispose();
+
                 //modify employee role
                 AssignToolsScreen assign = new AssignToolsScreen();
                 try {
@@ -183,6 +187,8 @@ public class Manager extends JPanel implements ActionListener {
             }
         else if ("logout".equals(e.getActionCommand()))
         {
+            IsSuccessful is = new IsSuccessful();
+            is.isSuccessful("Goodbye");
             System.exit(0);
         }
         }

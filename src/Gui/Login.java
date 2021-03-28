@@ -33,9 +33,10 @@ public class Login implements ActionListener {
     {
         panel = new JPanel();
 
-        loginFrame = new JFrame();
+        loginFrame = new JFrame("Tool Management Login");
         loginFrame.setSize(350, 200);
         loginFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         loginFrame.add(panel);
 
 
@@ -164,6 +165,7 @@ public class Login implements ActionListener {
 
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
             loginFrame.setVisible(false);
+            loginFrame.dispose();
             try {
 
                 GetEmployeeInfo gei = new GetEmployeeInfo(employee);
@@ -185,17 +187,13 @@ public class Login implements ActionListener {
 
                 if (gei.getResponse() instanceof objects.Labourer)
                 {
-                    is.isSuccessful("Loading Labourer menu");
+
                     Labourer l = new Labourer();
                     l.executeLabourer();
-                    //loginFrame.remove(panel);
-                    //loginFrame.setVisible(false);
-                    //loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
+
                 }
                 else if (gei.getResponse() instanceof objects.ToolManager ) {
                     //TODO update here for a timer of some sort
-
-                    is.isSuccessful("Loading Tool Manager menu");
 
 
                     ToolManager tm = new ToolManager();
@@ -206,7 +204,6 @@ public class Login implements ActionListener {
                 //uncomment this once Manager in objects is implemented
                 else if (gei.getResponse() instanceof objects.Manager)
                 {
-                    is.isSuccessful("Loading Job Manager menu");
 
                     Manager man = new Manager();
                     man.executeManager();

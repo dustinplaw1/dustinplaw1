@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class IsSuccessful extends JFrame{
 
-    private static JFrame frame;
+    private static JFrame f;
     private static JPanel panel;
     private static JLabel messageLabel;
     private static TimeUnit tu;
-    private static final int timerDelay = 5000;
 
+    private static JDialog dialog;
     //I need a method to popup a confirmation scrren for success
     //A method if they login in unsucessful
 
@@ -30,40 +30,58 @@ public class IsSuccessful extends JFrame{
     public void isSuccessful(String message)
     {
 
-        //create a frame and panel
-        frame = new JFrame();
-        panel = new JPanel();
-
-        frame.setSize(350, 200);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
+        f = new JFrame();
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        panel.setLayout(new GridBagLayout());
+        dialog = new JDialog(f, message, true);
+        dialog.setLayout(new FlowLayout());
+        dialog.setSize(350,200);
+        dialog.setLocationRelativeTo(null);
+        JButton button = new JButton("Ok");
+        JLabel label = new JLabel(message);
+        label.setBounds(150,185,150,30);
 
-        messageLabel = new JLabel(message);
-        //message.setBounds(100,100,165,25);
-        panel.add(messageLabel);
-        panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
-
-        frame.add(panel);
-
-
-        frame.setVisible(true);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-
-
-        //create a delay so that the screen will only appear briefly
-        Timer timer = new Timer(timerDelay, new ActionListener() {
+        button.setBounds(250,250,50,30);
+        button.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                //frame.setVisible(false);
+
+
+                IsSuccessful.dialog.setVisible(false);
+
+
+
             }
         });
-        timer.start();
+
+        dialog.add(new JLabel("Click on button to continue"));
+        dialog.add(button);
+        dialog.add(label);
+        dialog.setVisible(true);
+
+
+
+
+
+
+
+
+//        //create a delay so that the screen will only appear briefly
+//        Timer timer = new Timer(timerDelay, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                frame.dispose();
+//                //frame.setVisible(false);
+//            }
+//        });
+//        timer.start();
 
 
     }

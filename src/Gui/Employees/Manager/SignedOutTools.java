@@ -86,9 +86,9 @@ public class SignedOutTools implements ActionListener {
 
 
         listScroll = new JScrollPane(list);
-        listScroll.setPreferredSize(new Dimension(200,250));
+        listScroll.setPreferredSize(new Dimension(300,250));
 
-        listScroll.setBounds(100,50,200,250);
+        listScroll.setBounds(100,50,300,250);
         inventoryPanel.add(listScroll);
 
 
@@ -118,6 +118,7 @@ public class SignedOutTools implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        toolList.clear();       //clears it so that the tool list doesn't create duplicates
         if ("back".equals(e.getActionCommand()))
         {
             signedOutToolsFrame.setVisible(false);

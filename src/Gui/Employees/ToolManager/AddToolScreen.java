@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.IsSuccessful;
 import gateways.CreateTool;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddToolScreen implements ActionListener {
-
+    IsSuccessful is = new IsSuccessful();
     ToolManager tm = new ToolManager();
     private static JFrame addToolFrame;
     private static JPanel addPanel;
@@ -169,6 +170,8 @@ public class AddToolScreen implements ActionListener {
         //this is to logout
         else
         {
+            is = new IsSuccessful();
+            is.isSuccessful("Goodbye");
             System.exit(0);
             //logout
         }

@@ -157,60 +157,45 @@ public class ToolManager  implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
 
-        //nested if
+        //Dispose of the current frame
+        toolManagerFrame.setVisible(false);
+        toolManagerFrame.dispose();
+
         if ("next".equals(e.getActionCommand()))
         {
             if (choice == 0)
             {
-
-
-
                 //add a new tool window
-                toolManagerFrame.setVisible(false);
-
 
                 AddToolScreen ats = new AddToolScreen();
-                System.out.println(Thread.currentThread());
-
-
                 ats.executeAddToolScreen();
-                toolManagerFrame.dispose();
-
-
-
 
 
             }
             if(choice == 1)
             {
 
-                toolManagerFrame.setVisible(false);
                 RemoveToolScreen rtc = new RemoveToolScreen();
                 rtc.executeRemoveToolScreen();
-                toolManagerFrame.dispose();
 
             }
             if (choice == 2)
             {
-                toolManagerFrame.setVisible(false);
                 AddEmployeeScreen aes = new AddEmployeeScreen();
                 aes.executeAddEmployeeScreen();
-                toolManagerFrame.dispose();
 
             }
             if(choice ==3)
             {
-                toolManagerFrame.setVisible(false);
                 ModifyEmployeeRole mer = new ModifyEmployeeRole();
                 mer.executeModifyEmployeeRole();
-                toolManagerFrame.dispose();
 
             }
 
         }
         else if ("logout".equals(e.getActionCommand()))
         {
-
+            is.isSuccessful("Goodbye");
             System.exit(0);
             //need to logout here
         }
