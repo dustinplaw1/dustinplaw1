@@ -161,7 +161,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        IsSuccessful is = new IsSuccessful();
         String last = lastField.getText();
         String first = firstField.getText();
         String type = employeRoleField.getText();
@@ -190,10 +190,10 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
 
 
-                IsSuccessful.isSuccessful("Successfully Added New Employee");
+                is.isSuccessful("Successfully Added New Employee");
 
             } catch (Exception exception) {
-                IsSuccessful.isSuccessful("Error: Employee Not Added");
+                is.isSuccessful("Error: Employee Not Added");
 
                 exception.printStackTrace();
 
@@ -206,7 +206,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         }
         //logout button pressed
         else {
-            IsSuccessful.isSuccessful("Goodbye");
+            is.isSuccessful("Goodbye");
 
             System.exit(0);
 

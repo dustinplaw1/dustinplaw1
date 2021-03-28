@@ -141,7 +141,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-
+        IsSuccessful is = new IsSuccessful();
         //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
 
@@ -194,11 +194,11 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                 try {
                     ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
                     change.execute();
-                    IsSuccessful.isSuccessful("Employee Modification Successful");
+                    is.isSuccessful("Employee Modification Successful");
 
                     //now it should be good
                 } catch (Exception exception) {
-                    IsSuccessful.isSuccessful("Employee Modification Failed");
+                    is.isSuccessful("Employee Modification Failed");
 
                     exception.printStackTrace();
                 }
@@ -209,7 +209,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         //this is to logout
         else
         {
-            IsSuccessful.isSuccessful("Goodbye");
+            is.isSuccessful("Goodbye");
 
             System.exit(0);
             //logout

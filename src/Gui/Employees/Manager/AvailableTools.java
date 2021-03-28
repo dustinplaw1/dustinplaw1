@@ -1,5 +1,6 @@
 package Gui.Employees.Manager;
 
+import Gui.IsSuccessful;
 import gateways.FindTools;
 import objects.Tool;
 
@@ -9,11 +10,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class AvailableTools implements ActionListener {
     Manager man = new Manager();
 
-    private static String[]options = {"test" , "test2"};
+    //private static ArrayList<String> toolId = new ArrayList<String>();
+    private static DefaultListModel toolName = new DefaultListModel();
+    private static DefaultListModel toolId = new DefaultListModel();
+
+
     private static JFrame availableFrame;
     private static JPanel availablePanel;
     private static JLabel welcomeMessage;
@@ -22,11 +28,13 @@ public class AvailableTools implements ActionListener {
     private static JButton backButton;
     private static JButton logoutButton;
 
-    private static JList list;
     private static JScrollPane listScroll;
+    private static JList<Tool> list;
 
-    public void executeAvailableTools()
-    {
+
+
+
+    public void executeAvailableTools() throws Exception {
 
         availableFrame = new JFrame("Available Tools");
         availableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,7 +59,39 @@ public class AvailableTools implements ActionListener {
         welcomeMessage.setBounds(125, 10, 150, 40);
         availablePanel.add(welcomeMessage);
 
-        list = new JList(options);
+
+        FindTools ft = new FindTools(false);
+        ft.execute();
+        Tool[]options = ft.getTools();
+
+        for(int i = 0; i < options.length; i++)
+        {
+            toolName.addElement(options[i].getName());      //will get the tool name
+            toolId.addElement(options[i].getID());          //will get the tool ids
+
+        }
+
+//        DefaultListModel combined = new DefaultListModel();
+//
+//        //now to combine the tool id and tool name
+//        addTogether(toolId, combined);
+//
+//        addTogether(toolName, combined);
+
+
+        //if statement in case there are no tools available to take
+        if (toolName.getSize()== 0)     //check if there are no tools available
+        {
+            IsSuccessful is = new IsSuccessful();
+            is.isSuccessful("Error, there are no tools available");
+
+            availableFrame.setVisible(false);
+            availableFrame.dispose();
+            man.executeManager();
+        }
+
+
+        list = new JList(toolName);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
@@ -93,8 +133,11 @@ public class AvailableTools implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if("back".equals(e.getActionCommand()))
         {
+            //this should clear the items in the list before its ran again
+            toolName.clear();
             availableFrame.setVisible(false);
             availableFrame.dispose();
             man.executeManager();

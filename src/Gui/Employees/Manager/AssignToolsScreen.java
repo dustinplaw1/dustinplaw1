@@ -36,14 +36,14 @@ public class AssignToolsScreen implements ActionListener {
     private static JLabel employeeIdLabel;
     private static JTextField employeeText;
 
-    private static Tool [] id;
-    protected static Tool[] options;      //need to get a list of available tools
+    //private static Tool [] id;
+    //protected static Tool[] options;      //need to get a list of available tools
     private static JList<Tool> list;
     private static JScrollPane listScroll;
 
     public void executeAssignToolsScreen() throws Exception {
         //new frame
-        assignFrame = new JFrame("Assign tools");
+        assignFrame = new JFrame("Assign tools to an Employee");
         assignFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         assignFrame.pack();
         assignFrame.setSize(400, 400);
@@ -72,8 +72,8 @@ public class AssignToolsScreen implements ActionListener {
         assignPanel.add(saveButton);
 
         //create welcome message functionality
-        welcomeMessage = new JLabel("Change Employee Role");
-        welcomeMessage.setBounds(125, 10, 150, 40);
+        welcomeMessage = new JLabel("Assign tools to an Employee");
+        welcomeMessage.setBounds(125, 10, 200, 40);
         assignPanel.add(welcomeMessage);
 
         //this is to get the employee Id
@@ -185,6 +185,7 @@ public class AssignToolsScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String empId = employeeText.getText();
+        IsSuccessful is = new IsSuccessful();   //an instance of IsSuccessful
 
         if("back".equals(e.getActionCommand()))
         {
@@ -205,7 +206,6 @@ public class AssignToolsScreen implements ActionListener {
 
 
 
-
             String tool_id = toolId.get(num);
 
             System.out.println(tool_id + " tool id");
@@ -216,10 +216,11 @@ public class AssignToolsScreen implements ActionListener {
                 bt.execute();
                 assignFrame.setVisible(false);
                 assignFrame.dispose();
-                IsSuccessful.isSuccessful("Assigning Tool Successful");
+
+                        is.isSuccessful("Assigning Tool Successful");
 
             } catch (Exception exception) {
-                IsSuccessful.isSuccessful("Assigning Tool Failed:");
+                is.isSuccessful("Assigning Tool Failed:");
 
                 exception.printStackTrace();
             }
@@ -233,7 +234,7 @@ public class AssignToolsScreen implements ActionListener {
         //logout button pressed, then exit
         else if ("logout".equals(e.getActionCommand()))
         {
-            IsSuccessful.isSuccessful("Goodbye");
+            is.isSuccessful("Goodbye");
 
             System.exit(0);
         }

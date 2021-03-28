@@ -27,7 +27,7 @@ public class IsSuccessful extends JFrame{
      * A method that will create a frame with the message desired (successful or not)``````
      * @param message The message that will be passed to the button
      */
-    public static  void isSuccessful(String message)
+    public void isSuccessful(String message)
     {
 
         //create a frame and panel

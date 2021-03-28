@@ -149,7 +149,7 @@ public class Login implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //here i need to get data from the database, (login information
         String employee = employeeText.getText();  //capture employee id input
-
+        IsSuccessful is = new IsSuccessful();
 
         //this will close the frame
         try {
@@ -185,7 +185,7 @@ public class Login implements ActionListener {
 
                 if (gei.getResponse() instanceof objects.Labourer)
                 {
-                    IsSuccessful.isSuccessful("Loading Labourer menu");
+                    is.isSuccessful("Loading Labourer menu");
                     Labourer l = new Labourer();
                     l.executeLabourer();
                     //loginFrame.remove(panel);
@@ -195,7 +195,7 @@ public class Login implements ActionListener {
                 else if (gei.getResponse() instanceof objects.ToolManager ) {
                     //TODO update here for a timer of some sort
 
-                    IsSuccessful.isSuccessful("Loading Tool Manager menu");
+                    is.isSuccessful("Loading Tool Manager menu");
 
 
                     ToolManager tm = new ToolManager();
@@ -206,7 +206,7 @@ public class Login implements ActionListener {
                 //uncomment this once Manager in objects is implemented
                 else if (gei.getResponse() instanceof objects.Manager)
                 {
-                    IsSuccessful.isSuccessful("Loading Job Manager menu");
+                    is.isSuccessful("Loading Job Manager menu");
 
                     Manager man = new Manager();
                     man.executeManager();
@@ -233,7 +233,7 @@ public class Login implements ActionListener {
 
             //if unsuccessful,
         } else {
-            IsSuccessful.isSuccessful("Unsuccessful, please try again");
+            is.isSuccessful("Unsuccessful, please try again");
 
 
             //successful.setText("Login unsuccessful, please try again");

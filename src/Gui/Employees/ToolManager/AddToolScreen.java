@@ -1,6 +1,5 @@
 package Gui.Employees.ToolManager;
 
-import Gui.IsSuccessful;
 import gateways.CreateTool;
 
 import javax.swing.*;
@@ -97,7 +96,7 @@ public class AddToolScreen implements ActionListener {
         toolDescriptionField.setBounds(150  ,150,200,25);
         addPanel.add(toolDescriptionField);
 
-        
+
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
@@ -110,9 +109,9 @@ public class AddToolScreen implements ActionListener {
         logoutButton.addActionListener(new AddToolScreen());
         backButton.addActionListener(new AddToolScreen());
 
-        
 
-        
+
+
         //add components to the frame
         addToolFrame.add(addPanel);
         addToolFrame.setVisible(true);
@@ -121,7 +120,7 @@ public class AddToolScreen implements ActionListener {
     }
 
 
-        
+
     @Override
     public void actionPerformed(ActionEvent e){
 
@@ -154,7 +153,6 @@ public class AddToolScreen implements ActionListener {
 
                 CreateTool tool = new CreateTool(name, description);
                 tool.execute();     //execute it to add to the database
-                IsSuccessful.isSuccessful("Tool Successfully added");
 
 
                 tm.executeToolManager();
@@ -163,8 +161,6 @@ public class AddToolScreen implements ActionListener {
 
             } catch (Exception exception) {
                 exception.printStackTrace();
-                IsSuccessful.isSuccessful("Tool was not added");
-
             }
 
 
@@ -174,12 +170,12 @@ public class AddToolScreen implements ActionListener {
         else
         {
             System.exit(0);
-           //logout
+            //logout
         }
     }
 
-        
-        
+
+
 
 
 

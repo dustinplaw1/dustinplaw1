@@ -109,7 +109,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
+        IsSuccessful is = new IsSuccessful();
         String tool_id = toolIdField.getText();        //gets the the tool description
 
 
@@ -131,7 +131,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
             try {
                 DeleteTool tool = new DeleteTool(tool_id);
                 tool.execute();     //execute it to add to the database
-                IsSuccessful.isSuccessful("Tool Removal Successful");
+                is.isSuccessful("Tool Removal Successful");
 
 
                 tm.executeToolManager();
@@ -140,7 +140,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
 
 
             } catch (Exception exception) {
-                IsSuccessful.isSuccessful("Tool Removal Failed");
+                is.isSuccessful("Tool Removal Failed");
 
                 exception.printStackTrace();
             }
@@ -149,6 +149,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         }
         //logout button pressed
         else {
+            is.isSuccessful("Goodbye");
+
             System.exit(0);
 
             //logout button is pressed

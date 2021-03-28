@@ -1,6 +1,5 @@
 package Gui.Employees.ToolManager;
 
-import Gui.IsSuccessful;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
@@ -175,11 +174,11 @@ public class ToolManager  implements ActionListener {
                 RemoveToolScreen rtc = new RemoveToolScreen();
                 rtc.executeRemoveToolScreen();
                 toolManagerFrame.dispose();
+
             }
             if (choice == 2)
             {
                 toolManagerFrame.setVisible(false);
-
                 AddEmployeeScreen aes = new AddEmployeeScreen();
                 aes.executeAddEmployeeScreen();
                 toolManagerFrame.dispose();
@@ -188,28 +187,15 @@ public class ToolManager  implements ActionListener {
             if(choice ==3)
             {
                 toolManagerFrame.setVisible(false);
-
                 ModifyEmployeeRole mer = new ModifyEmployeeRole();
                 mer.executeModifyEmployeeRole();
                 toolManagerFrame.dispose();
 
             }
-            else
-            {
-                IsSuccessful.isSuccessful("Please Choose a valid option");
-                toolManagerFrame.setVisible(false);
-                toolManagerFrame.dispose();
-                ToolManager tm = new ToolManager();
-                tm.executeToolManager();
-
-            }
-
-
 
         }
         else if ("logout".equals(e.getActionCommand()))
         {
-            IsSuccessful.isSuccessful("Logout selected: Goodbye");
 
             System.exit(0);
             //need to logout here
