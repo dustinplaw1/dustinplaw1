@@ -13,6 +13,10 @@ public class DeleteTool extends Gateway implements Command {
      * @param t_id A string representing the tool id
      */
     public DeleteTool(String t_id) throws Exception {
+        // check for empty inputs
+        if (t_id == null) {
+            throw new Exception("Constructor parameter t_id cannot be null");
+        }
 
         try {
             // Connect to database by calling superclass method
@@ -35,30 +39,15 @@ public class DeleteTool extends Gateway implements Command {
             p.setString(1, tool_id);
             //saves a cursor position to go through the data to find the right tool_id
             confirmation = p.executeUpdate();
+
+            // check for success
+            if (confirmation == 0) {
+                throw new Exception("tool: "+tool_id+" was not deleted.");
+            }
             System.out.println("Conf: "+confirmation);
 
             con.close();
 
         } catch (Exception e) { throw e; }
-    }
-
-
-
-    public static void main(String[] args) {
-        try {
-            //cda.borrowTool("12345", "3");
-            @SuppressWarnings("resource")
-			Scanner in = new Scanner(System.in);
-
-            System.out.println("Enter the tool id =");
-            String toolid = in.next();
-            DeleteTool dt = new DeleteTool(toolid);
-            dt.execute();
-            System.out.println("Tool Deleted?");
-
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
     }
 }

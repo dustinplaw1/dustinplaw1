@@ -13,6 +13,11 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
      * @param emp_pass input password
      */
     public AuthenticateLoginInfo(String emp_id, String emp_pass) throws Exception {
+        // check for empty inputs
+        if (emp_id == null || emp_pass == null) {
+            throw new Exception("Constructor parameters cannot be null.");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
