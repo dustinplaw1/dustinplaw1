@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.IsSuccessful;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
@@ -29,6 +30,8 @@ public class ToolManager  implements ActionListener {
 
     private static JLabel welcomeMessage;
     private static int choice;
+
+    IsSuccessful is = new IsSuccessful();
 
     /**
      * A method that will run and execute the gui for the toolmanager action menu
@@ -159,11 +162,22 @@ public class ToolManager  implements ActionListener {
         {
             if (choice == 0)
             {
+
+
+
                 //add a new tool window
                 toolManagerFrame.setVisible(false);
+
+
                 AddToolScreen ats = new AddToolScreen();
+                System.out.println(Thread.currentThread());
+
+
                 ats.executeAddToolScreen();
                 toolManagerFrame.dispose();
+
+
+
 
 
             }

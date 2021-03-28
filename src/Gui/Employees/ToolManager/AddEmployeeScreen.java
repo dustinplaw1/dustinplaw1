@@ -193,20 +193,25 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
                 is.isSuccessful("Successfully Added New Employee");
 
             } catch (Exception exception) {
-                is.isSuccessful("Error: Employee Not Added");
-
+                is.isSuccessful(exception.getMessage());
+                System.out.println(exception.getMessage());
                 exception.printStackTrace();
+                addEmployeeFrame.setVisible(false);
 
             }
             addEmployeeFrame.setVisible(false);
             addEmployeeFrame.dispose();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
             tm.executeToolManager();
 
 
         }
         //logout button pressed
-        else {
-            is.isSuccessful("Goodbye");
+        else if ("logout".equals(e.getActionCommand())){
 
             System.exit(0);
 

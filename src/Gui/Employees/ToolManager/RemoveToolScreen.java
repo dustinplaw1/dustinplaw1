@@ -67,7 +67,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
 
         //create welcome button functionality
         welcomeMessage = new JLabel("Administrator, Remove a tool menu:");
-        welcomeMessage.setBounds(125, 10, 125, 40);
+        welcomeMessage.setBounds(125, 10, 200, 40);
         addPanel.add(welcomeMessage);
 
 
