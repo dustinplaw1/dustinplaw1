@@ -31,7 +31,7 @@ public class Login implements ActionListener {
 
     public void executeLogin()
     {
-        JPanel panel = new JPanel();
+        panel = new JPanel();
 
         loginFrame = new JFrame();
         loginFrame.setSize(350, 200);
@@ -119,6 +119,9 @@ public class Login implements ActionListener {
             {
                 System.out.println("in the if statement, this should re-initialize the login screen" );
 
+
+                loginFrame.setVisible(false);
+                loginFrame.dispose();
                 totalValid = false;
                 executeLogin();
 
