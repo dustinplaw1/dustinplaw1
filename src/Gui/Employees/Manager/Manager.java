@@ -1,8 +1,4 @@
 package Gui.Employees.Manager;
-import Gui.Employees.ToolManager.AddToolScreen;
-import Gui.Employees.ToolManager.ModifyEmployeeRole;
-import Gui.Employees.ToolManager.RemoveToolScreen;
-import Gui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +13,7 @@ import java.awt.event.MouseEvent;
 
 
 public class Manager extends JPanel implements ActionListener {
-    protected static String [] options = {"Check if a certain tool is available" , "See which tools are signed out" , "Assign tools to an employee"};
+    protected static String [] options = {"Find a list of available tools" , "See which tools are signed out" , "Assign tools to an employee"};
     private static JFrame managerFrame;
     private static JPanel managerPanel;
     private static JButton logoutButton;
@@ -31,7 +27,7 @@ public class Manager extends JPanel implements ActionListener {
 
     private static int choice;
 
-    public  void executeManager()
+    public void executeManager()
     {
 
 
@@ -134,11 +130,16 @@ public class Manager extends JPanel implements ActionListener {
         {
             if (choice == 0)
             {
+
                 managerFrame.setVisible(false);
 
                 managerFrame.dispose();
-                CheckAvailabilityScreen check = new CheckAvailabilityScreen();
-                check.executeCheckAvailabilityScreen();
+                AvailableTools at = new AvailableTools();
+                try {
+                    at.executeAvailableTools();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
                 //add a new tool window
 
 
@@ -150,18 +151,26 @@ public class Manager extends JPanel implements ActionListener {
                 managerFrame.dispose();
 
                 //remove a tool window
-                InventoryOfToolsScreen inventory = new InventoryOfToolsScreen();
-                inventory.executeInventoryOfTool();
+                SignedOutTools sot = new SignedOutTools();
+                try {
+                    sot.executeSignedOutTools();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
             }
             else if(choice ==2)
             {
+                //TODO Check here to change back commented sections
+
+                AssignToolsScreen ats = new AssignToolsScreen();
+
                 managerFrame.setVisible(false);
                 managerFrame.dispose();
                 //modify employee role
                 AssignToolsScreen assign = new AssignToolsScreen();
                 try {
-                    assign.executeAssignToolsScreen();
+                    ats.executeAssignToolsScreen();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -172,6 +181,10 @@ public class Manager extends JPanel implements ActionListener {
 
                 //when choice isn't valid
             }
+        else if ("logout".equals(e.getActionCommand()))
+        {
+            System.exit(0);
+        }
         }
 
 

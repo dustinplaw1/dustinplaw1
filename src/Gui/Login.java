@@ -157,8 +157,6 @@ public class Login implements ActionListener {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-
-
         //if login was successful, the call to open the homescreen should happen here.
         if (totalValid) {
 

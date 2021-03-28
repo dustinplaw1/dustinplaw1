@@ -27,7 +27,7 @@ public class AuthenticateLoginInfo extends Gateway implements Command {
 
     /**
      * A method that sets the validity term in AuthenticateLoginInfo by checking the database
-     * @throws exception
+     * @throws new exception
      */
     public void execute() throws Exception {
 

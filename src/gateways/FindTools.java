@@ -17,7 +17,7 @@ public class FindTools extends Gateway implements Command {
 
     /**
      * Creates a new Gateway for getting a list of tools from the database
-     * @param includeAvailable, is true to include all tools, false to filter signed out tools from result
+     * @param include_available, is true to include all tools, false to filter signed out tools from result
      */
     public FindTools (Boolean include_available) throws Exception {
         try {
@@ -71,6 +71,7 @@ public class FindTools extends Gateway implements Command {
                 toolsArrayList.add(new Tool(id, name, isBorrowed));
             }
             tools = toolsArrayList.toArray(new Tool[toolsArrayList.size()]);
+
             con.close();
         } catch (Exception e) { System.out.println(e);}
     }
@@ -89,6 +90,14 @@ public class FindTools extends Gateway implements Command {
             ft.execute();
             Tool[] testArray = ft.getTools();
             System.out.println(testArray.length);
+
+            testArray[0].getName().toString();
+            System.out.println(testArray[0].getName());
+
+
+
+
+
         } catch (Exception e) {
             System.out.println(e);
         }
