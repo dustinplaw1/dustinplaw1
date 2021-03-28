@@ -38,7 +38,7 @@ public class NewEmployee extends Gateway implements Command {
 
     /**
      * This method creates a new employee and their login entry in the database
-     * @throws exception
+     * @throws new exception
      */
     public void execute() throws Exception {
 
@@ -59,6 +59,19 @@ public class NewEmployee extends Gateway implements Command {
             //update values, then close connection
             confirmation = p.executeUpdate();
 
+
+
+            //check if any of these items is null, if so then it should throw an exception
+            if (employee_id.isEmpty() || last_name.isEmpty() || first_name.isEmpty() || employee_type.isEmpty())
+            {
+                confirmation = 0;
+            }
+            //make sure the employee_type is only 3 options
+            if (employee_type.equalsIgnoreCase("labourer") || employee_type.equalsIgnoreCase("tool_manager") || employee_type.equalsIgnoreCase("job_manager"))
+            {
+                confirmation = 0;
+            }
+            System.out.println(confirmation);
             // check for successful employee creation
             if (confirmation != 1) {
 
