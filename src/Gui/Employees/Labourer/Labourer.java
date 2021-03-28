@@ -1,30 +1,38 @@
 package Gui.Employees.Labourer;
 
+import Gui.Employees.Manager.AssignToolsScreen;
+import Gui.Employees.Manager.AvailableTools;
+import Gui.Employees.Manager.SignedOutTools;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * This java class will have the ToolManager's action menu here (for now)
  */
 
 
-public class Labourer extends JPanel {
+public class Labourer extends JPanel implements ActionListener {
     protected  String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
-    private  JFrame labourerFrame;
-    private  JPanel labourerPanel;
-    private  JButton logoutButton;
-    private  JButton nextButton;
+    private static  JFrame labourerFrame;
+    private static JPanel labourerPanel;
+    private static JButton logoutButton;
+    private static JButton nextButton;
 
-    private  JRadioButton addTool;
-    private  JRadioButton removeTool;
-    private  JRadioButton addEmployee;
-    private  JRadioButton modifyEmployee;
-    private  ButtonGroup optionButtons;
-    private  JList list;
-    private  JScrollPane listScroll;
+    private static JRadioButton addTool;
+    private static JRadioButton removeTool;
+    private static JRadioButton addEmployee;
+    private static JRadioButton modifyEmployee;
+    private static ButtonGroup optionButtons;
+    private static JList list;
+    private static JScrollPane listScroll;
+    private static int choice;
 
     private  JLabel welcomeMessage;
 
@@ -40,7 +48,7 @@ public class Labourer extends JPanel {
 
 
         //toolManager's frame
-        JFrame labourerFrame = new JFrame("Labourer Action Menu");
+        labourerFrame = new JFrame("Labourer Action Menu");
 
 
         labourerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,7 +69,7 @@ public class Labourer extends JPanel {
 
         //now create the logout or enter button
 
-        JButton logoutButton = new JButton("Logout");
+        logoutButton = new JButton("Logout");
         logoutButton.setBounds(100,650,80,25);
         labourerPanel.add(logoutButton);
 
@@ -69,6 +77,14 @@ public class Labourer extends JPanel {
 
         nextButton.setBounds(1000,650,80,25);
         labourerPanel.add(nextButton);
+
+
+        logoutButton.setActionCommand("logout");
+        nextButton.setActionCommand("next");
+
+        logoutButton.addActionListener(new Labourer());
+        nextButton.addActionListener(new Labourer());
+
 
 
         //maybe a way so that we pull the name of the employee that logged in to display name
@@ -89,6 +105,22 @@ public class Labourer extends JPanel {
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
 
+        list.addMouseListener(new MouseAdapter() { /**
+         * {@inheritDoc} A method that will track which mouse click
+         *
+         * @param e
+         */
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            choice = list.getSelectedIndex();
+            System.out.println(choice);
+
+        }
+        });
+
+
+
         listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(250,400));
 
@@ -104,7 +136,73 @@ public class Labourer extends JPanel {
 
     }
 
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if ("next".equals(e.getActionCommand()))
+        {
+            if (choice == 0)
+            {
 
+                labourerFrame.setVisible(false);
+
+                labourerFrame.dispose();
+                BorrowToolScreen bt = new BorrowToolScreen();
+                try {
+                    bt.executeBorrowTool();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                //add a new tool window
+
+
+
+            }
+            else if(choice == 1)
+            {
+                labourerFrame.setVisible(false);
+                labourerFrame.dispose();
+
+                //remove a tool window
+                ReturnToolScreen rts = new ReturnToolScreen();
+                try {
+                    rts.executeReturnToolScreen();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
+
+            }
+            else if(choice ==2)
+            {
+                //TODO Check here to change back commented sections
+
+                SearchForToolScreen sft = new SearchForToolScreen();
+
+                labourerFrame.setVisible(false);
+                labourerFrame.dispose();
+                //modify employee role
+                try {
+                    sft.executeSearchForTool();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
+            }
+
+
+
+            //when choice isn't valid
+        }
+        else if ("logout".equals(e.getActionCommand()))
+        {
+            System.exit(0);
+        }
+    }
 
 
 

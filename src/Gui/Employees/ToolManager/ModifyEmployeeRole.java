@@ -1,6 +1,7 @@
 package Gui.Employees.ToolManager;
 
-import gateways.CreateTool;
+import gateways.ChangeEmployeeRole;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -139,8 +140,14 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
+
+        //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
 
+
+        final String labourer = "Labourer";
+        final String tool_manager = "Tool_Manager";
+        final String manager = "Manager";
 
 
 
@@ -159,15 +166,37 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         {
             if (choice == 0)
             {
-                //change emp role to labourer
+                try {
+                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);
+                    change.execute();
+                    //now it should be good
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
+                //change emp role to labourer`````````````
             }
             else if (choice == 1)
             {
                 //manager
+                try {
+                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);
+                    change.execute();
+                    //now it should be good
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
             else if (choice ==3)
             {
                 //tool manager
+                try {
+                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
+                    change.execute();
+                    //now it should be good
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
 
 

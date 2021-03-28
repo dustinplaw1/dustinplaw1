@@ -6,8 +6,8 @@ public class ChangeEmployeeRole extends Gateway implements Command {
     private String employee_id, new_role;
 
     /** Creates a new Gateway for creating tool contracts
-     * @param tool_id of tool being borrowed
-     * @param employee_id of employee borrowing the tool
+     * @param id of employee 
+     * @param role of employee borrowing the tool
      */
     public ChangeEmployeeRole(String id, String role) throws Exception {
         try {

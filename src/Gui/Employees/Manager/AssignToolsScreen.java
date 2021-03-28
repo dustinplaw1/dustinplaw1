@@ -207,6 +207,8 @@ public class AssignToolsScreen implements ActionListener {
 
             String tool_id = toolId.get(num);
 
+            System.out.println(tool_id + " tool id");
+
             try {
                 BorrowTool bt = new BorrowTool(emp_id, tool_id);
                 bt.execute();
@@ -216,7 +218,8 @@ public class AssignToolsScreen implements ActionListener {
             }
             man.executeManager();
 
-
+            //this should clear the items in the list before its ran again
+            toolName.clear();
 
 
         }
