@@ -62,14 +62,19 @@ public class FindTools extends Gateway implements Command {
                 throw new Exception("FindTools gateway not correctly initialized.");
             }
 
-            // Create query for finding tools with a specific tool_name equal to tool_type
+            // Create query for finding available tools with a specific tool_name equal to tool_type
+            if (tool_type != null) {
+                p = con.prepareStatement("select t1.tool_id, t1.tool_name, false from tools as t1 " +
+                        "where t1.tool_name=? and t1.tool_id not in " +
+                        "(select c.tool_id from contracts as c where c.date_returned is null);");
+                p.setString(1, tool_type);
 
-            if (true) {
-                p = con.prepareStatement("select tool_id, tool_name");
-
-            } else if (search_available != null) { // input param is a boolean
+            }
+            // search for tools without filtering by tool_name
+            else { // input param is a boolean
                 if (search_available) {
-                    // This Query returns a list of all tools, with an availability field
+                    // This Query returns a list of all tools regardless of their availability
+                    // This function is likely not used in this project
                     p = con.prepareStatement("select A.tool_id, A.tool_name, " +
                             "CASE when EXISTS (select * from contracts B " +
                             "where (B.tool_id=A.tool_id AND date_returned is NULL)) " +
@@ -77,7 +82,9 @@ public class FindTools extends Gateway implements Command {
                             "ELSE false " +
                             "END unavailable" +
                             " from tools A");
-                } else { // list all tools that are not signed out for labourers
+                }
+                // list all tools that are not signed out for labourers
+                else {
                     p = con.prepareStatement("select tool_id, tool_name, false from tools where tool_id" +
                             " not in (select tool_id from contracts where date_returned is null)");
                 }
@@ -114,7 +121,15 @@ public class FindTools extends Gateway implements Command {
 
     public static void main(String[] args) {
         try {
-            FindTools ft = new FindTools(true);
+            // return all tools regardless of availability
+            //FindTools ft = new FindTools(true);
+
+            // return all available tools
+            //FindTools ft = new FindTools(false);
+
+            // filter available tools by type
+            FindTools ft = new FindTools("robertson");
+
             ft.execute();
             Tool[] testArray = ft.getTools();
             System.out.println(testArray.length);
