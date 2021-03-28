@@ -58,7 +58,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
         try {
             // alternate the two lines below for a simple test
             //ChangeEmployeeRole cer = new ChangeEmployeeRole ("e01", "Tool_Manager");
-            ChangeEmployeeRole cer = new ChangeEmployeeRole ("e01", "Labourer");
+            ChangeEmployeeRole cer = new ChangeEmployeeRole ("ee11", "Manager");
             cer.execute();
             System.out.println("Employee Role Changed");
 
