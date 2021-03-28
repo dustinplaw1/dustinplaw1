@@ -14,13 +14,19 @@ public class NewEmployee extends Gateway implements Command {
 
 
     /** Creates a new Gateway for adding new employees and their login info
-     * @param emp_id of new employee
      * @param l_name last name of the new employee
      * @param f_name first name of the new employee
      * @param emp_pass default password for new employee to login with
      * @param emp_type Labourer (Apprentice, Journeyman), Tool_Manager, Job_Manager
      */
     public NewEmployee (String l_name, String f_name, String emp_type, String emp_pass) throws Exception {
+        // quick input validity check
+        if (l_name == null || f_name == null || emp_pass.length() < 5) {
+            throw new Exception("Issue with input parameters. names cannot be null, password must be larger than 4 chars.")
+        } else if (!(emp_type.equals("Labourer") || emp_type.equals("Tool_Manager") || emp_type.equals("Manager"))) {
+            throw new Exception("Invalid employee role/type: must be 'Labourer', 'Tool_Manager', or 'Manager'");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -38,7 +44,7 @@ public class NewEmployee extends Gateway implements Command {
 
     /**
      * This method creates a new employee and their login entry in the database
-     * @throws exception
+     * @throws Exception
      */
     public void execute() throws Exception {
 

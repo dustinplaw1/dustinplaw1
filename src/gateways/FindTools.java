@@ -13,13 +13,13 @@ public class FindTools extends Gateway implements Command {
     private Tool[] tools;
 
     /** if include_unavailable_tools is false, then we exclude tools that are signed out */
-    private Boolean include_unavailable_tools;
+    private Boolean search_available;
 
     /**
      * Creates a new Gateway for getting a list of tools from the database
-     * @param includeAvailable, is true to include all tools, false to filter signed out tools from result
+     * @param available_tools, is true to include all tools, false to filter signed out tools from result
      */
-    public FindTools (Boolean include_available) throws Exception {
+    public FindTools (Boolean available_tools) throws Exception {
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -27,7 +27,7 @@ public class FindTools extends Gateway implements Command {
             throw e;
         }
 
-        include_unavailable_tools = include_available;
+        search_available = available_tools;
     }
 
 
@@ -40,7 +40,14 @@ public class FindTools extends Gateway implements Command {
         try {
             PreparedStatement p;
             // list all tools for tool_manager
-            if (include_unavailable_tools) {
+            if (search_available) {
+                p =  con.prepareStatement("select tools.tool_id, tools.tool_name, true " +
+                        "from tools " +
+                        "inner join contracts on " +
+                        "tools.tool_id=contracts.tool_id "  +
+                        "where date_returned=null");
+                /*
+                // This Query returns a list of all tools, with an availability field
                 p =  con.prepareStatement("select A.tool_id, A.tool_name, " +
                         "CASE when EXISTS (select * from contracts B " +
                         "where (B.tool_id=A.tool_id AND date_returned is NULL)) " +
@@ -48,6 +55,7 @@ public class FindTools extends Gateway implements Command {
                         "ELSE false " +
                         "END unavailable" +
                         " from tools A");
+                 */
             }
             // list all tools that are not signed out for labourers
             else {
@@ -89,6 +97,9 @@ public class FindTools extends Gateway implements Command {
             ft.execute();
             Tool[] testArray = ft.getTools();
             System.out.println(testArray.length);
+            for (int i=0; i<testArray.length; i++) {
+                System.out.println(testArray[0].getID());
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
