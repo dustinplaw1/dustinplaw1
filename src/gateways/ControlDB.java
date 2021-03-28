@@ -15,7 +15,8 @@ public class ControlDB extends Gateway {
         + " date_borrowed timestamp not null,"
         + " due_date timestamp not null,"
         + " date_returned timestamp null,"
-        + " foreign key (employee_id) references employees(employee_id), foreign key (tool_id) references tools(tool_id)";
+        + " foreign key (employee_id) references employees(employee_id) on delete cascade, " +
+                "foreign key (tool_id) references tools(tool_id) on delete cascade";
 
     private String employee_fields =
         "employee_id varchar(30) NOT NULL PRIMARY KEY,"
@@ -27,7 +28,7 @@ public class ControlDB extends Gateway {
 
     private String login_fields = "employee_id varchar(30) NOT NULL,"
         + " password varchar(50),"
-        + " foreign key (employee_id) references employees(employee_id)";
+        + " foreign key (employee_id) references employees(employee_id) on delete cascade";
 
     private String tool_fields =
         "tool_id varchar(20) NOT NULL PRIMARY KEY,"

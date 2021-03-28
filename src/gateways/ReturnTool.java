@@ -16,12 +16,18 @@ public class ReturnTool extends Gateway implements Command {
      * @param emp_id of employee borrowing the tool
      */
     public ReturnTool(String t_id, String emp_id) throws Exception {
+        // check for empty inputs
+        if (t_id == null || emp_id == null) {
+            throw new Exception("Constructor parameters cannot be null");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
         } catch (Exception e) {
             throw e;
         }
+
 
         tool_id = t_id;
         employee_id = emp_id;
@@ -44,6 +50,11 @@ public class ReturnTool extends Gateway implements Command {
             confirmation = p.executeUpdate();
             //saves a cursor position to go through the data to find the right tool_id
             con.close();
+
+            // check to see if query was successful
+            if (confirmation == 0) {
+                throw new Exception("There was an issue and the tool was not returned.");
+            }
 
         } catch (Exception e) {
             throw e;

@@ -144,6 +144,10 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         IsSuccessful is = new IsSuccessful();
         //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
+        if (empId.equalsIgnoreCase(""))
+        {
+            JOptionPane.showMessageDialog(null, "Enter Valid Employee id or Select valid Employee Role");
+        }
 
 
         final String labourer = "Labourer";

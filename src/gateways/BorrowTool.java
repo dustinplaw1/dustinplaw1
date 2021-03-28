@@ -10,7 +10,7 @@ public class BorrowTool extends Gateway implements Command {
     private String employee_id;
     /** tool_id of tool being borrowed */
     private String tool_id;
-    private static int confirmation;
+
     /** Creates a new Gateway for creating tool contracts
      * @param tool_id of tool being borrowed
      * @param employee_id of employee borrowing the tool
@@ -33,9 +33,7 @@ public class BorrowTool extends Gateway implements Command {
      * @throws exception
      */
     public void execute() throws Exception {
-        // confirmation of response
-        //@SuppressWarnings("unused")
-        confirmation = 0;
+        int confirmation = 0;
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
@@ -43,49 +41,30 @@ public class BorrowTool extends Gateway implements Command {
         Calendar today = Calendar.getInstance();
         Calendar due_date = Calendar.getInstance();
         due_date.add(Calendar.DAY_OF_MONTH, 14);
-        System.out.println("test:"+today.getTimeInMillis());
-        System.out.println("test:"+due_date.getTimeInMillis());
+
         //establish a connection
         try {
             //prepare to add items to tool database
-            PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)");
+            PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) " +
+                    "select ?, ?, ?, ?, ? " +
+                    "where NOT EXISTS (select 0 from contracts where tool_id=? and date_returned is null)");
             //sets parameters into a string
             p.setString(1, contract_id);
             p.setString(2, employee_id);
             p.setString(3, tool_id);
             p.setTimestamp(4, new java.sql.Timestamp(today.getTimeInMillis()));
             p.setTimestamp(5, new java.sql.Timestamp(due_date.getTimeInMillis()));
+            p.setString(6, tool_id);
 
             confirmation = p.executeUpdate();
+            // check to see if query was successful
+            if (confirmation == 0) {
+                throw new Exception("There was an issue and a new contract was not added.");
+            }
             //close the connection
             con.close();
         } catch (Exception e) {
             throw e;
         }
     }
-    public static void main (String[]args)
-    {
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("Enter a name of a tool id: ");
-        String toolId = in.next();
-
-        System.out.println("Enter an employee id ");
-        String empId = in.next();
-
-        try {
-            BorrowTool bt = new BorrowTool(empId, toolId);
-            bt.execute();
-            if (confirmation == 0)
-            {
-                System.out.println("Error, the tool was not borrowed");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
-
 }
