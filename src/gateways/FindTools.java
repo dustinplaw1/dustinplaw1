@@ -23,6 +23,12 @@ public class FindTools extends Gateway implements Command {
      * @param t_type, specifies the type of tools to be matched.
      */
     public FindTools (String t_type) throws Exception {
+        // input parameters cannot be null
+        if (t_type == null) {
+            throw new Exception("Constructor parameters cannot be null");
+        }
+
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -118,35 +124,4 @@ public class FindTools extends Gateway implements Command {
     public Tool[] getTools() {
         return this.tools;
     }
-
-    public static void main(String[] args) {
-        try {
-            // return all tools regardless of availability
-            //FindTools ft = new FindTools(true);
-
-            // return all available tools
-            //FindTools ft = new FindTools(false);
-
-            // filter available tools by type
-            FindTools ft = new FindTools("robertson");
-
-            ft.execute();
-            Tool[] testArray = ft.getTools();
-            System.out.println(testArray.length);
-
-            for (int i=0; i<testArray.length; i++) {
-                System.out.println(testArray[0].getID());
-            }
-
-            testArray[0].getName().toString();
-            System.out.println(testArray[0].getName());
-
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-
-
 }

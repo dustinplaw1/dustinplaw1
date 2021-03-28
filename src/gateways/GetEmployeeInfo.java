@@ -20,6 +20,10 @@ public class GetEmployeeInfo extends Gateway implements Command {
      * @param emp_id of employee
      */
     public GetEmployeeInfo(String emp_id) throws Exception {
+        // check for empty inputs
+        if (emp_id == null) {
+            throw new Exception("Constructor parameters cannot be null");
+        }
 
         try {
             // Connect to database by calling superclass method
@@ -27,7 +31,7 @@ public class GetEmployeeInfo extends Gateway implements Command {
         } catch (Exception e) {
             throw e;
         }
-
+        // empty input check
         employee_id = emp_id;
     }
 
@@ -87,20 +91,4 @@ public class GetEmployeeInfo extends Gateway implements Command {
         
         return this.emp;
     }
-
-
-    // Literally only here to manually test the method.
-    public static void main(String[] args) {
-        try {
-            GetEmployeeInfo gei = new GetEmployeeInfo("e01");
-            gei.execute();
-            System.out.println(gei.getResponse().toString());
-            System.out.println(gei.getResponse() instanceof ToolManager);
-
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-    }
-
 }

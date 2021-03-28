@@ -13,6 +13,11 @@ public class CreateTool extends Gateway implements Command {
      * @param t_descr A brief description of the tool
      */
     public CreateTool(String t_name, String t_descr) throws Exception {
+        // check for empty inputs
+        if (t_name == null) {
+            throw new Exception("Constructor parameter t_name cannot be null");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -47,6 +52,11 @@ public class CreateTool extends Gateway implements Command {
 
             //close the connection
             confirmation = p.executeUpdate();
+            // check to see if query was successful
+            if (confirmation == 0) {
+                throw new Exception("There was an issue and a new tool was not added.");
+            }
+
             con.close();
         } catch (Exception e) { System.out.println(e);}
     }

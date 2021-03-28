@@ -93,7 +93,4 @@ public class FindContracts extends Gateway implements Command {
             System.out.println(e);
         }
     }
-
-
-
 }

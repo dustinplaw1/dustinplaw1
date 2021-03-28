@@ -33,8 +33,6 @@ public class BorrowTool extends Gateway implements Command {
      * @throws exception
      */
     public void execute() throws Exception {
-        // confirmation of response
-        @SuppressWarnings("unused")
         int confirmation = 0;
 
 
@@ -43,20 +41,26 @@ public class BorrowTool extends Gateway implements Command {
         Calendar today = Calendar.getInstance();
         Calendar due_date = Calendar.getInstance();
         due_date.add(Calendar.DAY_OF_MONTH, 14);
-        System.out.println("test:"+today.getTimeInMillis());
-        System.out.println("test:"+due_date.getTimeInMillis());
+
         //establish a connection
         try {
             //prepare to add items to tool database
-            PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) values(?,?,?,?,?)");
+            PreparedStatement p = con.prepareStatement ("insert into contracts(contract_id, employee_id, tool_id, date_borrowed, due_date) " +
+                    "select ?, ?, ?, ?, ? " +
+                    "where NOT EXISTS (select 0 from contracts where tool_id=? and date_returned is null)");
             //sets parameters into a string
             p.setString(1, contract_id);
             p.setString(2, employee_id);
             p.setString(3, tool_id);
             p.setTimestamp(4, new java.sql.Timestamp(today.getTimeInMillis()));
             p.setTimestamp(5, new java.sql.Timestamp(due_date.getTimeInMillis()));
+            p.setString(6, tool_id);
 
             confirmation = p.executeUpdate();
+            // check to see if query was successful
+            if (confirmation == 0) {
+                throw new Exception("There was an issue and a new contract was not added.");
+            }
             //close the connection
             con.close();
         } catch (Exception e) {

@@ -10,6 +10,11 @@ public class ChangeEmployeeRole extends Gateway implements Command {
      * @param role of employee borrowing the tool
      */
     public ChangeEmployeeRole(String id, String role) throws Exception {
+        // check for empty inputs
+        if (id == null || role == null) {
+            throw new Exception("Constructor parameters cannot be null");
+        }
+
         try {
             // Connect to database by calling superclass method
             this.getConnection();
@@ -22,7 +27,6 @@ public class ChangeEmployeeRole extends Gateway implements Command {
         } else {
             throw new Exception("Invalid employee role/type, please use either 'Labourer' or 'Tool_Manager'");
         }
-
     }
 
     /**
@@ -49,21 +53,6 @@ public class ChangeEmployeeRole extends Gateway implements Command {
 
         } catch (Exception e) {
             throw e;
-        }
-    }
-
-
-    public static void main(String[] args) {
-
-        try {
-            // alternate the two lines below for a simple test
-            //ChangeEmployeeRole cer = new ChangeEmployeeRole ("e01", "Tool_Manager");
-            ChangeEmployeeRole cer = new ChangeEmployeeRole ("ee11", "Manager");
-            cer.execute();
-            System.out.println("Employee Role Changed");
-
-        } catch(Exception e) {
-            System.out.println(e);
         }
     }
 }
