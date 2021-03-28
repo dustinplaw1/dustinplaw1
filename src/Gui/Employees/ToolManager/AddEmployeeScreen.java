@@ -1,6 +1,7 @@
 package Gui.Employees.ToolManager;
 
 
+import Gui.IsSuccessful;
 import gateways.DeleteTool;
 import gateways.NewEmployee;
 import objects.Employee;
@@ -184,15 +185,18 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
             //TODO get confirmation for a new employee
             try {
-                System.out.println("inside try");
                 NewEmployee emp = new NewEmployee(last, first, type, pass);
                 emp.execute();
 
 
 
+                IsSuccessful.isSuccessful("Successfully Added New Employee");
 
             } catch (Exception exception) {
+                IsSuccessful.isSuccessful("Error: Employee Not Added");
+
                 exception.printStackTrace();
+
             }
             addEmployeeFrame.setVisible(false);
             addEmployeeFrame.dispose();
@@ -202,6 +206,8 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         }
         //logout button pressed
         else {
+            IsSuccessful.isSuccessful("Goodbye");
+
             System.exit(0);
 
             //logout button is pressed

@@ -17,7 +17,7 @@ public class IsSuccessful extends JFrame{
     private static JPanel panel;
     private static JLabel messageLabel;
     private static TimeUnit tu;
-    private static final int timerDelay = 5000;
+    private static final int timerDelay = 2500;
 
     //I need a method to popup a confirmation scrren for success
     //A method if they login in unsucessful
