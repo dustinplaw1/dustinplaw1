@@ -39,6 +39,7 @@ public class NewEmployee extends Gateway implements Command {
         last_name = l_name;
         first_name = f_name;
         employee_type = emp_type;
+        password = emp_pass;
     }
 
 
