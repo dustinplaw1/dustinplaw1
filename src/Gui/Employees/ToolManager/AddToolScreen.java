@@ -98,7 +98,7 @@ public class AddToolScreen implements ActionListener {
 
         
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
-        saveButton.setActionCommand("back");
+        saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
 
@@ -143,18 +143,19 @@ public class AddToolScreen implements ActionListener {
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
+            addToolFrame.setVisible(false);
+            addToolFrame.dispose();
             //TODO need to check with confirmation from other method if update was successful
 
             try {
-                addToolFrame.setVisible(false);
-                addToolFrame.dispose();
+
 
 
                 CreateTool tool = new CreateTool(name, description);
                 tool.execute();     //execute it to add to the database
 
 
-
+                tm.executeToolManager();
 
 
 

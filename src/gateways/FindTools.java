@@ -79,6 +79,7 @@ public class FindTools extends Gateway implements Command {
                 toolsArrayList.add(new Tool(id, name, isBorrowed));
             }
             tools = toolsArrayList.toArray(new Tool[toolsArrayList.size()]);
+
             con.close();
         } catch (Exception e) { System.out.println(e);}
     }
@@ -97,9 +98,15 @@ public class FindTools extends Gateway implements Command {
             ft.execute();
             Tool[] testArray = ft.getTools();
             System.out.println(testArray.length);
+
             for (int i=0; i<testArray.length; i++) {
                 System.out.println(testArray[0].getID());
             }
+
+            testArray[0].getName().toString();
+            System.out.println(testArray[0].getName());
+
+            
         } catch (Exception e) {
             System.out.println(e);
         }
