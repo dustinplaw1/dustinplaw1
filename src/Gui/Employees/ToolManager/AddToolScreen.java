@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.IsSuccessful;
 import gateways.CreateTool;
 
 import javax.swing.*;
@@ -153,6 +154,7 @@ public class AddToolScreen implements ActionListener {
 
                 CreateTool tool = new CreateTool(name, description);
                 tool.execute();     //execute it to add to the database
+                IsSuccessful.isSuccessful("Tool Successfully added");
 
 
                 tm.executeToolManager();
@@ -161,6 +163,8 @@ public class AddToolScreen implements ActionListener {
 
             } catch (Exception exception) {
                 exception.printStackTrace();
+                IsSuccessful.isSuccessful("Tool was not added");
+
             }
 
 
