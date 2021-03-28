@@ -6,7 +6,10 @@ package Gui.Employees.Labourer;
 
 import Gui.Employees.Manager.Manager;
 import Gui.Employees.ToolManager.ToolManager;
+import Gui.IsSuccessful;
+import gateways.BorrowTool;
 import gateways.FindTools;
+import objects.Employee;
 import objects.Tool;
 
 import javax.swing.*;
@@ -20,8 +23,9 @@ import java.util.ArrayList;
 public class BorrowToolScreen implements ActionListener {
 
     //TODO I need to pull a list of all available tools in the system
-    protected static  String [] options;    //= {"hammer", "screwdriver"};
+   // protected static  String [] options;    //= {"hammer", "screwdriver"};
     Manager man = new Manager();
+    private IsSuccessful is = new IsSuccessful();
 
     private static ArrayList<String> toolId = new ArrayList<String>();
     private static DefaultListModel toolName = new DefaultListModel();
@@ -40,7 +44,7 @@ public class BorrowToolScreen implements ActionListener {
 
     private static String borrowTool;
 
-    private static JList list;
+    private static JList <Tool>list;
     private static JScrollPane listScroll;
 
 
@@ -94,9 +98,11 @@ public class BorrowToolScreen implements ActionListener {
         borrowPanel.add(welcomeMessage);
 
 
-        FindTools ft = new FindTools(true);
+        FindTools ft = new FindTools(false);
         ft.execute();
         Tool[]options = ft.getTools();
+
+
         for(int i = 0; i <options.length; i++)
         {
             toolName.addElement(options[i].getName().toString());
@@ -125,7 +131,7 @@ public class BorrowToolScreen implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 choice = list.getSelectedValue();           //give me the string of the tool type
-                num = list.getSelectedIndex();
+                num = list.getSelectedIndex();              //get the index of what user selects, and will check against toolId array
 
 
 
@@ -135,9 +141,9 @@ public class BorrowToolScreen implements ActionListener {
 
 
         listScroll = new JScrollPane(list);
-        listScroll.setPreferredSize(new Dimension(300,300));
+        listScroll.setPreferredSize(new Dimension(100  ,150));
 
-        listScroll.setBounds(112,75,200,250);
+        listScroll.setBounds(100,150,150,150);
 
         borrowPanel.add(listScroll);
 
@@ -158,6 +164,8 @@ public class BorrowToolScreen implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        Employee emp = new Employee();
+        String empid = emp.getEmployeeID();
 
         //user clicks on back button
         if ("back".equals(e.getActionCommand())) {
@@ -173,9 +181,27 @@ public class BorrowToolScreen implements ActionListener {
         else if ("save".equals(e.getActionCommand())) {
             //I need to get the employee ID that is logged in for this session
 
+            String tool_id = toolId.get(num);           //the tool id that will be signed out
+
+            System.out.println("employee id: " + empid);
+            System.out.println("ToolId: " + tool_id);
+
+            try
+            {
+                BorrowTool bt = new BorrowTool(empid, tool_id);
+                bt.execute();
+
+                is.isSuccessful("Tool borrowed");
+            }catch (Exception exeption)
+            {
+                is.isSuccessful("Error, the tool was not borrowewd");
+            }
+
+
         }
         //logout button pressed
         else {
+            is.isSuccessful("Goodbye");
             System.exit(0);
 
             //logout button is pressed

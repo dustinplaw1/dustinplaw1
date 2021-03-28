@@ -10,7 +10,7 @@ public class BorrowTool extends Gateway implements Command {
     private String employee_id;
     /** tool_id of tool being borrowed */
     private String tool_id;
-
+    private static int confirmation;
     /** Creates a new Gateway for creating tool contracts
      * @param tool_id of tool being borrowed
      * @param employee_id of employee borrowing the tool
@@ -34,8 +34,8 @@ public class BorrowTool extends Gateway implements Command {
      */
     public void execute() throws Exception {
         // confirmation of response
-        @SuppressWarnings("unused")
-        int confirmation = 0;
+        //@SuppressWarnings("unused")
+        confirmation = 0;
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
@@ -63,4 +63,29 @@ public class BorrowTool extends Gateway implements Command {
             throw e;
         }
     }
+    public static void main (String[]args)
+    {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Enter a name of a tool id: ");
+        String toolId = in.next();
+
+        System.out.println("Enter an employee id ");
+        String empId = in.next();
+
+        try {
+            BorrowTool bt = new BorrowTool(empId, toolId);
+            bt.execute();
+            if (confirmation == 0)
+            {
+                System.out.println("Error, the tool was not borrowed");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 }

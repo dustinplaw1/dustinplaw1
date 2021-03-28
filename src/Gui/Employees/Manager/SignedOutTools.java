@@ -50,7 +50,7 @@ public class SignedOutTools implements ActionListener {
 
         //create welcome message functionality
         welcomeMessage = new JLabel ("Tools Currently Signed out:");
-        welcomeMessage.setBounds(125,10,200,40);
+        welcomeMessage.setBounds(100,10,200,40);
         inventoryPanel.add(welcomeMessage);
 
         //need to pull data from this
@@ -88,7 +88,7 @@ public class SignedOutTools implements ActionListener {
         listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(300,250));
 
-        listScroll.setBounds(100,50,300,250);
+        listScroll.setBounds(20,50,300,250);
         inventoryPanel.add(listScroll);
 
 

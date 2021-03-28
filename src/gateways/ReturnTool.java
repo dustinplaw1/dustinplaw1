@@ -10,6 +10,7 @@ public class ReturnTool extends Gateway implements Command {
     /** employee_id of employee returning the tool */
     private String employee_id;
 
+    private static int confirmation;
     /** Creates a new Gateway for creating tool contracts
      * @param t_id of tool being borrowed
      * @param emp_id of employee borrowing the tool
@@ -31,8 +32,8 @@ public class ReturnTool extends Gateway implements Command {
      */
     public void execute () throws Exception {
         // confirmation of response
-        @SuppressWarnings("unused")
-		int confirmation = 0;
+        //@SuppressWarnings("unused")
+		confirmation = 0;
         try{
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? AND employee_id=?");
@@ -63,7 +64,11 @@ public class ReturnTool extends Gateway implements Command {
 
             ReturnTool rt = new ReturnTool(toolid, empid);
             rt.execute();
-            System.out.println("Tool Returned");
+            System.out.println("Trying to return now");
+            if (confirmation == 0)
+            {
+
+            }
 
         } catch(Exception e) {
             System.out.println(e);

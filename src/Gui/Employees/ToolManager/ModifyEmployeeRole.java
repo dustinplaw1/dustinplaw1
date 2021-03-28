@@ -157,22 +157,28 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         if ("back".equals(e.getActionCommand()))
         {
             roleFrame.setVisible(false);
-
+            roleFrame.dispose();
             tm.executeToolManager();
 
-            roleFrame.dispose();
+
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
+            roleFrame.setVisible(false);
+            roleFrame.dispose();
             if (choice == 0)
             {
                 try {
                     ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);
                     change.execute();
                     //now it should be good
+                    is.isSuccessful("Successfully changed Role");
+
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                    is.isSuccessful("Error, Cannot change to the same role as current");
+
                 }
 
                 //change emp role to labourer
@@ -184,8 +190,12 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                     ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);
                     change.execute();
                     //now it should be good
+                    is.isSuccessful("Successfully changed Role");
+
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                    is.isSuccessful("Error, Cannot change to the same role as current");
+
                 }
             }
             else if (choice ==3)
@@ -194,15 +204,17 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                 try {
                     ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
                     change.execute();
-                    is.isSuccessful("Employee Modification Successful");
+                    is.isSuccessful("Successfully changed Role");
 
                     //now it should be good
                 } catch (Exception exception) {
-                    is.isSuccessful("Employee Modification Failed");
+                    is.isSuccessful("Error, Cannot change to the same role as current");
 
                     exception.printStackTrace();
                 }
             }
+
+            tm.executeToolManager();
 
 
         }

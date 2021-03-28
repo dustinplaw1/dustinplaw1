@@ -1,6 +1,5 @@
 package Gui;
 
-//import com.mysql.cj.protocol.a.TimeTrackingPacketReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class IsSuccessful extends JFrame{
 
-    private static JFrame f;
+    private static JFrame frame;
     private static JPanel panel;
     private static JLabel messageLabel;
     private static TimeUnit tu;
@@ -32,19 +31,23 @@ public class IsSuccessful extends JFrame{
 
 
 
-        f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        dialog = new JDialog(f, message, true);
+        dialog = new JDialog(frame, message, true);
         dialog.setLayout(new FlowLayout());
         dialog.setSize(350,200);
         dialog.setLocationRelativeTo(null);
-        JButton button = new JButton("Ok");
-        JLabel label = new JLabel(message);
-        label.setBounds(150,185,150,30);
 
-        button.setBounds(250,250,50,30);
+
+        JLabel label = new JLabel(message);
+        label.setBounds(20 ,10,250,30);
+
+
+        JButton button = new JButton("Ok");
+        button.setBounds(270,200,80,30);
         button.addActionListener(new ActionListener() {
+
             /**
              * Invoked when an action occurs.
              *
@@ -60,10 +63,9 @@ public class IsSuccessful extends JFrame{
 
             }
         });
-
-        dialog.add(new JLabel("Click on button to continue"));
-        dialog.add(button);
         dialog.add(label);
+        dialog.add(button);
+
         dialog.setVisible(true);
 
 
@@ -72,16 +74,6 @@ public class IsSuccessful extends JFrame{
 
 
 
-
-//        //create a delay so that the screen will only appear briefly
-//        Timer timer = new Timer(timerDelay, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                frame.dispose();
-//                //frame.setVisible(false);
-//            }
-//        });
-//        timer.start();
 
 
     }

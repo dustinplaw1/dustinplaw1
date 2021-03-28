@@ -35,6 +35,12 @@ public class CreateTool extends Gateway implements Command {
         @SuppressWarnings("unused")
 		int confirmation = 0;
 
+
+        if(tool_name.isEmpty() || tool_description.isEmpty())
+        {
+            confirmation = 1;
+        }
+
         try {
             //prepare to add item to tool database
             PreparedStatement p = con.prepareStatement ("insert into tools(tool_id, tool_name, tool_description) values(?,?,?)");
@@ -59,6 +65,10 @@ public class CreateTool extends Gateway implements Command {
     {
         return this.tool_id;
     }
+
+
+
+
 
     // Literally only here to manually test the method.
     public static void main(String[] args) {

@@ -54,7 +54,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
     public void executeAddEmployeeScreen()
     {
         //new frame for add employee
-        addEmployeeFrame = new JFrame();
+        addEmployeeFrame = new JFrame("Add new employee");
         addEmployeeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addEmployeeFrame.pack();
         addEmployeeFrame.setSize(400,400);
@@ -87,52 +87,44 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
         //last name display
         lastNameLabel = new JLabel ("Last Name:");
-        lastNameLabel.setBounds(20,50,100,20);
+        lastNameLabel.setBounds(20,60,100,30);
         addPanel.add(lastNameLabel);
         lastField = new JTextField(20);
-        lastField.setBounds(160,50,200,20);
+        lastField.setBounds(160,60,200,30);
         addPanel.add(lastField);
 
 
         //first name functionality
         firstNameLabel = new JLabel ("First Name:");
-        firstNameLabel.setBounds(20,80,100,20);
+        firstNameLabel.setBounds(20,120,100,30);
         addPanel.add(firstNameLabel);
         firstField = new JTextField(20);
-        firstField.setBounds(160,80,200,20);
+        firstField.setBounds(160,120,200,30);
         addPanel.add(firstField);
 
 
         //employee password
         passwordNameLabel = new JLabel ("Password:");
-        passwordNameLabel.setBounds(20,110,100,20);
+        passwordNameLabel.setBounds(20,180,100,30);
         addPanel.add(passwordNameLabel);
         passwordField = new JTextField(20);
-        passwordField.setBounds(160,110,200,20);
+        passwordField.setBounds(160,180,200,30);
         addPanel.add(passwordField);
 
-//
-//        //date hired functionality
-//        dateHiredLabel = new JLabel ("Hire Date:(yyyy-mm-dd)");
-//        dateHiredLabel.setBounds(20,140,200,20);
-//        addPanel.add(dateHiredLabel);
-//        dateHiredField = new JTextField(20);
-//        dateHiredField.setBounds(160,140,200,20);
-//        addPanel.add(dateHiredField);
 
 
 
         //emp type
         employeeRoleLabel = new JLabel ("Employee Role:");
-        employeeRoleLabel.setBounds(20,170,100,20);
+        employeeRoleLabel.setBounds(20,240,100,30);
         addPanel.add(employeeRoleLabel);
         employeRoleField = new JTextField(20);
-        employeRoleField.setBounds(160,170,200,20);
+        employeRoleField.setBounds(160,240,200,30);
         addPanel.add(employeRoleField);
 
 
-        roles = new JLabel("Roles: Labourer, Job_Manager, Tool_Manager");
-        roles.setBounds(20, 200, 300,20);
+        roles = new JLabel("Roles: Labourer, Manager, Tool_Manager");
+        roles.setBounds(20, 280, 300,20);
         addPanel.add(roles);
 
 
@@ -167,7 +159,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         String type = employeRoleField.getText();
         String pass = passwordField.getText();
 
-        System.out.println(last + ", " + first + ", " + type + ", " + pass);
+        //System.out.println(last + ", " + first + ", " + type + ", " + pass);
 
 
 
@@ -185,6 +177,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
             //TODO get confirmation for a new employee
             try {
+
                 NewEmployee emp = new NewEmployee(last, first, type, pass);
                 emp.execute();
 
@@ -192,20 +185,16 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
                 is.isSuccessful("Successfully Added New Employee");
 
+
             } catch (Exception exception) {
                 is.isSuccessful(exception.getMessage());
-                System.out.println(exception.getMessage());
-                exception.printStackTrace();
+                //exception.printStackTrace();
                 addEmployeeFrame.setVisible(false);
 
             }
             addEmployeeFrame.setVisible(false);
             addEmployeeFrame.dispose();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
+
             tm.executeToolManager();
 
 

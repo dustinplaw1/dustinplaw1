@@ -93,7 +93,7 @@ public class AssignToolsScreen implements ActionListener {
         ft.execute();
         Tool[] options = ft.getTools();
 
-        String x ="";
+
 
         int size = options.length;
 
@@ -101,19 +101,14 @@ public class AssignToolsScreen implements ActionListener {
         {
 
 
-            //id[i].getID();
+
             toolName.addElement(options[i].getName().toString());
-            //options[i].getName().toString();
-            //toolName.addElement( options[i].getName().toString());
-            //toolIds.addElement(options[i].getID());
-           // String test = options[i].getName();
+
             toolId.add(i,(String)options[i].getID());
 
-            //listModel.addElement(test);
-            x = toolId.get(i);
+
         }
 
-        System.out.println(x + "with a size of " + toolId.size());
 
 
         list = new JList(toolName);     //don't change this. I get the list to populate. Now it will not need to be changed
@@ -139,8 +134,7 @@ public class AssignToolsScreen implements ActionListener {
 
                 choice = list.getSelectedValue();       //this will give me the string of the tool type
                 num = list.getSelectedIndex();          //this will get the index of the button that is pressed
-                System.out.println(num);
-                System.out.println(choice);             //this should return the toolName that is pressed
+
             }
         });
 
@@ -186,11 +180,11 @@ public class AssignToolsScreen implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String empId = employeeText.getText();
         IsSuccessful is = new IsSuccessful();   //an instance of IsSuccessful
-
+        assignFrame.setVisible(false);
+        assignFrame.dispose();
         if("back".equals(e.getActionCommand()))
         {
-            assignFrame.setVisible(false);
-            assignFrame.dispose();
+
             man.executeManager();
         }
         //else if save is pressed
@@ -198,11 +192,6 @@ public class AssignToolsScreen implements ActionListener {
         {
             //I need to check if this is valid or not
             String emp_id = employeeText.getText();
-//            toolId.size();
-//            toolId.get(num);        //this should give me the tool id and the index i want
-//            System.out.println("The id to send to borrow a tool");
-//            System.out.println("num is " + num);
-//            System.out.println ("Tool id size is : " + toolId.size());
 
 
 
@@ -214,8 +203,7 @@ public class AssignToolsScreen implements ActionListener {
 
                 BorrowTool bt = new BorrowTool(emp_id, tool_id);
                 bt.execute();
-                assignFrame.setVisible(false);
-                assignFrame.dispose();
+
 
                         is.isSuccessful("Assigning Tool Successful");
 
