@@ -133,7 +133,8 @@ public class Labourer extends JPanel implements ActionListener {
         labourerFrame.add(labourerPanel);
 
         labourerFrame.setVisible(true);
-
+        labourerFrame.setResizable(false);
+        labourerFrame.setLocationRelativeTo(null);
 
     }
 

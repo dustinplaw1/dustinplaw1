@@ -5,7 +5,8 @@ package Gui.Employees.Labourer;
 //import objects.Tool;
 
 import Gui.Employees.Manager.Manager;
-import Gui.Employees.ToolManager.ToolManager;
+
+
 import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
@@ -30,7 +31,7 @@ public class BorrowToolScreen implements ActionListener {
     private static ArrayList<String> toolId = new ArrayList<String>();
     private static DefaultListModel toolName = new DefaultListModel();
 
-
+    Employee emp = new Employee();
     private static Object choice;
     private  int num;
 
@@ -152,7 +153,7 @@ public class BorrowToolScreen implements ActionListener {
         borrowToolFrame.add(borrowPanel);
         borrowToolFrame.setVisible(true);
         borrowToolFrame.setResizable(false);
-
+        borrowToolFrame.setLocationRelativeTo(null);
     }
 
 
@@ -164,24 +165,32 @@ public class BorrowToolScreen implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        Employee emp = new Employee();
-        String empid = emp.getEmployeeID();
+        //Employee emp = new Employee();
+        System.out.println(emp.getEmployeeID());
+        Labourer lab = new Labourer();
+
+
+        String empid = "e02";
 
         //user clicks on back button
+        borrowToolFrame.setVisible(false);
+        borrowToolFrame.dispose();
+        String tool_id = toolId.get(num);           //the tool id that will be signed out
+        System.out.println("employee id: " + empid);
+        System.out.println("ToolId: " + tool_id);
+
+
         if ("back".equals(e.getActionCommand())) {
-            borrowToolFrame.setVisible(false);
-            Labourer lab = new Labourer();
             lab.executeLabourer();
-            borrowToolFrame.dispose();
 
 
 
         }
         //here i need to extract the employee_id, and the tool_id
-        else if ("save".equals(e.getActionCommand())) {
+        else if ("borrow".equals(e.getActionCommand())) {
             //I need to get the employee ID that is logged in for this session
 
-            String tool_id = toolId.get(num);           //the tool id that will be signed out
+
 
             System.out.println("employee id: " + empid);
             System.out.println("ToolId: " + tool_id);
@@ -197,10 +206,12 @@ public class BorrowToolScreen implements ActionListener {
                 is.isSuccessful("Error, the tool was not borrowewd");
             }
 
+            toolName.clear();
+            lab.executeLabourer();
 
         }
         //logout button pressed
-        else {
+        else  {
             is.isSuccessful("Goodbye");
             System.exit(0);
 

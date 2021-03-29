@@ -23,6 +23,10 @@ public class Employee {
 
     }
 
+    /**
+     * A method to get the employee id
+     * @return The employee id
+     */
     public String getEmployeeID () {
         return this.employee_id;
     }

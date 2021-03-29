@@ -112,14 +112,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
         listScroll.setBounds(100,150,150,150);
 
-
-
         rolePanel.add(listScroll);
-
-
-
-
-
 
         //need to add actionlisteners to the buttons -> logoutButton, backButton, saveButton
         saveButton.setActionCommand("save");
