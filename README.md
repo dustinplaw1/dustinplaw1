@@ -41,7 +41,6 @@ javaw -jar <FILENAME> Gui.MainFrame.class
 ### Daniel Stamper
 
 * Contributed to discussion.
-* Wrote the Action Plan
 
 
 ## License
