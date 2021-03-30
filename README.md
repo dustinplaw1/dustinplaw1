@@ -12,10 +12,12 @@ A management system for a shared set of physical tools (wrenches, hammers, lawn 
 Before you continue, ensure you have met the following requirements:
 
 * You have installed the latest version of _**JDK**_.
+* You must have installed the latest version of JDBC Mysql Connector (8.0.23)
 * You must be using Windows , Mac OS , Linux
 * While running the project you must be connected to internet as the database is hosted on [azure](https://azure.microsoft.com/en-in/)
 
-## Installation
+
+## Installation  
 Download the jar file from gitlab repository
  
 ## Run
