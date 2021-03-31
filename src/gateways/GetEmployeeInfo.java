@@ -39,7 +39,7 @@ public class GetEmployeeInfo extends Gateway implements Command {
     // TODO There is an issue with this method not getting a valid result set
     /**
      * This method requests an employee's info from the database
-     * @throws exception
+     * @throws  Exception
      */
     public void execute() throws Exception {
         //try/catch when connecting to a database

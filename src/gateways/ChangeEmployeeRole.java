@@ -11,7 +11,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
      */
     public ChangeEmployeeRole(String id, String role) throws Exception {
         // check for empty inputs
-        if (id == null || role == null) {
+        if (id.isEmpty() || role.isEmpty()) {
             throw new Exception("Constructor parameters cannot be null");
         }
 

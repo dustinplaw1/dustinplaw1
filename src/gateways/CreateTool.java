@@ -14,8 +14,8 @@ public class CreateTool extends Gateway implements Command {
      */
     public CreateTool(String t_name, String t_descr) throws Exception {
         // check for empty inputs
-        if (t_name == null) {
-            throw new Exception("Constructor parameter t_name cannot be null");
+        if (t_name.isEmpty()) {
+            throw new Exception("Error creating tool: Cannot have empty tool name");
         }
 
         try {

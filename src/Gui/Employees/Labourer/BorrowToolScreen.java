@@ -1,9 +1,6 @@
 package Gui.Employees.Labourer;
 
 
-//import Gui.Employees.ToolManager.ToolManager;
-//import objects.Tool;
-
 import Gui.Employees.Manager.Manager;
 
 
@@ -30,6 +27,7 @@ public class BorrowToolScreen implements ActionListener {
 
     private static ArrayList<String> toolId = new ArrayList<String>();
     private static DefaultListModel toolName = new DefaultListModel();
+
 
     Employee emp = new Employee();
     private static Object choice;
@@ -203,7 +201,7 @@ public class BorrowToolScreen implements ActionListener {
                 is.isSuccessful("Tool borrowed");
             }catch (Exception exeption)
             {
-                is.isSuccessful("Error, the tool was not borrowewd");
+                is.isSuccessful("Error, unsuccessful");
             }
 
             toolName.clear();

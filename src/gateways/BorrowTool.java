@@ -12,9 +12,10 @@ public class BorrowTool extends Gateway implements Command {
     private String tool_id;
 
     /** Creates a new Gateway for creating tool contracts
-     * @param tool_id of tool being borrowed
-     * @param employee_id of employee borrowing the tool
-     */
+     * @param emp_id of employee borrowing the tool
+     * @param t_id of tool being borrowed
+     * @throws Exception
+     * */
     public BorrowTool(String emp_id, String t_id) throws Exception {
         try {
             // Connect to database by calling superclass method
@@ -23,6 +24,12 @@ public class BorrowTool extends Gateway implements Command {
             throw e;
         }
 
+        if (t_id.isEmpty() || emp_id.isEmpty())
+        {
+            throw new Exception("Error: Must input valid data");
+        }
+
+
         tool_id = t_id;
         employee_id = emp_id;
     }
@@ -30,7 +37,7 @@ public class BorrowTool extends Gateway implements Command {
 
     /**
      * A method to allow an employee to borrow a tool by creating a contract.
-     * @throws exception
+     * @throws new exception
      */
     public void execute() throws Exception {
         int confirmation = 0;
@@ -64,7 +71,7 @@ public class BorrowTool extends Gateway implements Command {
             //close the connection
             con.close();
         } catch (Exception e) {
-            throw e;
+            throw new Exception(e);
         }
     }
 
