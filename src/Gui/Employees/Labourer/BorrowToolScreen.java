@@ -7,6 +7,7 @@ import Gui.Employees.Manager.Manager;
 import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
+import gateways.GetEmployeeInfo;
 import objects.Employee;
 import objects.Tool;
 
@@ -17,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
+import static Gui.EmployeeInstance.employeeInstance;
 
 public class BorrowToolScreen implements ActionListener {
 
@@ -167,8 +170,10 @@ public class BorrowToolScreen implements ActionListener {
         System.out.println(emp.getEmployeeID());
         Labourer lab = new Labourer();
 
+        //GetEmployeeInfo gei = new GetEmployeeInfo(emp);
+        String empid = employeeInstance.getEmployeeID();
+        System.out.println("Employee id: " + empid);
 
-        String empid = "e02";
 
         //user clicks on back button
         borrowToolFrame.setVisible(false);

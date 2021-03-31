@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
-public class ReturnTool extends Gateway implements Command {
+public class ReturnTool extends gateways.Gateway implements Command {
     /** tool_id of tool being returned*/
     private String tool_id;
     /** employee_id of employee returning the tool */

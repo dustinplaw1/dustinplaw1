@@ -166,6 +166,9 @@ public class Login implements ActionListener {
             //when password is successful here, need to check the role of the employee to open the appropriate frame by title
             loginFrame.setVisible(false);
             loginFrame.dispose();
+
+            //
+            EmployeeInstance.employeeInstance.setEmployeeId(employee);      //This should create an employee instance and capture
             try {
 
                 GetEmployeeInfo gei = new GetEmployeeInfo(employee);

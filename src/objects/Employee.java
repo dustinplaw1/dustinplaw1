@@ -30,6 +30,10 @@ public class Employee {
     public String getEmployeeID () {
         return this.employee_id;
     }
+    public void setEmployeeId(String id)
+    {
+        this.employee_id = id;
+    }
     public String getLastName() {
         return this.last_name;
     }

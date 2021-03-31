@@ -2,7 +2,7 @@ package gateways;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AuthenticateLoginInfo extends Gateway implements Command {
+public class AuthenticateLoginInfo extends gateways.Gateway implements gateways.Command {
     /** employee_id and password are the id and password used by an employee to login. */
     private String employee_id, password;
     private Boolean validity = false;

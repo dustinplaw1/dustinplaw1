@@ -25,19 +25,12 @@ public class AssignToolsScreen implements ActionListener {
     private static JPanel assignPanel;
     private static Object choice;
     private  int num;
-
     private static JLabel welcomeMessage;
-
-
     private static JButton backButton;
     private static JButton saveButton;
     private static JButton logoutButton;
-
     private static JLabel employeeIdLabel;
     private static JTextField employeeText;
-
-    //private static Tool [] id;
-    //protected static Tool[] options;      //need to get a list of available tools
     private static JList<Tool> list;
     private static JScrollPane listScroll;
 
