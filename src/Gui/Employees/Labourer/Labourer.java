@@ -1,5 +1,6 @@
 package Gui.Employees.Labourer;
 
+import Gui.CommandGui;
 import Gui.Employees.Manager.AssignToolsScreen;
 import Gui.Employees.Manager.AvailableTools;
 import Gui.Employees.Manager.SignedOutTools;
@@ -19,7 +20,7 @@ import java.awt.event.MouseEvent;
  */
 
 
-public class Labourer extends JPanel implements ActionListener {
+public class Labourer extends JPanel implements ActionListener, CommandGui {
     protected  String [] options = {"Borrow a tool" , "Return a tool" , "Search for tools by type"};
     private static  JFrame labourerFrame;
     private static JPanel labourerPanel;
@@ -43,8 +44,11 @@ public class Labourer extends JPanel implements ActionListener {
 
     }
 
-
-    public void executeLabourer()
+    /**
+     * Create an instance of Labourer frame using CommandGui
+     */
+    @Override
+    public void execute()
     {
 
 
@@ -158,7 +162,7 @@ public class Labourer extends JPanel implements ActionListener {
 
                 BorrowToolScreen bt = new BorrowToolScreen();
                 try {
-                    bt.executeBorrowTool();
+                    bt.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -174,7 +178,7 @@ public class Labourer extends JPanel implements ActionListener {
                 //remove a tool window
                 ReturnToolScreen rts = new ReturnToolScreen();
                 try {
-                    rts.executeReturnToolScreen();
+                    rts.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

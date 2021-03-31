@@ -1,5 +1,6 @@
 package Gui.Employees.Manager;
 
+import Gui.CommandGui;
 import gateways.FindContracts;
 import gateways.FindTools;
 import objects.Contract;
@@ -14,7 +15,7 @@ import java.awt.event.ActionListener;
  * This class is a gui in which the manager can see which tools are signed out (maybe by whom with an emp_id?)
  *
  */
-public class SignedOutTools implements ActionListener {
+public class SignedOutTools implements ActionListener, CommandGui {
     DefaultListModel toolList = new DefaultListModel();
 
     Manager man = new Manager();
@@ -28,7 +29,12 @@ public class SignedOutTools implements ActionListener {
     private static JLabel welcomeMessage;
 
 
-    public  void executeSignedOutTools() throws Exception {
+    /**
+     * A method that uses CommandGui interface to execute the signed out tools menu
+     * @throws Exception
+     */
+    @Override
+    public  void execute() throws Exception {
         signedOutToolsFrame = new JFrame("Signed out tools:");
         signedOutToolsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         signedOutToolsFrame.pack();
@@ -123,7 +129,7 @@ public class SignedOutTools implements ActionListener {
         {
             signedOutToolsFrame.setVisible(false);
 
-            man.executeManager();
+            man.execute();
 
             signedOutToolsFrame.dispose();
         }

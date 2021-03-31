@@ -1,8 +1,11 @@
 package Gui.Employees.Labourer;
 
-public class  SearchForToolScreen {
+import Gui.CommandGui;
 
-    public void executeSearchForTool ()
+public class  SearchForToolScreen implements CommandGui {
+
+    @Override
+    public void execute ()
     {
 
     }

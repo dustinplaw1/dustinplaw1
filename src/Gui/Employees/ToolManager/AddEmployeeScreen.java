@@ -1,6 +1,7 @@
 package Gui.Employees.ToolManager;
 
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.DeleteTool;
 import gateways.NewEmployee;
@@ -12,7 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddEmployeeScreen extends JPanel implements ActionListener {
+public class AddEmployeeScreen extends JPanel implements ActionListener, CommandGui {
 
     ToolManager tm = new ToolManager();
     private static JFrame addEmployeeFrame;
@@ -48,10 +49,19 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
 
     private static JLabel roles;
 
+//
+//    @Override
+//    public void execute() throws Exception {
+//
+//    }
+
+
+
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public void executeAddEmployeeScreen()
+    @Override
+    public void execute() throws Exception
     {
         //new frame for add employee
         addEmployeeFrame = new JFrame("Add new employee");
@@ -167,8 +177,11 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand())) {
             addEmployeeFrame.setVisible(false);
             addEmployeeFrame.dispose();
-            tm.executeToolManager();
-
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }
@@ -195,7 +208,11 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
             addEmployeeFrame.setVisible(false);
             addEmployeeFrame.dispose();
 
-            tm.executeToolManager();
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }
@@ -208,19 +225,6 @@ public class AddEmployeeScreen extends JPanel implements ActionListener {
             //logout button is pressed
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.ChangeEmployeeRole;
 
@@ -11,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ModifyEmployeeRole extends JFrame implements ActionListener {
+public class ModifyEmployeeRole extends JFrame implements ActionListener, CommandGui {
 
     ToolManager tm = new ToolManager();
 
@@ -39,7 +40,8 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public void executeModifyEmployeeRole() {
+    @Override
+    public void execute() throws Exception {
         //new frame
         roleFrame = new JFrame("Change Employee Role");
         roleFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -137,10 +139,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         IsSuccessful is = new IsSuccessful();
         //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
-        if (empId.equalsIgnoreCase(""))
-        {
-            JOptionPane.showMessageDialog(null, "Enter Valid Employee id or Select valid Employee Role");
-        }
+
 
 
         final String labourer = "Labourer";
@@ -155,13 +154,22 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
         {
             roleFrame.setVisible(false);
             roleFrame.dispose();
-            tm.executeToolManager();
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
+            if (empId.equalsIgnoreCase(""))
+            {
+                JOptionPane.showMessageDialog(null, "Enter Valid Employee id or Select valid Employee Role");
+            }
+
             roleFrame.setVisible(false);
             roleFrame.dispose();
             if (choice == 0)
@@ -174,7 +182,9 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
-                    is.isSuccessful("Error, Cannot change to the same role as current");
+
+
+                    //is.isSuccessful("Error, Cannot change to the same role as current");
 
                 }
 
@@ -211,7 +221,11 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener {
                 }
             }
 
-            tm.executeToolManager();
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }

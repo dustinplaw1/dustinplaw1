@@ -8,32 +8,28 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.awt.*;
 
-public class MainFrame {
-    private static JFrame mainFrame;
+public class MainFrame{
 
-    public static void execute()
-    {
-//        mainFrame = new JFrame();
-//        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        mainFrame.setSize(new Dimension(1280,768));
-//        mainFrame.setVisible(true);
-
-        //JPanel panel = LoginPanel.();
-        //frame.add(panel);
-    }
 
     public static void main(String[] args) {
+        //ad a look and feel design to the GUI
         try{
             UIManager.setLookAndFeel(new  NimbusLookAndFeel ());
-
+        //throw an exception if not allowed
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
 
+        //Create an instance of a login and
         Login login = new Login();
-        login.executeLogin();
-        //execute();
+        try {
+            login.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
 }

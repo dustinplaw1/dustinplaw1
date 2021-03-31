@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.CreateTool;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddToolScreen implements ActionListener {
+public class AddToolScreen implements ActionListener, CommandGui {
     IsSuccessful is = new IsSuccessful();
     ToolManager tm = new ToolManager();
     private static JFrame addToolFrame;
@@ -36,7 +37,8 @@ public class AddToolScreen implements ActionListener {
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public void executeAddToolScreen()
+    @Override
+    public void execute()
     {
         //new frame
         addToolFrame = new JFrame("Add a Tool");
@@ -138,7 +140,11 @@ public class AddToolScreen implements ActionListener {
             addToolFrame.setVisible(false);
             addToolFrame.dispose();
 
-            tm.executeToolManager();
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
@@ -156,7 +162,7 @@ public class AddToolScreen implements ActionListener {
                 tool.execute();     //execute it to add to the database
 
 
-                tm.executeToolManager();
+                tm.execute();
 
 
 

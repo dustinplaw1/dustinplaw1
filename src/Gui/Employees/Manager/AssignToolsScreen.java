@@ -1,4 +1,5 @@
 package Gui.Employees.Manager;
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 /**
  * This Gui class will deal with
  */
-public class AssignToolsScreen implements ActionListener {
+public class AssignToolsScreen implements ActionListener, CommandGui {
     Manager man = new Manager();
     private static ArrayList<String> toolId = new ArrayList<String>();
     private static DefaultListModel toolName = new DefaultListModel();
@@ -34,7 +35,13 @@ public class AssignToolsScreen implements ActionListener {
     private static JList<Tool> list;
     private static JScrollPane listScroll;
 
-    public void executeAssignToolsScreen() throws Exception {
+
+    /**
+     * A method that will create frame to assign a tool to an employee
+     * @throws Exception
+     */
+    @Override
+    public void execute() throws Exception {
         //new frame
         assignFrame = new JFrame("Assign tools to an Employee");
         assignFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -178,7 +185,7 @@ public class AssignToolsScreen implements ActionListener {
         if("back".equals(e.getActionCommand()))
         {
 
-            man.executeManager();
+            man.execute();
         }
         //else if save is pressed
         else if ("save".equals(e.getActionCommand()))
@@ -205,7 +212,7 @@ public class AssignToolsScreen implements ActionListener {
 
                 exception.printStackTrace();
             }
-            man.executeManager();
+            man.execute();
 
             //this should clear the items in the list before its ran again
             toolName.clear();

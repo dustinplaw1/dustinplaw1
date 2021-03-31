@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import Gui.MainFrame;
 import com.sun.tools.javac.Main;
@@ -18,7 +19,7 @@ import java.awt.event.MouseEvent;
  */
 
 
-public class ToolManager  implements ActionListener {
+public class ToolManager  implements ActionListener, CommandGui {
     protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
 
     private static JFrame toolManagerFrame;
@@ -36,7 +37,8 @@ public class ToolManager  implements ActionListener {
     /**
      * A method that will run and execute the gui for the toolmanager action menu
      */
-    public void executeToolManager()
+    @Override
+    public void execute() throws Exception
     {
 
 
@@ -168,7 +170,7 @@ public class ToolManager  implements ActionListener {
                 //add a new tool window
 
                 AddToolScreen ats = new AddToolScreen();
-                ats.executeAddToolScreen();
+                ats.execute();
 
 
             }
@@ -176,19 +178,27 @@ public class ToolManager  implements ActionListener {
             {
 
                 RemoveToolScreen rtc = new RemoveToolScreen();
-                rtc.executeRemoveToolScreen();
+                rtc.execute();
 
             }
             if (choice == 2)
             {
                 AddEmployeeScreen aes = new AddEmployeeScreen();
-                aes.executeAddEmployeeScreen();
+                try {
+                    aes.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
             }
             if(choice ==3)
             {
                 ModifyEmployeeRole mer = new ModifyEmployeeRole();
-                mer.executeModifyEmployeeRole();
+                try {
+                    mer.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
             }
 
@@ -200,4 +210,6 @@ public class ToolManager  implements ActionListener {
             //need to logout here
         }
     }
+
+
 }

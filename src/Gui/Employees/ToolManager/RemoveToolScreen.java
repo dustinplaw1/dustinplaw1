@@ -1,5 +1,6 @@
 package Gui.Employees.ToolManager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.CreateTool;
 import gateways.DeleteTool;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RemoveToolScreen extends JPanel implements ActionListener {
+public class RemoveToolScreen extends JPanel implements ActionListener, CommandGui {
     ToolManager tm = new ToolManager();
 
     private static JFrame removeToolFrame;
@@ -34,7 +35,8 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
     /**
      * A method that will run and execute the gui for the toolmanager add tool menu
      */
-    public void executeRemoveToolScreen() {
+    @Override
+    public void execute() {
         //create a new frame
         removeToolFrame = new JFrame("Remove a tool");
         removeToolFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,8 +120,11 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
         if ("back".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
             removeToolFrame.dispose();
-            tm.executeToolManager();
-
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
 
         }
@@ -134,7 +139,7 @@ public class RemoveToolScreen extends JPanel implements ActionListener {
                 is.isSuccessful("Tool Removal Successful");
 
 
-                tm.executeToolManager();
+                tm.execute();
 
 
 

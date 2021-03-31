@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-public class Login implements ActionListener {
+public class Login implements ActionListener,CommandGui {
 
 
 
@@ -28,8 +28,12 @@ public class Login implements ActionListener {
     private  static JLabel successful;
     private  static boolean totalValid;
     private  static JPanel panel;
-
-    public void executeLogin()
+//    @Override
+//    public void execute() throws Exception {
+//
+//    }
+    @Override
+    public void execute() throws Exception
     {
         panel = new JPanel();
 
@@ -124,7 +128,7 @@ public class Login implements ActionListener {
                 loginFrame.setVisible(false);
                 loginFrame.dispose();
                 totalValid = false;
-                executeLogin();
+                execute();
 
 
             }
@@ -192,7 +196,7 @@ public class Login implements ActionListener {
                 {
 
                     Labourer l = new Labourer();
-                    l.executeLabourer();
+                    l.execute();
 
                 }
                 else if (gei.getResponse() instanceof objects.ToolManager ) {
@@ -200,7 +204,7 @@ public class Login implements ActionListener {
 
 
                     ToolManager tm = new ToolManager();
-                    tm.executeToolManager();
+                    tm.execute();
 
 
                 }
@@ -209,7 +213,7 @@ public class Login implements ActionListener {
                 {
 
                     Manager man = new Manager();
-                    man.executeManager();
+                    man.execute();
 
                 }
                 else
@@ -247,6 +251,7 @@ public class Login implements ActionListener {
     public static void main(String[] args) {
 //
     }
+
 
 
 }

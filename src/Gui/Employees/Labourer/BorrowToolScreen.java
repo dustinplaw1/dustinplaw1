@@ -1,6 +1,7 @@
 package Gui.Employees.Labourer;
 
 
+import Gui.CommandGui;
 import Gui.Employees.Manager.Manager;
 
 
@@ -21,10 +22,9 @@ import java.util.ArrayList;
 
 import static Gui.EmployeeInstance.employeeInstance;
 
-public class BorrowToolScreen implements ActionListener {
+public class BorrowToolScreen implements ActionListener, CommandGui {
 
-    //TODO I need to pull a list of all available tools in the system
-   // protected static  String [] options;    //= {"hammer", "screwdriver"};
+
     Manager man = new Manager();
     private IsSuccessful is = new IsSuccessful();
 
@@ -50,10 +50,11 @@ public class BorrowToolScreen implements ActionListener {
     private static JScrollPane listScroll;
 
 
-        /**
-         * A method that will run and execute the gui for the toolmanager add tool menu
-         */
-    public void executeBorrowTool() throws Exception {
+    /**
+    * A method that used CommandGui interface to initialize a borrow tool
+    */
+    @Override
+    public void execute() throws Exception {
 
 
 
@@ -184,7 +185,7 @@ public class BorrowToolScreen implements ActionListener {
 
 
         if ("back".equals(e.getActionCommand())) {
-            lab.executeLabourer();
+            lab.execute();
 
 
 
@@ -210,7 +211,7 @@ public class BorrowToolScreen implements ActionListener {
             }
 
             toolName.clear();
-            lab.executeLabourer();
+            lab.execute();
 
         }
         //logout button pressed

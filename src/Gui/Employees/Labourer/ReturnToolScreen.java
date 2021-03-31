@@ -1,5 +1,6 @@
 package Gui.Employees.Labourer;
 
+import Gui.CommandGui;
 import Gui.Employees.ToolManager.ToolManager;
 import gateways.GetEmployeeInfo;
 import objects.Employee;
@@ -14,19 +15,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class ReturnToolScreen extends JPanel implements ActionListener {
+public class ReturnToolScreen extends JPanel implements ActionListener, CommandGui {
 
         //TODO I need to pull a list of tools that are signed out by the user
         //protected static String[] options;
         private ArrayList<Tool> tools;
-
         private  JFrame returnToolFrame;
         private  JPanel returnPanel;
-
         private  JLabel welcomeMessage;
         private  JButton backButton;
-        private  JButton nextButton;
-        private  JButton addButton;
+        private  JButton returnButton;
         private  JButton logoutButton;
 
         private  String returnTool;
@@ -37,9 +35,10 @@ public class ReturnToolScreen extends JPanel implements ActionListener {
 
 
         /**
-         * A method that will run and execute the gui for the toolmanager add tool menu
+         * A method that will return a tool to the system. Uses CommandGui interface
          */
-        public void executeReturnToolScreen() {
+        @Override
+        public void execute() {
             //new frame for add employee
             returnToolFrame = new JFrame("Return a Tool");
             returnToolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -52,27 +51,27 @@ public class ReturnToolScreen extends JPanel implements ActionListener {
             returnPanel.setSize(400, 400);
 
             //create back button functionality
-            nextButton = new JButton("Back");
-            nextButton.setBounds(25, 325, 80, 30);
-            returnPanel.add(nextButton);
+            backButton = new JButton("Back");
+            backButton.setBounds(25, 325, 80, 30);
+            returnPanel.add(backButton);
 
 
             //create logout button functionality
-            backButton = new JButton("Logout");
-            backButton.setBounds(150, 325, 80, 30);
-            returnPanel.add(backButton);
+            logoutButton = new JButton("Logout");
+            logoutButton.setBounds(150, 325, 80, 30);
+            returnPanel.add(logoutButton);
 
-            addButton = new JButton("Add");
-            addButton.setBounds(285, 325, 80, 30);
-            returnPanel.add(addButton);
+            returnButton = new JButton("Return");
+            returnButton.setBounds(285, 325, 80, 30);
+            returnPanel.add(returnButton);
 
-            addButton.setActionCommand("add");
+            returnButton.setActionCommand("return");
             backButton.setActionCommand("back");
             logoutButton.setActionCommand("logout");
 
-//            addButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
-//            backButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
-//            logoutButton.addActionListener(new Gui.Employees.Labourer.BorrowToolScreen());
+            returnButton.addActionListener(new ReturnToolScreen());
+            backButton.addActionListener(new ReturnToolScreen());
+            logoutButton.addActionListener(new ReturnToolScreen());
 
 
             //create welcome message JLabel
@@ -138,8 +137,12 @@ public class ReturnToolScreen extends JPanel implements ActionListener {
             //user clicks on back button
             if ("back".equals(e.getActionCommand())) {
                 returnToolFrame.setVisible(false);
-                ToolManager tm = new ToolManager();
-                tm.executeToolManager();
+                Labourer l = new Labourer();
+                try {
+                    l.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
 
                 returnToolFrame.dispose();

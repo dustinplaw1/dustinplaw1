@@ -1,5 +1,6 @@
 package Gui.Employees.Manager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.FindTools;
 import objects.Tool;
@@ -12,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class AvailableTools implements ActionListener {
+public class AvailableTools implements ActionListener, CommandGui {
     Manager man = new Manager();
 
     //private static ArrayList<String> toolId = new ArrayList<String>();
@@ -32,9 +33,12 @@ public class AvailableTools implements ActionListener {
     private static JList<Tool> list;
 
 
-
-
-    public void executeAvailableTools() throws Exception {
+    /**
+     * A method that will use CommandGui interface to execute the frame creation
+     * @throws Exception
+     */
+    @Override
+    public void execute() throws Exception {
 
         availableFrame = new JFrame("Available Tools");
         availableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -87,7 +91,7 @@ public class AvailableTools implements ActionListener {
 
             availableFrame.setVisible(false);
             availableFrame.dispose();
-            man.executeManager();
+            man.execute();
         }
 
 
@@ -140,7 +144,7 @@ public class AvailableTools implements ActionListener {
             toolName.clear();
             availableFrame.setVisible(false);
             availableFrame.dispose();
-            man.executeManager();
+            man.execute();
         }
         else if ("logout".equals(e.getActionCommand()))
         {

@@ -1,5 +1,6 @@
 package Gui.Employees.Manager;
 
+import Gui.CommandGui;
 import Gui.IsSuccessful;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.awt.event.MouseEvent;
  */
 
 
-public class Manager extends JPanel implements ActionListener {
+public class Manager extends JPanel implements ActionListener, CommandGui {
 
     protected static String [] options = {"Find a list of available tools" , "See which tools are signed out" , "Assign tools to an employee"};
     private static JFrame managerFrame;
@@ -30,7 +31,11 @@ public class Manager extends JPanel implements ActionListener {
 
     private static int choice;
 
-    public void executeManager()
+    /**
+     * A method that will use CommandGui interface to create the desired frame
+     */
+    @Override
+    public void execute()
     {
 
 
@@ -142,7 +147,7 @@ public class Manager extends JPanel implements ActionListener {
 
                 AvailableTools at = new AvailableTools();
                 try {
-                    at.executeAvailableTools();
+                    at.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -158,7 +163,7 @@ public class Manager extends JPanel implements ActionListener {
                 //remove a tool window
                 SignedOutTools sot = new SignedOutTools();
                 try {
-                    sot.executeSignedOutTools();
+                    sot.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -174,7 +179,7 @@ public class Manager extends JPanel implements ActionListener {
                 //modify employee role
                 AssignToolsScreen assign = new AssignToolsScreen();
                 try {
-                    ats.executeAssignToolsScreen();
+                    ats.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
