@@ -3,6 +3,7 @@ package Gui.Employees.ToolManager;
 import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.ChangeEmployeeRole;
+import static Gui.EmployeeInstance.employeeInstance;
 
 
 import javax.swing.*;
@@ -140,6 +141,8 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
 
+        String getEmployeID = employeeInstance.getEmployeeID();
+
 
 
         final String labourer = "Labourer";
@@ -147,7 +150,17 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         final String manager = "Manager";
 
 
-
+        if (empId.equalsIgnoreCase(getEmployeID))
+        {
+            is.isSuccessful("Cannot change your own employee Role:");
+            roleFrame.setVisible(false);
+            roleFrame.dispose();
+            try {
+                tm.execute();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
 
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand()))
