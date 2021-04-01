@@ -8,7 +8,7 @@ import Gui.Employees.Manager.Manager;
 import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
-;
+
 import objects.Employee;
 import objects.Tool;
 

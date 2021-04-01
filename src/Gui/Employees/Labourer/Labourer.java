@@ -158,7 +158,7 @@ public class Labourer extends JPanel implements ActionListener, CommandGui {
         if ("next".equals(e.getActionCommand()))
         {
             //this is if the index is invalid
-            if ((choice <0 && choice >2))
+
 
 
             if (choice == 0)
