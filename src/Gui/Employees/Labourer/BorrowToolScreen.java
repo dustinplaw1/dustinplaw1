@@ -168,20 +168,16 @@ public class BorrowToolScreen implements ActionListener, CommandGui {
     @Override
     public void actionPerformed(ActionEvent e) {
         //Employee emp = new Employee();
-        System.out.println(emp.getEmployeeID());
         Labourer lab = new Labourer();
 
         //GetEmployeeInfo gei = new GetEmployeeInfo(emp);
         String empid = employeeInstance.getEmployeeID();
-        System.out.println("Employee id: " + empid);
 
 
         //user clicks on back button
         borrowToolFrame.setVisible(false);
         borrowToolFrame.dispose();
         String tool_id = toolId.get(num);           //the tool id that will be signed out
-        System.out.println("employee id: " + empid);
-        System.out.println("ToolId: " + tool_id);
 
 
         if ("back".equals(e.getActionCommand())) {
@@ -196,8 +192,6 @@ public class BorrowToolScreen implements ActionListener, CommandGui {
 
 
 
-            System.out.println("employee id: " + empid);
-            System.out.println("ToolId: " + tool_id);
 
             try
             {

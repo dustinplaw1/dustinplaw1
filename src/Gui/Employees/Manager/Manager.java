@@ -87,7 +87,6 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
         public void mouseClicked(MouseEvent e) {
 
             choice = list.getSelectedIndex();
-            System.out.println(choice);
 
         }
         });

@@ -153,7 +153,7 @@ public class Labourer extends JPanel implements ActionListener, CommandGui {
         labourerFrame.setVisible(false);
         labourerFrame.dispose();
         boolean empty = list.isSelectionEmpty();
-        System.out.println("Is an item clicked" + empty);
+
 
         if ("next".equals(e.getActionCommand()))
         {

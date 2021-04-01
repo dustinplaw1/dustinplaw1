@@ -99,7 +99,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
             public void mouseClicked(MouseEvent e) {
 
                 choice = list.getSelectedIndex();
-                System.out.println(choice);
+
 
             }
         });
@@ -150,8 +150,6 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand())) {
-            System.out.println("Choice is: " + choice);
-            //TODO still not working right with no button clicked
             //check if tool manager is trying to change their own role or if entered employee id is empty, or an invalid choice is made
             if ((empId.equalsIgnoreCase(getEmployeID) || empId.equalsIgnoreCase("")) || (choice < 0 || choice > 2)) {
                 //choose one of two
