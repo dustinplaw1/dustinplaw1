@@ -15,21 +15,12 @@ public class AddToolScreen implements ActionListener, CommandGui {
     ToolManager tm = new ToolManager();
     private static JFrame addToolFrame;
     private static JPanel addPanel;
-
     private static JLabel welcomeMessage;
-
-
     private static JButton backButton;
     private static JButton saveButton;
-
-
     private static JButton logoutButton;
-
-    //label and textfield for the toolname label
     private static JLabel toolNameLabel;
     private static JTextField toolNameField;
-
-    //label and textfield for the tool description
     private static JLabel toolDescriptionLabel;
     private static JTextField toolDescriptionField;
 
@@ -40,7 +31,7 @@ public class AddToolScreen implements ActionListener, CommandGui {
     @Override
     public void execute()
     {
-        //new frame
+        //new JFrame
         addToolFrame = new JFrame("Add a Tool");
         addToolFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addToolFrame.pack();
@@ -104,10 +95,6 @@ public class AddToolScreen implements ActionListener, CommandGui {
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-
-
-
-
         saveButton.addActionListener(new AddToolScreen());
         logoutButton.addActionListener(new AddToolScreen());
         backButton.addActionListener(new AddToolScreen());
@@ -141,7 +128,7 @@ public class AddToolScreen implements ActionListener, CommandGui {
 
 
             try {
-                tm.execute();
+                tm.execute();       //if user hits back go to the tool manager action menu
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -165,19 +152,14 @@ public class AddToolScreen implements ActionListener, CommandGui {
             else {
                 try {
 
-
-                    CreateTool tool = new CreateTool(name, description);
+                    CreateTool tool = new CreateTool(name, description);        // create a new tool with the user inputs
                     tool.execute();     //execute it to add to the database
-
-
                     tm.execute();
-
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
-
 
         }
         //this is to logout

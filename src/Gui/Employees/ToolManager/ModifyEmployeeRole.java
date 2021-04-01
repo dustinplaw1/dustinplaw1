@@ -14,26 +14,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ModifyEmployeeRole extends JFrame implements ActionListener, CommandGui {
+    private final String labourer = "Labourer";
+    private final String tool_manager = "Tool_Manager";
+    private final String manager = "Manager";
+
 
     ToolManager tm = new ToolManager();
-
     private static JFrame roleFrame;
     private static JPanel rolePanel;
     private static int choice;
-
     private static JLabel welcomeMessage;
-
-
     private static JButton backButton;
     private static JButton saveButton;
     private static JButton logoutButton;
-
     private static JLabel employeeIdLabel;
     private static JTextField employeeText;
-
-
-
-    //this is list of options
     protected static String [] options = {"Labourer" , "Manager" , "Tool Manager"};
     private static JList list;
     private static JScrollPane listScroll;
@@ -61,7 +56,6 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
 
 
         //create logout button functionality
-
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(150, 325, 80, 30);
         rolePanel.add(logoutButton);
@@ -85,7 +79,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         employeeText.setBounds(150,50,200,25);
         rolePanel.add(employeeText);
 
-
+        //create a new Jlist
         list = new JList(options);
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -121,8 +115,6 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-
-
         saveButton.addActionListener(new ModifyEmployeeRole());
         logoutButton.addActionListener(new ModifyEmployeeRole());
         backButton.addActionListener(new ModifyEmployeeRole());
@@ -138,15 +130,9 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
     @Override
     public void actionPerformed(ActionEvent e) {
         IsSuccessful is = new IsSuccessful();
-        //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
 
-        String getEmployeID = employeeInstance.getEmployeeID();
-
-
-        final String labourer = "Labourer";
-        final String tool_manager = "Tool_Manager";
-        final String manager = "Manager";
+        String getEmployeID = employeeInstance.getEmployeeID();     //get the employee id
 
 
         roleFrame.setVisible(false);
@@ -155,7 +141,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         if ("back".equals(e.getActionCommand())) {
 
             try {
-                tm.execute();
+                tm.execute();       //open a tool manager action menu
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -178,11 +164,10 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
                 }
             } else {
 
-
                 //if labourer was selected
                 if (choice == 0) {
                     try {
-                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);        //modify to a new labourer
                         change.execute();
                         //now it should be good
                         is.isSuccessful("Successfully changed Role");
@@ -203,7 +188,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
                 else if (choice == 1) {
                     //manager
                     try {
-                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);     //change role to a manager
                         change.execute();
                         //now it should be good
                         is.isSuccessful("Successfully changed Role");
@@ -219,7 +204,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
                 else if (choice == 2) {
                     //tool manager
                     try {
-                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);        //change role to a tool manager
                         change.execute();
                         is.isSuccessful("Successfully changed Role");
 
@@ -231,11 +216,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
                     }
                 }
 
-//            try {
-//                tm.execute();
-//            } catch (Exception exception) {
-//                exception.printStackTrace();
-//            }
+//
 
 
                 //this is to logout

@@ -2,30 +2,20 @@ package Gui.Employees.ToolManager;
 
 import Gui.CommandGui;
 import Gui.IsSuccessful;
-import gateways.CreateTool;
 import gateways.DeleteTool;
-
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTreeUI;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class RemoveToolScreen extends JPanel implements ActionListener, CommandGui {
     ToolManager tm = new ToolManager();
-
     private static JFrame removeToolFrame;
     private static JPanel addPanel;
-
     private static JLabel welcomeMessage;
-
-
     private static JButton backButton;
     private static JButton saveButton;
-
-
     private static JButton logoutButton;
-
     //label and textfield for the toolname label
     private static JLabel toolIdLabel;
     private static JTextField toolIdField;
@@ -88,13 +78,12 @@ public class RemoveToolScreen extends JPanel implements ActionListener, CommandG
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-
-
         saveButton.addActionListener(new RemoveToolScreen());
         logoutButton.addActionListener(new RemoveToolScreen());
         backButton.addActionListener(new RemoveToolScreen());
 
 
+        //configure the Jframe
         removeToolFrame.add(addPanel);
         removeToolFrame.setVisible(true);
         removeToolFrame.setResizable(false);
@@ -114,42 +103,39 @@ public class RemoveToolScreen extends JPanel implements ActionListener, CommandG
         IsSuccessful is = new IsSuccessful();
         String tool_id = toolIdField.getText();        //gets the the tool description
 
-
+        removeToolFrame.setVisible(false);
+        removeToolFrame.dispose();
 
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand())) {
-            removeToolFrame.setVisible(false);
-            removeToolFrame.dispose();
+
             try {
-                tm.execute();
+                tm.execute();       //go back to tool manager action menu
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
 
-
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand())) {
-            removeToolFrame.setVisible(false);
-            removeToolFrame.dispose();
 
-            if (tool_id.isEmpty())
+            if (tool_id.isEmpty())      //check if user didn't give a tool id and is empty
             {
                 is.isSuccessful("Error, invalid tool Id");
                 try {
-                    tm.execute();
+                    tm.execute();       //go back to tool manager action menu
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
             else {
                 try {
-                    DeleteTool tool = new DeleteTool(tool_id);
+                    DeleteTool tool = new DeleteTool(tool_id);      //otherwise delete a tool
                     tool.execute();     //execute it to add to the database
                     is.isSuccessful("Tool Removal Successful");
 
 
-                    tm.execute();
+                    tm.execute();       //go back to the action menu of the tool manager
 
 
                 } catch (Exception exception) {
@@ -158,7 +144,6 @@ public class RemoveToolScreen extends JPanel implements ActionListener, CommandG
                     exception.printStackTrace();
                 }
             }
-
 
         }
         //logout button pressed
