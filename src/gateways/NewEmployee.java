@@ -1,10 +1,13 @@
 package gateways;
 import objects.Employee;
 
+import java.security.InvalidParameterException;
 import java.util.UUID;
 import java.sql.PreparedStatement;
 
-
+/**
+ * Gateway for adding new Employees and their login information into the database.
+ */
 public class NewEmployee extends Gateway implements Command {
 
     /** employee_id, last_name, first_name, and employee_type are
@@ -24,9 +27,9 @@ public class NewEmployee extends Gateway implements Command {
     public NewEmployee (String l_name, String f_name, String emp_type, String emp_pass) throws Exception {
         // quick input validity check
         if (l_name == null || f_name == null || emp_pass.length() < 5) {
-            throw new Exception("Issue with input parameters. names cannot be null, password must be larger than 4 chars.");
+            throw new InvalidParameterException("Issue with input parameters. names cannot be null, password must be larger than 4 chars.");
         } else if (!(emp_type.equals("Labourer") || emp_type.equals("Tool_Manager") || emp_type.equals("Manager"))) {
-            throw new Exception("Invalid employee role/type: must be 'Labourer', 'Tool_Manager', or 'Manager'");
+            throw new InvalidParameterException("Invalid employee role/type: must be 'Labourer', 'Tool_Manager', or 'Manager'");
         }
 
         try {
@@ -55,9 +58,6 @@ public class NewEmployee extends Gateway implements Command {
         int confirmation = 0;
 
         try {
-
-            // TODO are all these checks neccessary with stricter db conditions?
-            //
             // Prepare Query for new employe
             PreparedStatement p = con.prepareStatement("insert into employees(employee_id, last_name, first_name, employee_type) values(?,?,?,?)");
             p.setString(1, employee_id);
@@ -79,7 +79,6 @@ public class NewEmployee extends Gateway implements Command {
             p.setString(1, employee_id);
             p.setString(2, password);
             confirmation += p.executeUpdate();
-            con.close();
 
             // check for successful login creation
             if (confirmation != 2) {
@@ -89,49 +88,21 @@ public class NewEmployee extends Gateway implements Command {
                 throw new Exception("new Employee created, but their login was not created.");
             }
 
+            // cleanup
+            con.close();
+            p.close();
 
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         }
     }
 
-
-    // Literally only here to manually test the method.
-    public static void main(String[] args) {
-//        try {
-//            NewEmployee ne = new NewEmployee("law", "d", "Manager", "12345");
-//            ne.execute();
-//
-//        } catch(Exception e) {
-//            System.out.println(e);
-//        }
-//
-//        // Test with each field empty
-//        try {
-//            NewEmployee ne = new NewEmployee("", "", "", "");
-//            ne.execute();
-//
-//        } catch(Exception e) {
-//            System.out.println(e);
-//            System.out.println("Empty Field Error (ALL)");
-//        }
-//
-//        // Test with one field empty
-//        try {
-//            NewEmployee ne = new NewEmployee("name", "test", "", "passwordtest");
-//            ne.execute();
-//
-//        } catch(Exception e) {
-//            System.out.println(e);
-//            System.out.println("Empty Field Error (SINGLE)");
-//        }
-
-        try {
-            NewEmployee ne = new NewEmployee("law", "d", "Tool_Manager", "ad@m1");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    /**
+     * return employee id for testing
+     * @return the id of the employee that is being added to the system
+     */
+    public String getEmployee_id() {
+        return employee_id;
     }
-
 }

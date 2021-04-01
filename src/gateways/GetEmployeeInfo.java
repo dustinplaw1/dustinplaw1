@@ -1,12 +1,14 @@
 package gateways;
 import objects.*;
+
+import java.security.InvalidParameterException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-
-// To get an employee's info: GetEmployeeInfo e_info = new GetEmployeeInfo({"e02", "t03"}).execute();
-// Then: e_info.getResponse()
+/**
+ * Gateway class used to get information about an employee if their employee_id is known
+ */
 public class GetEmployeeInfo extends Gateway implements Command {
 
     /** employee_id is the id of the employee who's info is being requested */
@@ -22,7 +24,7 @@ public class GetEmployeeInfo extends Gateway implements Command {
     public GetEmployeeInfo(String emp_id) throws Exception {
         // check for empty inputs
         if (emp_id == null) {
-            throw new Exception("Constructor parameters cannot be null");
+            throw new InvalidParameterException("Constructor parameters cannot be null");
         }
 
         try {
@@ -36,27 +38,29 @@ public class GetEmployeeInfo extends Gateway implements Command {
     }
 
 
-    // TODO There is an issue with this method not getting a valid result set
     /**
      * This method requests an employee's info from the database
      * @throws  Exception
      */
     public void execute() throws Exception {
-        //try/catch when connecting to a database
         try {
-            //easier more efficient at accessing data
+            // easier more efficient at accessing data
             PreparedStatement p = con.prepareStatement(("select employee_id, last_name, first_name, employee_type from employees where employee_id=?"));
             p.setString(1, employee_id);
-            //cursor for going through data in database
+
+            // cursor for going through data in database
             ResultSet rs = p.executeQuery();
-            // go to first entry
-            rs.next();
+            rs.next();             // go to first entry
+
+
             //build a string for the employee information
             String id, l_name, f_name, role;
             id = rs.getString("employee_id");
             l_name = rs.getString("last_name");
             f_name = rs.getString("first_name");
             role = rs.getString("employee_type");
+
+            // Create a new Employee subclass based on their role
             if (role.equals("Labourer")) {
                   emp = new Labourer(id, l_name, f_name);
             } else if (role.equals("Tool_Manager")) {
@@ -67,11 +71,15 @@ public class GetEmployeeInfo extends Gateway implements Command {
                 throw new Exception("Invalid Employee Type");
             }
 
+            // cleanup
+            con.close();
+            p.close();
+            rs.close();
 
 
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         }
 
         // sets the response object
@@ -85,10 +93,11 @@ public class GetEmployeeInfo extends Gateway implements Command {
      */
     public Employee getResponse() throws Exception {
 
+        // .execute() must be run first
         if (this.emp == null) {
             throw new Exception("Empty resonse object: Try running execute() first");
         }
-        
+        // return the created Employee
         return this.emp;
     }
 }

@@ -13,6 +13,8 @@ public class TestContractGWs extends TestGateway {
 
     private BorrowTool bt;
     private ReturnTool rt;
+    private static final String table = "contracts";
+    private static final String id = "contract_id";
 
 
     // Create Test Object
@@ -42,12 +44,14 @@ public class TestContractGWs extends TestGateway {
     private void Test1 () {
         int testCount = 0;
         try {
-            testCount = this.countRows("contracts");
+            testCount = this.countRows(table);
             bt.execute();
 
             // Check Cases
             if (this.countRows("contracts") != testCount) {
                 testPrinter(1, true);
+                // how to get
+                this.deleteItem(table, id, );
             } else {
                 throw new Exception("Row Count In Contracts Unchaged");
             }

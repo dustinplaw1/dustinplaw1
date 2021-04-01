@@ -1,4 +1,5 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,11 +22,12 @@ public class FindTools extends Gateway implements Command {
     /**
      * Creates a new Gateway for getting a list of tools from the database
      * @param t_type, specifies the type of tools to be matched.
+     * @throws InvalidParameterException if t_type is null
      */
     public FindTools (String t_type) throws Exception {
         // input parameters cannot be null
         if (t_type == null) {
-            throw new Exception("Constructor parameters cannot be null");
+            throw new InvalidParameterException("Constructor parameters cannot be null");
         }
 
 
@@ -63,12 +65,14 @@ public class FindTools extends Gateway implements Command {
 
         try {
             PreparedStatement p;
-            // list all tools for tool_manager
+
+            // Redundant check
             if (tool_type == null && search_available == null) {
                 throw new Exception("FindTools gateway not correctly initialized.");
             }
 
-            // Create query for finding available tools with a specific tool_name equal to tool_type
+            // Create query for finding all available tools with a specific tool_name equal to tool_type
+            // There is a small bug here where the query returns a repeated table row.
             if (tool_type != null) {
                 p = con.prepareStatement("select t1.tool_id, t1.tool_name, false from tools as t1 " +
                         "where t1.tool_name=? and t1.tool_id not in " +
@@ -76,11 +80,13 @@ public class FindTools extends Gateway implements Command {
                 p.setString(1, tool_type);
 
             }
+
             // search for tools without filtering by tool_name
             else { // input param is a boolean
+
+                // This Query returns a list of all tools regardless of their availability
+                // This function is likely not used in this project
                 if (search_available) {
-                    // This Query returns a list of all tools regardless of their availability
-                    // This function is likely not used in this project
                     p = con.prepareStatement("select A.tool_id, A.tool_name, " +
                             "CASE when EXISTS (select * from contracts B " +
                             "where (B.tool_id=A.tool_id AND date_returned is NULL)) " +
@@ -89,7 +95,8 @@ public class FindTools extends Gateway implements Command {
                             "END unavailable" +
                             " from tools A");
                 }
-                // list all tools that are not signed out for labourers
+
+                // list all tools that are not signed out by labourers
                 else {
                     p = con.prepareStatement("select tool_id, tool_name, false from tools where tool_id" +
                             " not in (select tool_id from contracts where date_returned is null)");
@@ -113,7 +120,11 @@ public class FindTools extends Gateway implements Command {
             }
             tools = toolsArrayList.toArray(new Tool[toolsArrayList.size()]);
 
+            // cleanup
             con.close();
+            p.close();
+            rs.close();
+            
         } catch (Exception e) { System.out.println(e);}
     }
 

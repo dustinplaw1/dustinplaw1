@@ -1,4 +1,5 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.util.UUID;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
@@ -11,11 +12,12 @@ public class CreateTool extends Gateway implements Command {
      * Creates a new Gateway for adding a new tool to the system
      * @param t_name A string which represents a new tool name
      * @param t_descr A brief description of the tool
+     * @throws InvalidParameterException when there is an empty tool name
      */
     public CreateTool(String t_name, String t_descr) throws Exception {
         // check for empty inputs
         if (t_name.isEmpty()) {
-            throw new Exception("Error creating tool: Cannot have empty tool name");
+            throw new InvalidParameterException("Error creating tool: Cannot have empty tool name");
         }
 
         try {
@@ -25,6 +27,7 @@ public class CreateTool extends Gateway implements Command {
             throw e;
         }
 
+        // set instance variables
         tool_id = "t" + UUID.randomUUID().toString().substring(0,3);
         tool_name = t_name;
         tool_description = t_descr;
@@ -63,7 +66,10 @@ public class CreateTool extends Gateway implements Command {
                 throw new Exception("There was an issue and a new tool was not added.");
             }
 
+            // cleanup
             con.close();
+            p.close();
+
         } catch (Exception e) { System.out.println(e);}
     }
 
@@ -75,38 +81,4 @@ public class CreateTool extends Gateway implements Command {
     {
         return this.tool_id;
     }
-
-
-
-
-
-    // Literally only here to manually test the method.
-    public static void main(String[] args) {
-        @SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-        System.out.println("Enter the tool name =");
-        String toolname = in.next();
-        System.out.println("Enter a tool description = ");
-        String tooldesc = in.next();
-
-        try {
-            CreateTool ct = new CreateTool(toolname, tooldesc);
-            ct.execute();
-            System.out.println("Tool successfully added");
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-
-
-        try {
-            NewEmployee ne = new NewEmployee("", "", "", "");
-            ne.execute();
-
-        } catch(Exception e) {
-            System.out.println(e);
-            System.out.println("Empty Field Error");
-        }
-    }
-
 }

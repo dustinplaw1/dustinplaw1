@@ -5,7 +5,9 @@ import java.util.Scanner;
 import java.sql.*;
 
 
-// import Date
+/**
+ * A class for aiding in development. (Mostly useful for viewing tables)
+ */
 public class ControlDB extends Gateway {
 
     private String contract_fields =

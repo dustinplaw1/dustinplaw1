@@ -1,20 +1,25 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.util.UUID;
 import java.util.Calendar;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
-// The BorrowTool Gateway is called by: new BorrowTool({"e02", "t03"}).execute();
+/**
+ * Gateway class used to borrow tools by adding a contract to the contracts table
+ */
 public class BorrowTool extends Gateway implements Command {
     /** employee_id of employee borrowing the tool */
     private String employee_id;
     /** tool_id of tool being borrowed */
     private String tool_id;
+    /** The unique id for the new contract */
+    private String contract_id;
 
     /** Creates a new Gateway for creating tool contracts
      * @param emp_id of employee borrowing the tool
      * @param t_id of tool being borrowed
-     * @throws Exception
+     * @throws InvalidParameterException for invalid ids
      * */
     public BorrowTool(String emp_id, String t_id) throws Exception {
         try {
@@ -24,9 +29,9 @@ public class BorrowTool extends Gateway implements Command {
             throw e;
         }
 
-        if (t_id.isEmpty() || emp_id.isEmpty())
-        {
-            throw new Exception("Error: Must input valid data");
+        // check for empty inputs
+        if (t_id.isEmpty() || emp_id.isEmpty()) {
+            throw new InvalidParameterException("Error: Must input valid data");
         }
 
 
@@ -37,6 +42,7 @@ public class BorrowTool extends Gateway implements Command {
 
     /**
      * A method to allow an employee to borrow a tool by creating a contract.
+     * by adding a new row to the contracts table
      * @throws new exception
      */
     public void execute() throws Exception {
@@ -44,7 +50,7 @@ public class BorrowTool extends Gateway implements Command {
 
 
         // TODO Might need to do validation here, or in other method. Unsure at this point
-        String contract_id = "c" + UUID.randomUUID().toString().substring(0,3);
+        contract_id = "c" + UUID.randomUUID().toString().substring(0,3);
         Calendar today = Calendar.getInstance();
         Calendar due_date = Calendar.getInstance();
         due_date.add(Calendar.DAY_OF_MONTH, 14);
@@ -70,9 +76,18 @@ public class BorrowTool extends Gateway implements Command {
             }
             //close the connection
             con.close();
+            // cleanup
+            p.close();
+
         } catch (Exception e) {
             throw new Exception(e);
         }
     }
 
+    /** Method used to help with testing
+     * @return contract_id for the contract that is being created.
+     */
+    public String getContract_id() {
+        return contract_id;
+    }
 }

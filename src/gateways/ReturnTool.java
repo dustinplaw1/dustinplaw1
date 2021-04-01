@@ -1,9 +1,13 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.util.Calendar;
 //import java.util.Date;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
+/**
+ * Gateway for updating the date_returned field of a contract to be the current TimeStamp
+ */
 public class ReturnTool extends gateways.Gateway implements Command {
     /** tool_id of tool being returned*/
     private String tool_id;
@@ -18,7 +22,7 @@ public class ReturnTool extends gateways.Gateway implements Command {
     public ReturnTool(String t_id, String emp_id) throws Exception {
         // check for empty inputs
         if (t_id == null || emp_id == null) {
-            throw new Exception("Constructor parameters cannot be null");
+            throw new InvalidParameterException("Constructor parameters cannot be null");
         }
 
         try {
@@ -43,13 +47,15 @@ public class ReturnTool extends gateways.Gateway implements Command {
         try{
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? AND employee_id=?");
-
+            // set current timestamp
             p.setTimestamp(1, new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis()));
             p.setString(2, tool_id);
             p.setString(3, employee_id);
             confirmation = p.executeUpdate();
-            //saves a cursor position to go through the data to find the right tool_id
+
+            // cleanup
             con.close();
+            p.close();
 
             // check to see if query was successful
             if (confirmation == 0) {
@@ -59,31 +65,5 @@ public class ReturnTool extends gateways.Gateway implements Command {
         } catch (Exception e) {
             throw e;
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        @SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-        System.out.println("Enter the tool id =");
-        String toolid = in.next();
-        System.out.println("Enter employee id = ");
-        String empid = in.next();
-
-        try {
-
-            ReturnTool rt = new ReturnTool(toolid, empid);
-            rt.execute();
-            System.out.println("Trying to return now");
-            if (confirmation == 0)
-            {
-
-            }
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-
     }
 }

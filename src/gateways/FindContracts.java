@@ -61,11 +61,16 @@ public class FindContracts extends Gateway implements Command {
                 due_date = rs.getTimestamp("due_date").toString();
 
                 // create and add a tool to tools list
+                // should probably use Tool and Employee objects as parameters, as this would aid in future extendability.
                 contractsArrayList.add(new Contract(emp_id, t_id, t_name, d_borrowed, due_date));
             }
             contracts = contractsArrayList.toArray(new Contract[contractsArrayList.size()]);
 
+            // cleanup
             con.close();
+            p.close();
+            rs.close();
+
         } catch (Exception e) { System.out.println(e);}
     }
 
@@ -75,22 +80,5 @@ public class FindContracts extends Gateway implements Command {
      */
     public Contract[] getContracts() {
         return this.contracts;
-    }
-
-    public static void main(String[] args) {
-        try {
-            FindContracts fc = new FindContracts();
-            fc.execute();
-            Contract[] testArray = fc.getContracts();
-            System.out.println(testArray.length);
-
-            for (int i=0; i<testArray.length; i++) {
-                System.out.println(testArray[i].toString());
-            }
-
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }

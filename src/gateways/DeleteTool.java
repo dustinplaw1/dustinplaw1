@@ -1,4 +1,5 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 
@@ -11,11 +12,12 @@ public class DeleteTool extends Gateway implements Command {
     /**
      * A method that will delete the given tool from the database
      * @param t_id A string representing the tool id
+     * @throws InvalidParameterException when t_id is null
      */
     public DeleteTool(String t_id) throws Exception {
         // check for empty inputs
         if (t_id == null) {
-            throw new Exception("Constructor parameter t_id cannot be null");
+            throw new InvalidParameterException("Constructor parameter t_id cannot be null");
         }
 
         try {
@@ -32,7 +34,6 @@ public class DeleteTool extends Gateway implements Command {
         int confirmation = 0;
 
         try{
-            System.out.println("Conf: "+confirmation);
             // prepare Query
             PreparedStatement p = con.prepareStatement("delete from tools where tool_id=?");
             //sets p to the values after setString
@@ -44,9 +45,10 @@ public class DeleteTool extends Gateway implements Command {
             if (confirmation == 0) {
                 throw new Exception("tool: "+tool_id+" was not deleted.");
             }
-            System.out.println("Conf: "+confirmation);
 
+            // cleanup
             con.close();
+            p.close();
 
         } catch (Exception e) { throw e; }
     }

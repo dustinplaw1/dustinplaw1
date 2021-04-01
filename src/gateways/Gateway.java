@@ -23,11 +23,8 @@ public abstract class Gateway {
         String url = "jdbc:mysql://loollibrary.mysql.database.azure.com:3306/tool_library?useSSL=true&requireSSL=false";
 
         try {
-            System.out.println("connecting to db");
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected");
-            // con = DriverManager.getConnection(url, username, password);
         } catch (Exception e){
             throw e;
         }
@@ -38,7 +35,7 @@ public abstract class Gateway {
         if (con != null) {
             try {
             con.close();
-            } catch (Exception e) { System.out.println(e); }
+            } catch (Exception e) { System.out.println(e.getStackTrace()); }
         }
     }
 }

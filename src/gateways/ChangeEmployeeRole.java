@@ -1,4 +1,5 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.sql.PreparedStatement;
 
 public class ChangeEmployeeRole extends Gateway implements Command {
@@ -12,7 +13,14 @@ public class ChangeEmployeeRole extends Gateway implements Command {
     public ChangeEmployeeRole(String id, String role) throws Exception {
         // check for empty inputs
         if (id.isEmpty() || role.isEmpty()) {
-            throw new Exception("Constructor parameters cannot be null");
+            throw new InvalidParameterException("Constructor parameters cannot be null");
+        }
+        // check if roles are valid
+        if (role.equals("Labourer") || role.equals("Tool_Manager") || role.equals("Manager")) {
+            employee_id = id;
+            new_role = role;
+        } else {
+            throw new InvalidParameterException("Invalid employee role/type, please use either 'Labourer' or 'Tool_Manager'");
         }
 
         try {
@@ -21,12 +29,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
         } catch (Exception e) {
             throw e;
         }
-        if (role.equals("Labourer") || role.equals("Tool_Manager") || role.equals("Manager")) {
-            employee_id = id;
-            new_role = role;
-        } else {
-            throw new Exception("Invalid employee role/type, please use either 'Labourer' or 'Tool_Manager'");
-        }
+
     }
 
     /**
@@ -40,6 +43,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
             // PreparedStatement p = con.prepareStatement("update contracts set date_returned=? where tool_id=? and employee_id=? and date_returned=null");
             PreparedStatement p = con.prepareStatement("update employees set employee_type=? where employee_id=? and employee_type!=?");
 
+            // set above '?' to Strings
             p.setString(1, new_role);
             p.setString(2, employee_id);
             p.setString(3, new_role);
@@ -50,6 +54,7 @@ public class ChangeEmployeeRole extends Gateway implements Command {
             }
             //saves a cursor position to go through the data to find the right tool_id
             con.close();
+            p.close();
 
         } catch (Exception e) {
             throw e;

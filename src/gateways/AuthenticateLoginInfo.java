@@ -1,4 +1,5 @@
 package gateways;
+import java.security.InvalidParameterException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -15,7 +16,7 @@ public class AuthenticateLoginInfo extends gateways.Gateway implements gateways.
     public AuthenticateLoginInfo(String emp_id, String emp_pass) throws Exception {
         // check for empty inputs
         if (emp_id == null || emp_pass == null) {
-            throw new Exception("Constructor parameters cannot be null.");
+            throw new InvalidParameterException("Constructor parameters cannot be null.");
         }
 
         try {
@@ -42,7 +43,11 @@ public class AuthenticateLoginInfo extends gateways.Gateway implements gateways.
             p.setString(2, password);
             ResultSet result = p.executeQuery();
             validity = result.next();
+            // cleanup
             con.close();
+            p.close();
+            result.close();
+
         } catch (Exception e) { System.out.println(e);}
     }
 
