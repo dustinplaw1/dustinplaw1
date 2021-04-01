@@ -22,13 +22,9 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
     private static JPanel managerPanel;
     private static JButton logoutButton;
     private static JButton nextButton;
-
-
     private static JList list;
     private static JScrollPane listScroll;
-
     private static JLabel welcomeMessage;
-
     private static int choice;
 
     /**
@@ -37,12 +33,8 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
     @Override
     public void execute()
     {
-
-
         //toolManager's frame
         managerFrame = new JFrame("Manager Action Menu");
-
-
         managerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         managerFrame.pack();
         managerFrame.setSize(1280,768);
@@ -64,17 +56,13 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(100,650,80,25);
         managerPanel.add(logoutButton);
-
         nextButton = new JButton("Next");
-
         nextButton.setBounds(1000,650,80,25);
         managerPanel.add(nextButton);
 
-
-        //set action buttons
+        //set action Listeners for the buttons
         logoutButton.setActionCommand("logout");
         nextButton.setActionCommand("next");
-
         logoutButton.addActionListener(new Manager());
         nextButton.addActionListener(new Manager());
 
@@ -84,17 +72,12 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
         welcomeMessage.setBounds(300,50,700,40);
         managerPanel.add(welcomeMessage);
 
-
-
-
-
         //create a new Jlist with the String [] list
         list = new JList(options);
-
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
-
+        //get the input from user button click from Jlist
         list.addMouseListener(new MouseAdapter() { /**
          * {@inheritDoc} A method that will track which mouse click
          *
@@ -109,23 +92,16 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
         }
         });
 
-
-            listScroll = new JScrollPane(list);
+        //configure JScrool look
+        listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(250,400));
 
         listScroll.setBounds(550,250,200,200);
-
         managerPanel.add(listScroll);
-
-
         managerFrame.add(managerPanel);
-
         managerFrame.setVisible(true);
 
-
     }
-
-
 
     /**
      * Invoked when an action occurs.
@@ -134,20 +110,30 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        IsSuccessful is = new IsSuccessful();
         //make frame not visible, then dispose of it
         managerFrame.setVisible(false);
         managerFrame.dispose();
 
+
         if ("next".equals(e.getActionCommand()))
         {
-            if (choice == 0)
+            //check if there is invalid choice from the user
+            if (choice < 0 || choice >2)
+            {
+                is.isSuccessful("Error, please choose an option");
+                Manager man = new Manager();
+
+                man.execute();
+            }
+            //user chooses to see available tools
+            else if (choice == 0)
             {
 
 
-                AvailableTools at = new AvailableTools();
+                AvailableTools at = new AvailableTools();       //create an object to see available tools
                 try {
-                    at.execute();
+                    at.execute();       //execute the available tool screen
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -156,43 +142,39 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
 
 
             }
+            //if user chooses to see a report of signed out tools
             else if(choice == 1)
             {
 
 
-                //remove a tool window
+                //create a object to see a report for signed out tools
                 SignedOutTools sot = new SignedOutTools();
                 try {
-                    sot.execute();
+                    sot.execute();      //execute the signed out tools report frame
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
 
             }
+            //manager chooses to assign tools to an employee
             else if(choice ==2)
             {
-                //TODO Check here to change back commented sections
-
-                AssignToolsScreen ats = new AssignToolsScreen();
-
 
                 //modify employee role
                 AssignToolsScreen assign = new AssignToolsScreen();
                 try {
-                    ats.execute();
+
+                    assign.execute();       //execute assign an employee a new tool
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
 
             }
-
-
 
                 //when choice isn't valid
             }
         else if ("logout".equals(e.getActionCommand()))
         {
-            IsSuccessful is = new IsSuccessful();
             is.isSuccessful("Goodbye");
             System.exit(0);
         }
