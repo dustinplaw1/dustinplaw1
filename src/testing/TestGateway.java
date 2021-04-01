@@ -40,4 +40,17 @@ public abstract class TestGateway extends Gateway {
         p.close();
         return count;
     }
+
+    // deletes a row added for testing purposes
+    protected void deleteItem(String table_name, String id_name, String id) {
+        try {
+            PreparedStatement p = con.prepareStatement(String.format("delete from %s where %s=?", table_name, id_name));
+            //sets p to the values after setString
+            p.setString(1, id);
+            //saves a cursor position to go through the data to find the right tool_id
+            p.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Failed to delete item that was added for a test.");
+        }
+    }
 }

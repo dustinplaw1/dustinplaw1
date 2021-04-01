@@ -1,6 +1,7 @@
 package testing;
 
 import gateways.BorrowTool;
+import gateways.ReturnTool;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,13 +9,14 @@ import java.sql.SQLException;
 /**
  * Class for testing the BorrowTool gateway
  */
-public class BorrowToolTests extends TestGateway {
+public class TestContractGWs extends TestGateway {
 
     private BorrowTool bt;
+    private ReturnTool rt;
 
 
     // Create Test Object
-    public BorrowToolTests() {
+    public TestContractGWs() {
         try {
             bt = new BorrowTool("e01", "tcf2");
             // attempt to borrow tool by creating a new contract
@@ -73,7 +75,7 @@ public class BorrowToolTests extends TestGateway {
 
 
     public static void main(String[] args) {
-        BorrowToolTests test = new BorrowToolTests();
+        TestContractGWs test = new TestContractGWs();
         test.Test1();
         // create borrow tool object
 
