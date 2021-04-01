@@ -19,6 +19,8 @@ Before you continue, ensure you have met the following requirements:
 
 ## Installation  
 Download the jar file from gitlab repository
+
+
  
 ## Run
 * Navigate to the terminal where the JAR file is located
