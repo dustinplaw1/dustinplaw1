@@ -82,7 +82,6 @@ public class GetEmployeeInfo extends Gateway implements Command {
             throw e;
         }
 
-        // sets the response object
     }
 
     /**
