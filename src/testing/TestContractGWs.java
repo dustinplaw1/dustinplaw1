@@ -65,7 +65,6 @@ public class TestContractGWs extends TestGateway {
             // attempt to borrow tool by creating a new contract
         } catch (Exception e) {
             System.out.println("Failed to set the BorrowTool gateway used in testing: \n"+e);
-            System.exit(1);
         }
     }
 
@@ -77,7 +76,6 @@ public class TestContractGWs extends TestGateway {
             // attempt to borrow tool by creating a new contract
         } catch (Exception e) {
             System.out.println("Failed to set the BorrowTool gateway used in testing: \n"+e);
-            System.exit(1);
         }
     }
 
@@ -174,6 +172,7 @@ public class TestContractGWs extends TestGateway {
             String employee_id, tool_id;
             employee_id = rs.getString("employee_id");
             tool_id = rs.getString("tool_id");
+            // Should also check for timestamp validity, but manual testing seems to confirm that it is working
 
             // Check Test Outcome
             if (employee_id.equals(e1) && tool_id.equals(t3)) {
@@ -227,7 +226,6 @@ public class TestContractGWs extends TestGateway {
             }
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -260,7 +258,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -294,7 +291,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -328,7 +324,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -360,7 +355,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -396,7 +390,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
@@ -430,7 +423,6 @@ public class TestContractGWs extends TestGateway {
 
         } catch (Exception e) {
             testResultPrinter(number, true);
-            System.out.println(e);
         }
     }
 
