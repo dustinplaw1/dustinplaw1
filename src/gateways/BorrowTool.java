@@ -30,7 +30,7 @@ public class BorrowTool extends Gateway implements Command {
         }
 
         // check for empty inputs
-        if (t_id.isEmpty() || emp_id.isEmpty()) {
+        if (t_id == null || emp_id == null || t_id.isEmpty() || emp_id.isEmpty()) {
             throw new InvalidParameterException("Error: Must input valid data");
         }
 
