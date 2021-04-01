@@ -119,7 +119,7 @@ public class Labourer extends JPanel implements ActionListener, CommandGui {
         public void mouseClicked(MouseEvent e) {
 
             choice = list.getSelectedIndex();
-            System.out.println(choice);
+
 
         }
         });
@@ -152,10 +152,15 @@ public class Labourer extends JPanel implements ActionListener, CommandGui {
 
         labourerFrame.setVisible(false);
         labourerFrame.dispose();
-
+        boolean empty = list.isSelectionEmpty();
+        System.out.println("Is an item clicked" + empty);
 
         if ("next".equals(e.getActionCommand()))
         {
+            //this is if the index is invalid
+            if ((choice <0 && choice >2))
+
+
             if (choice == 0)
             {
 
@@ -194,7 +199,7 @@ public class Labourer extends JPanel implements ActionListener, CommandGui {
 
                 //modify employee role
                 try {
-                    sft.executeSearchForTool();
+                    sft.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
