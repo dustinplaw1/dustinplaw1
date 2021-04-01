@@ -98,11 +98,6 @@ public class ReturnToolScreen extends JPanel implements ActionListener, CommandG
                     Object tool = list.getSelectedValue();
                     returnTool = tool.toString();
 
-                    //System.out.println(borrowTool);
-
-                    //choice = list.getSelectedIndex();
-                    //System.out.println(choice);
-
                 }
             });
 
