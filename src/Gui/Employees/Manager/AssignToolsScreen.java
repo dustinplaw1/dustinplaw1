@@ -3,17 +3,11 @@ import Gui.CommandGui;
 import Gui.IsSuccessful;
 import gateways.BorrowTool;
 import gateways.FindTools;
-import Gui.Employees.ToolManager.ModifyEmployeeRole;
-import Gui.Employees.ToolManager.ToolManager;
-import gateways.GetEmployeeInfo;
-import objects.Employee;
 import objects.Tool;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-
 
 /**
  * This Gui class will deal with
@@ -34,7 +28,7 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
     private static JTextField employeeText;
     private static JList<Tool> list;
     private static JScrollPane listScroll;
-
+    private static int size;
 
     /**
      * A method that will create frame to assign a tool to an employee
@@ -42,7 +36,7 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
      */
     @Override
     public void execute() throws Exception {
-        //new frame
+        //new JFrame
         assignFrame = new JFrame("Assign tools to an Employee");
         assignFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         assignFrame.pack();
@@ -84,27 +78,21 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
         employeeText.setBounds(150,50,200,25);
         assignPanel.add(employeeText);
 
+        FindTools ft = new FindTools(false);        //create an instance to find tools that are available
+        ft.execute();       //execute it
+        Tool[] options = ft.getTools();     //add the available tools to options
 
 
 
-        //Todo Figure this out!!!
+        size = options.length;
 
-        FindTools ft = new FindTools(false);
-        ft.execute();
-        Tool[] options = ft.getTools();
-
-
-
-        int size = options.length;
-
+        //for loop to go the length of the list of tools
         for(int i = 0; i< options.length; i++)
         {
 
+            toolName.addElement(options[i].getName().toString());       //add an element from tools to toolName
 
-
-            toolName.addElement(options[i].getName().toString());
-
-            toolId.add(i,(String)options[i].getID());
+            toolId.add(i,(String)options[i].getID());       //get the tool id's to add to it
 
 
         }
@@ -112,7 +100,6 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
 
 
         list = new JList(toolName);     //don't change this. I get the list to populate. Now it will not need to be changed
-
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(3);
@@ -137,7 +124,7 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
 
             }
         });
-
+        //add things to the scrollPane
         listScroll = new JScrollPane(list);
         listScroll.setPreferredSize(new Dimension(100,150));
 
@@ -156,12 +143,9 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
-
-
         saveButton.addActionListener(new AssignToolsScreen());
         logoutButton.addActionListener(new AssignToolsScreen());
         backButton.addActionListener(new AssignToolsScreen());
-
 
         //add components to the frame
         assignFrame.add(assignPanel);
@@ -178,13 +162,14 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        String empId = employeeText.getText();
+        String empId = employeeText.getText();      //get the input from the user
         IsSuccessful is = new IsSuccessful();   //an instance of IsSuccessful
         assignFrame.setVisible(false);
         assignFrame.dispose();
+
+        // if user wants to go back
         if("back".equals(e.getActionCommand()))
         {
-
             man.execute();
         }
         //else if save is pressed
@@ -192,32 +177,33 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
         {
             //I need to check if this is valid or not
             String emp_id = employeeText.getText();
-
-
-
             String tool_id = toolId.get(num);
 
-            System.out.println(tool_id + " tool id");
 
-            try {
-
-                BorrowTool bt = new BorrowTool(emp_id, tool_id);
-                bt.execute();
-
-
-                        is.isSuccessful("Assigning Tool Successful");
-
-            } catch (Exception exception) {
-                is.isSuccessful("Assigning Tool Failed:");
-
-                exception.printStackTrace();
+            //check if the employee id is empty
+            if (emp_id.isEmpty()|| tool_id.isEmpty())
+            {
+                is.isSuccessful("Error, please enter a valid employee id");
+                man.execute();      //go back to the manager action menu
             }
-            man.execute();
+            else {
+                try {
 
-            //this should clear the items in the list before its ran again
-            toolName.clear();
+                    BorrowTool bt = new BorrowTool(emp_id, tool_id);        //if not try and borrow the tool by creating an instance
+                    bt.execute();
+                    is.isSuccessful("Assigning Tool Successful");
 
+                } catch (Exception exception) {
+                    is.isSuccessful("Assigning Tool Failed:");
 
+                    exception.printStackTrace();
+                }
+                man.execute();      //then execute the manager action menu
+
+                //this should clear the items in the list before its ran again
+                toolName.clear();
+
+            }
         }
         //logout button pressed, then exit
         else if ("logout".equals(e.getActionCommand()))
@@ -226,8 +212,6 @@ public class AssignToolsScreen implements ActionListener, CommandGui {
 
             System.exit(0);
         }
-
-
 
     }
 }

@@ -100,6 +100,8 @@ public class Manager extends JPanel implements ActionListener, CommandGui {
         managerPanel.add(listScroll);
         managerFrame.add(managerPanel);
         managerFrame.setVisible(true);
+        managerFrame.setResizable(false);
+        managerFrame.setLocationRelativeTo(null);
 
     }
 
