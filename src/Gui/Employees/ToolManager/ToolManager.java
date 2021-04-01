@@ -165,7 +165,20 @@ public class ToolManager  implements ActionListener, CommandGui {
 
         if ("next".equals(e.getActionCommand()))
         {
-            if (choice == 0)
+
+            //where user hits next without making a choice
+            if (choice <0 || choice >3)
+            {
+                is.isSuccessful("Error, please make a choice");
+                ToolManager tm = new ToolManager();
+                try {
+                    tm.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            //if user chooses to add a new tool
+            else if (choice == 0)
             {
                 //add a new tool window
 
@@ -174,14 +187,16 @@ public class ToolManager  implements ActionListener, CommandGui {
 
 
             }
-            if(choice == 1)
+            //is the user chooses to remove a tool
+            else if(choice == 1)
             {
 
                 RemoveToolScreen rtc = new RemoveToolScreen();
                 rtc.execute();
 
             }
-            if (choice == 2)
+            //if the user chooses to add a new employee
+            else if (choice == 2)
             {
                 AddEmployeeScreen aes = new AddEmployeeScreen();
                 try {
@@ -190,8 +205,10 @@ public class ToolManager  implements ActionListener, CommandGui {
                     exception.printStackTrace();
                 }
 
+
             }
-            if(choice ==3)
+            //if user chooses to modify an employee role
+            else if(choice ==3)
             {
                 ModifyEmployeeRole mer = new ModifyEmployeeRole();
                 try {
@@ -201,6 +218,7 @@ public class ToolManager  implements ActionListener, CommandGui {
                 }
 
             }
+
 
         }
         else if ("logout".equals(e.getActionCommand()))

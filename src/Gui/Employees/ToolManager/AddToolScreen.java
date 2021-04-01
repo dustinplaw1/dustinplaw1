@@ -133,12 +133,12 @@ public class AddToolScreen implements ActionListener, CommandGui {
 
 
 
-
+        addToolFrame.setVisible(false);
+        addToolFrame.dispose();
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
         if ("back".equals(e.getActionCommand()))
         {
-            addToolFrame.setVisible(false);
-            addToolFrame.dispose();
+
 
             try {
                 tm.execute();
@@ -150,26 +150,33 @@ public class AddToolScreen implements ActionListener, CommandGui {
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand()))
         {
-            addToolFrame.setVisible(false);
-            addToolFrame.dispose();
-            //TODO need to check with confirmation from other method if update was successful
+            //check if user input is empty
+            if (name.isEmpty() || description.isEmpty())
+            {
+                //if data is valid, then open tool manager
+                is.isSuccessful("Error, please enter valid name and description");
+                try {
+                    tm.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
-            try {
-
-
-
-                CreateTool tool = new CreateTool(name, description);
-                tool.execute();     //execute it to add to the database
-
-
-                tm.execute();
-
-
-
-            } catch (Exception exception) {
-                exception.printStackTrace();
             }
+            else {
+                try {
 
+
+                    CreateTool tool = new CreateTool(name, description);
+                    tool.execute();     //execute it to add to the database
+
+
+                    tm.execute();
+
+
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
 
 
         }

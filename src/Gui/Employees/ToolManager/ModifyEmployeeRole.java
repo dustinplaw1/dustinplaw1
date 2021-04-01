@@ -136,7 +136,7 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         IsSuccessful is = new IsSuccessful();
         //Need to make sure this is a valid employeeId
         String empId = employeeText.getText();
@@ -144,29 +144,16 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
         String getEmployeID = employeeInstance.getEmployeeID();
 
 
-
         final String labourer = "Labourer";
         final String tool_manager = "Tool_Manager";
         final String manager = "Manager";
 
 
-        if (empId.equalsIgnoreCase(getEmployeID))
-        {
-            is.isSuccessful("Cannot change your own employee Role:");
-            roleFrame.setVisible(false);
-            roleFrame.dispose();
-            try {
-                tm.execute();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-
+        roleFrame.setVisible(false);
+        roleFrame.dispose();
         //if user hit back button, then I should make this Frame (AddToolScreen) not visible, and then call the ToolManagers Action menu
-        if ("back".equals(e.getActionCommand()))
-        {
-            roleFrame.setVisible(false);
-            roleFrame.dispose();
+        if ("back".equals(e.getActionCommand())) {
+
             try {
                 tm.execute();
             } catch (Exception exception) {
@@ -176,86 +163,93 @@ public class ModifyEmployeeRole extends JFrame implements ActionListener, Comman
 
         }
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
-        else if ("save".equals(e.getActionCommand()))
-        {
-            if (empId.equalsIgnoreCase(""))
-            {
-                JOptionPane.showMessageDialog(null, "Enter Valid Employee id or Select valid Employee Role");
-            }
-
-            roleFrame.setVisible(false);
-            roleFrame.dispose();
-            if (choice == 0)
-            {
+        else if ("save".equals(e.getActionCommand())) {
+            System.out.println("Choice is: " + choice);
+            //TODO still not working right with no button clicked
+            //check if tool manager is trying to change their own role or if entered employee id is empty, or an invalid choice is made
+            if ((empId.equalsIgnoreCase(getEmployeID) || empId.equalsIgnoreCase("")) || (choice < 0 || choice > 2)) {
+                //choose one of two
+                is.isSuccessful("Cannot change your own employee Role:");
+                //JOptionPane.showMessageDialog(null, "Enter Valid Employee id or Select valid Employee Role");
                 try {
-                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);
-                    change.execute();
-                    //now it should be good
-                    is.isSuccessful("Successfully changed Role");
-
+                    tm.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                }
+            } else {
 
 
-                    //is.isSuccessful("Error, Cannot change to the same role as current");
+                //if labourer was selected
+                if (choice == 0) {
+                    try {
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, labourer);
+                        change.execute();
+                        //now it should be good
+                        is.isSuccessful("Successfully changed Role");
 
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        is.isSuccessful("Error, Cannot change to the same role as current");
+                    }
+
+                    //change emp role to labourer
+                    try {
+                        tm.execute();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+                //if the manager was selected
+                else if (choice == 1) {
+                    //manager
+                    try {
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);
+                        change.execute();
+                        //now it should be good
+                        is.isSuccessful("Successfully changed Role");
+
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+
+                        is.isSuccessful("Error, Cannot change to the same role as current");
+                    }
                 }
 
-                //change emp role to labourer
-            }
-            else if (choice == 1)
-            {
-                //manager
-                try {
-                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, manager);
-                    change.execute();
-                    //now it should be good
-                    is.isSuccessful("Successfully changed Role");
+                //If tool manager was selected
+                else if (choice == 2) {
+                    //tool manager
+                    try {
+                        ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
+                        change.execute();
+                        is.isSuccessful("Successfully changed Role");
 
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                    is.isSuccessful("Error, Cannot change to the same role as current");
+                        //now it should be good
+                    } catch (Exception exception) {
+                        is.isSuccessful("Error, Cannot change to the same role as current");
 
+                        exception.printStackTrace();
+                    }
+                }
+
+//            try {
+//                tm.execute();
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//            }
+
+
+                //this is to logout
+                else {
+                    is.isSuccessful("Goodbye");
+
+                    System.exit(0);
+                    //logout
                 }
             }
-            else if (choice ==3)
-            {
-                //tool manager
-                try {
-                    ChangeEmployeeRole change = new ChangeEmployeeRole(empId, tool_manager);
-                    change.execute();
-                    is.isSuccessful("Successfully changed Role");
-
-                    //now it should be good
-                } catch (Exception exception) {
-                    is.isSuccessful("Error, Cannot change to the same role as current");
-
-                    exception.printStackTrace();
-                }
-            }
-
-            try {
-                tm.execute();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-
 
         }
-        //this is to logout
-        else
-        {
-            is.isSuccessful("Goodbye");
 
-            System.exit(0);
-            //logout
-        }
+
     }
-
-
-
-
-
-
 
 }

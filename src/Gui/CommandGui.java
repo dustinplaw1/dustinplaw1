@@ -1,7 +1,7 @@
 package Gui;
 
 
-/** Runs a Gui command to make changes to, or request info from the database */
+/** CommandGui will make request to make changes with the Command interface of gateways **/
 
 public interface CommandGui
 {

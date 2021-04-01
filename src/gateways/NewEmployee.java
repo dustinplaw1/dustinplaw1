@@ -1,4 +1,6 @@
 package gateways;
+import objects.Employee;
+
 import java.util.UUID;
 import java.sql.PreparedStatement;
 
@@ -97,32 +99,38 @@ public class NewEmployee extends Gateway implements Command {
 
     // Literally only here to manually test the method.
     public static void main(String[] args) {
+//        try {
+//            NewEmployee ne = new NewEmployee("law", "d", "Manager", "12345");
+//            ne.execute();
+//
+//        } catch(Exception e) {
+//            System.out.println(e);
+//        }
+//
+//        // Test with each field empty
+//        try {
+//            NewEmployee ne = new NewEmployee("", "", "", "");
+//            ne.execute();
+//
+//        } catch(Exception e) {
+//            System.out.println(e);
+//            System.out.println("Empty Field Error (ALL)");
+//        }
+//
+//        // Test with one field empty
+//        try {
+//            NewEmployee ne = new NewEmployee("name", "test", "", "passwordtest");
+//            ne.execute();
+//
+//        } catch(Exception e) {
+//            System.out.println(e);
+//            System.out.println("Empty Field Error (SINGLE)");
+//        }
+
         try {
-            NewEmployee ne = new NewEmployee("law", "d", "Manager", "12345");
-            ne.execute();
-
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-
-        // Test with each field empty
-        try {
-            NewEmployee ne = new NewEmployee("", "", "", "");
-            ne.execute();
-
-        } catch(Exception e) {
-            System.out.println(e);
-            System.out.println("Empty Field Error (ALL)");
-        }
-
-        // Test with one field empty
-        try {
-            NewEmployee ne = new NewEmployee("name", "test", "", "passwordtest");
-            ne.execute();
-
-        } catch(Exception e) {
-            System.out.println(e);
-            System.out.println("Empty Field Error (SINGLE)");
+            NewEmployee ne = new NewEmployee("law", "d", "Tool_Manager", "ad@m1");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

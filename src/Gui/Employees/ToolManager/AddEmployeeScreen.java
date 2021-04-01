@@ -172,11 +172,14 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
         //System.out.println(last + ", " + first + ", " + type + ", " + pass);
 
 
+        //dispose of the screen
+        addEmployeeFrame.setVisible(false);
+        addEmployeeFrame.dispose();
 
-
+        //if user wants to go back to action menu
         if ("back".equals(e.getActionCommand())) {
-            addEmployeeFrame.setVisible(false);
-            addEmployeeFrame.dispose();
+
+            //try and open the tool manager action menu
             try {
                 tm.execute();
             } catch (Exception exception) {
@@ -188,37 +191,46 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
         //If user hits the save button, then the CreateTool.java in gateways will make an instance of CreateTool, execute it and add to the system
         else if ("save".equals(e.getActionCommand())) {
 
-            //TODO get confirmation for a new employee
-            try {
 
-                NewEmployee emp = new NewEmployee(last, first, type, pass);
-                emp.execute();
-
-
-
-                is.isSuccessful("Successfully Added New Employee");
-
-
-            } catch (Exception exception) {
-                is.isSuccessful(exception.getMessage());
-                //exception.printStackTrace();
-                addEmployeeFrame.setVisible(false);
-
+            //check if any of the user inputs is empty
+            if (last.isEmpty()|| first.isEmpty() || type.isEmpty() || pass.isEmpty())
+            {
+                //if invalid data, then display error and go back to tool manager action menu
+                is.isSuccessful("Error, please enter valid employee data");
+                try {
+                    tm.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-            addEmployeeFrame.setVisible(false);
-            addEmployeeFrame.dispose();
+            else {
 
-            try {
-                tm.execute();
-            } catch (Exception exception) {
-                exception.printStackTrace();
+                try {
+
+                    NewEmployee emp = new NewEmployee(last, first, type, pass);
+                    emp.execute();
+
+
+                    is.isSuccessful("Successfully Added New Employee");
+
+
+                } catch (Exception exception) {
+
+                    //exception.printStackTrace();
+
+                }
+
+
+                try {
+                    tm.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-
 
         }
         //logout button pressed
-        else if ("logout".equals(e.getActionCommand())){
-            is = new IsSuccessful();
+        else {
             is.isSuccessful("Goodbye");
             System.exit(0);
 

@@ -132,22 +132,31 @@ public class RemoveToolScreen extends JPanel implements ActionListener, CommandG
         else if ("save".equals(e.getActionCommand())) {
             removeToolFrame.setVisible(false);
             removeToolFrame.dispose();
-            //TODO get confirmation that deletion occured
-            try {
-                DeleteTool tool = new DeleteTool(tool_id);
-                tool.execute();     //execute it to add to the database
-                is.isSuccessful("Tool Removal Successful");
+
+            if (tool_id.isEmpty())
+            {
+                is.isSuccessful("Error, invalid tool Id");
+                try {
+                    tm.execute();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            else {
+                try {
+                    DeleteTool tool = new DeleteTool(tool_id);
+                    tool.execute();     //execute it to add to the database
+                    is.isSuccessful("Tool Removal Successful");
 
 
-                tm.execute();
+                    tm.execute();
 
 
+                } catch (Exception exception) {
+                    is.isSuccessful("Tool Removal Failed");
 
-
-            } catch (Exception exception) {
-                is.isSuccessful("Tool Removal Failed");
-
-                exception.printStackTrace();
+                    exception.printStackTrace();
+                }
             }
 
 
