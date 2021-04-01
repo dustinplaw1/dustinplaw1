@@ -20,18 +20,16 @@ import java.awt.event.MouseEvent;
 
 
 public class ToolManager  implements ActionListener, CommandGui {
-    protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
 
+    protected static String [] options = {"Add a new tool" , "Remove a tool" , "Add a new employee" , "Modify employee role"};
     private static JFrame toolManagerFrame;
     private static JPanel managerPanel;
     private static JButton logoutButton;
     private static JButton nextButton;
     private static JList list;
     private static JScrollPane listScroll;
-
     private static JLabel welcomeMessage;
     private static int choice;
-
     IsSuccessful is = new IsSuccessful();
 
     /**
@@ -79,15 +77,6 @@ public class ToolManager  implements ActionListener, CommandGui {
         logoutButton.addActionListener(new ToolManager());
         nextButton.addActionListener(new ToolManager());
 
-
-
-
-
-
-
-
-
-        //maybe a way so that we pull the name of the employee that logged in to display name
         welcomeMessage = new JLabel ("Welcome Tool Manager, Choose an action below:");
         welcomeMessage.setFont(new Font("Verdana", Font.PLAIN, 24));
         welcomeMessage.setBounds(300,50,700,40);
@@ -128,27 +117,16 @@ public class ToolManager  implements ActionListener, CommandGui {
 
 
 
-
+        //add the scrolllist to the panel
         managerPanel.add(listScroll);
-
-
         toolManagerFrame.add(managerPanel);
+
 
         toolManagerFrame.setVisible(true);
         toolManagerFrame.setResizable(false);
         toolManagerFrame.setLocationRelativeTo(null);
 
     }
-
-
-
-
-
-    public void valueChanged(ListSelectionEvent e)
-    {
-
-    }
-
 
     /**
      * Invoked when an action occurs.
@@ -170,9 +148,9 @@ public class ToolManager  implements ActionListener, CommandGui {
             if (choice <0 || choice >3)
             {
                 is.isSuccessful("Error, please make a choice");
-                ToolManager tm = new ToolManager();
+                ToolManager tm = new ToolManager();     //create tool manager object
                 try {
-                    tm.execute();
+                    tm.execute();   //execute tool manager actionmenu
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -182,8 +160,8 @@ public class ToolManager  implements ActionListener, CommandGui {
             {
                 //add a new tool window
 
-                AddToolScreen ats = new AddToolScreen();
-                ats.execute();
+                AddToolScreen ats = new AddToolScreen();    //add a tool object
+                ats.execute();      //go to add new tool JFrame
 
 
             }
@@ -191,16 +169,16 @@ public class ToolManager  implements ActionListener, CommandGui {
             else if(choice == 1)
             {
 
-                RemoveToolScreen rtc = new RemoveToolScreen();
-                rtc.execute();
+                RemoveToolScreen rtc = new RemoveToolScreen();      //remove a tool object
+                rtc.execute();      //execute the remove tool screen
 
             }
             //if the user chooses to add a new employee
             else if (choice == 2)
             {
-                AddEmployeeScreen aes = new AddEmployeeScreen();
+                AddEmployeeScreen aes = new AddEmployeeScreen();        //add a new employee object
                 try {
-                    aes.execute();
+                    aes.execute();              //execute add new employee frame
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -210,9 +188,9 @@ public class ToolManager  implements ActionListener, CommandGui {
             //if user chooses to modify an employee role
             else if(choice ==3)
             {
-                ModifyEmployeeRole mer = new ModifyEmployeeRole();
+                ModifyEmployeeRole mer = new ModifyEmployeeRole();      //modify an employee object
                 try {
-                    mer.execute();
+                    mer.execute();      //execute modify employee role frame
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -221,7 +199,7 @@ public class ToolManager  implements ActionListener, CommandGui {
 
 
         }
-        else if ("logout".equals(e.getActionCommand()))
+        else if ("logout".equals(e.getActionCommand()))     //if user chooses to logout
         {
             is.isSuccessful("Goodbye");
             System.exit(0);
