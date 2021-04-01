@@ -18,42 +18,19 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
     ToolManager tm = new ToolManager();
     private static JFrame addEmployeeFrame;
     private static JPanel addPanel;
-
     private static JLabel welcomeMessage;
-
-
     private static JButton backButton;
     private static JButton saveButton;
     private static JButton logoutButton;
-
-
-    //label and textfield for the employee name label and field
     private static JLabel lastNameLabel;
     private static JTextField lastField;
-
     private static JLabel firstNameLabel;
     private static JTextField firstField;
-
-    private static JLabel empIdLabel;
-    private static JTextField empIdField;
-
     private static JLabel passwordNameLabel;
     private static JTextField passwordField;
-
-    private static JLabel dateHiredLabel;
-    private static JTextField dateHiredField;
-
-    //label and textfield for the tool description
     private static JLabel employeeRoleLabel;
     private static JTextField employeRoleField;
-
     private static JLabel roles;
-
-//
-//    @Override
-//    public void execute() throws Exception {
-//
-//    }
 
 
 
@@ -124,7 +101,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
 
 
 
-        //emp type
+        //get the employees job role
         employeeRoleLabel = new JLabel ("Employee Role:");
         employeeRoleLabel.setBounds(20,240,100,30);
         addPanel.add(employeeRoleLabel);
@@ -137,7 +114,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
         roles.setBounds(20, 280, 300,20);
         addPanel.add(roles);
 
-
+        //set the action properties for the buttons
         saveButton.setActionCommand("save");
         logoutButton.setActionCommand("logout");
         backButton.setActionCommand("back");
@@ -169,10 +146,8 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
         String type = employeRoleField.getText();
         String pass = passwordField.getText();
 
-        //System.out.println(last + ", " + first + ", " + type + ", " + pass);
 
-
-        //dispose of the screen
+        //dispose of current frame
         addEmployeeFrame.setVisible(false);
         addEmployeeFrame.dispose();
 
@@ -181,7 +156,7 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
 
             //try and open the tool manager action menu
             try {
-                tm.execute();
+                tm.execute();       //go back to the tool manager screen
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -198,15 +173,15 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
                 //if invalid data, then display error and go back to tool manager action menu
                 is.isSuccessful("Error, please enter valid employee data");
                 try {
-                    tm.execute();
+                    tm.execute();       //if data is invalid then go back to the tool managers action menu
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
+            //if not try and create the employee
             else {
-
                 try {
-
+                    //create new employee with the parameters given
                     NewEmployee emp = new NewEmployee(last, first, type, pass);
                     emp.execute();
 
@@ -216,12 +191,11 @@ public class AddEmployeeScreen extends JPanel implements ActionListener, Command
 
                 } catch (Exception exception) {
 
-                    //exception.printStackTrace();
-
+                    exception.printStackTrace();
                 }
 
-
                 try {
+                    //after adding a new employee, go back to action menu
                     tm.execute();
                 } catch (Exception exception) {
                     exception.printStackTrace();
